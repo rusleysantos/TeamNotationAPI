@@ -10,7 +10,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Repository.Contracts;
 using Repository.Models;
+using Repository.Services;
+using Service.Contracts;
+using Service.Services;
 
 namespace TeamNotationAPI
 {
@@ -27,9 +31,9 @@ namespace TeamNotationAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
-            //services.AddDbContext<NotationContext>
-            // (item => item.UseSqlServer(Configuration.GetConnectionString("myconn")));
+            services.AddScoped(typeof(NotationContext));
+            services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<IAddressService, AddressService>();
 
             services.AddDbContext<NotationContext>(options =>
             options.UseSqlServer(
