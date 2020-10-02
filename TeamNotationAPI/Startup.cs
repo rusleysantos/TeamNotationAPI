@@ -32,12 +32,24 @@ namespace TeamNotationAPI
         {
             services.AddControllers();
             services.AddScoped(typeof(NotationContext));
-            
+
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IAddressService, AddressService>();
 
             services.AddScoped<IAttachService, AttachService>();
             services.AddScoped<IAttachRepository, AttachRepository>();
+            services.AddScoped<IBacklogRepository, BacklogRepository>();
+            services.AddScoped<IImpedimentRepository, ImpedimentRepository>();
+            services.AddScoped<IKnowledgeRepository, KnowledgeRepository>();
+            services.AddScoped<IMockupRepository, MockupRepository>();
+            services.AddScoped<INotationRepository, NotationRepository>();
+            services.AddScoped<IProfileRepository, ProfileRepository>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddScoped<IStatusRepository, StatusRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<ITeamRepository, TeamRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
 
             services.AddDbContext<NotationContext>(options =>
             options.UseSqlServer(
