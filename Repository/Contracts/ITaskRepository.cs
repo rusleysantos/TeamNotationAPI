@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using TeamNotationAPI.Models;
 
 namespace Repository.Contracts
 {
     public interface ITaskRepository
     {
-        public Task AddTask(Task task);
-        public bool PutTask(Task task);
-        public Task GetTask(int idTask);
-        public List<Task> GetTask(int page, int size);
-        public bool DeleteTask(int idTask);
+        public ExecutionTask AddExecutionTask(ExecutionTask task);
+        public bool DeleteExecutionTask(int idTask);
+        public List<ExecutionTask> GetExecutionTasks(int page, int size);
+        public ExecutionTask GetExecutionTask(int idTask);
+        public bool PutExecutionTask(ExecutionTask task);
     }
 }

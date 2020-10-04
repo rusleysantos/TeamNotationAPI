@@ -42,9 +42,8 @@ namespace Repository.Models
         public DbSet<Notation> Notation { get; set; }
         public DbSet<Profile> Profile { get; set; }
         public DbSet<Project> Project { get; set; }
-        public DbSet<StatusBacklog> StatusBacklog { get; set; }
-        public DbSet<StatusTask> StatusTask { get; set; }
-        public DbSet<Task> Task { get; set; }
+        public DbSet<Status> Status { get; set; }
+        public DbSet<ExecutionTask> Task { get; set; }
         public DbSet<Team> Team { get; set; }
         public DbSet<User> User { get; set; }
 

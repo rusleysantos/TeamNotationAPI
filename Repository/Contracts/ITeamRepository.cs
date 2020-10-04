@@ -10,7 +10,7 @@ namespace Repository.Contracts
         public Team AddTeam(Team team);
         public bool PutTeam(Team team);
         public Team GetTeam(int idTeam);
-        public List<Team> GetTeam(int page, int size);
+        public List<Team> GetTeams(int page, int size);
         public bool DeleteTeam(int idTeam);
     }
 }

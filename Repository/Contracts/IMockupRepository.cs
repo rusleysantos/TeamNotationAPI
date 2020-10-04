@@ -10,7 +10,7 @@ namespace Repository.Contracts
         public Mockup AddMockup(Mockup mockup);
         public bool PutMockup(Mockup mockup);
         public Mockup GetMockup(int idMockup);
-        public List<Mockup> GetMockup(int page, int size);
+        public List<Mockup> GetMockups(int page, int size);
         public bool DeleteMockup(int idMockup);
     }
 }

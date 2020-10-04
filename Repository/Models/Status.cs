@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace TeamNotationAPI.Models
 {
-    public class StatusBacklog
+    public class Status
     {
         [Key]
-        public int idStatusBacklog { get; set; }
+        public int idStatus { get; set; }
         public string Description { get; set; }
+        public string Tipo { get; set; }
+
     }
 }

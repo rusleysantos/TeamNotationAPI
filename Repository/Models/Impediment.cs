@@ -14,6 +14,6 @@ namespace TeamNotationAPI.Models
         public string Description { get; set; }
         public User User { get; set; }
         public List<Attach> Attachments { get; set; }
-        public List<Task> Tasks { get; set; }
+        public List<ExecutionTask> Tasks { get; set; }
     }
 }

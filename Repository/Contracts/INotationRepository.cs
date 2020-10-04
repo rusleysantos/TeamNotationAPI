@@ -10,7 +10,7 @@ namespace Repository.Contracts
         public Notation AddNotation(Notation notation);
         public bool PutNotation(Notation notation);
         public Notation GetNotation(int idNotation);
-        public List<Notation> GetNotation(int page, int size);
+        public List<Notation> GetNotations(int page, int size);
         public bool DeleteNotation(int idNotation);
     }
 }

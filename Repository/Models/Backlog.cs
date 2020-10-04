@@ -17,6 +17,6 @@ namespace TeamNotationAPI.Models
         public int Story { get; set; }
         public Project Project { get; set; }
         public Mockup Mockup { get; set; }
-        public StatusBacklog Status { get; set; }
+        public Status Status { get; set; }
     }
 }
