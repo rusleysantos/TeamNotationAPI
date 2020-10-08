@@ -17,12 +17,12 @@ namespace Repository.Services
             _con = con;
         }
 
-        public Profile AddProfile(Profile attach)
+        public Profile AddProfile(Profile profile)
         {
-            _con.Add(attach);
+            _con.Add(profile);
             _con.SaveChanges();
 
-            return attach;
+            return profile;
         }
 
         public bool DeleteProfile(int idProfile)
@@ -54,16 +54,16 @@ namespace Repository.Services
                         .ToList();
         }
 
-        public bool PutProfile(Profile attach)
+        public bool PutProfile(Profile profile)
         {
-            Profile returnProfile = _con.Profile.Where(x => x.idProfile == attach.idProfile).First();
+            Profile returnProfile = _con.Profile.Where(x => x.idProfile == profile.idProfile).First();
 
             if (returnProfile != null)
             {
-                returnProfile.BirthDate = attach.BirthDate == null ? returnProfile.BirthDate : attach.BirthDate;
-                returnProfile.Gender = attach.Gender == null ? returnProfile.Gender : attach.Gender;
-                returnProfile.Name = attach.Name == null ? returnProfile.Name : attach.Name;
-                returnProfile.Surname = attach.Surname == null ? returnProfile.Surname : attach.Surname;
+                returnProfile.BirthDate = profile.BirthDate == null ? returnProfile.BirthDate : profile.BirthDate;
+                returnProfile.Gender = profile.Gender == null ? returnProfile.Gender : profile.Gender;
+                returnProfile.Name = profile.Name == null ? returnProfile.Name : profile.Name;
+                returnProfile.Surname = profile.Surname == null ? returnProfile.Surname : profile.Surname;
 
                 _con.SaveChanges();
 

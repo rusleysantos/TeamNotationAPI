@@ -17,12 +17,12 @@ namespace Repository.Services
             _con = con;
         }
 
-        public Team AddTeam(Team attach)
+        public Team AddTeam(Team team)
         {
-            _con.Add(attach);
+            _con.Add(team);
             _con.SaveChanges();
 
-            return attach;
+            return team;
         }
 
         public bool DeleteTeam(int idTeam)
@@ -54,14 +54,14 @@ namespace Repository.Services
                         .ToList();
         }
 
-        public bool PutTeam(Team attach)
+        public bool PutTeam(Team team)
         {
-            Team returnTeam = _con.Team.Where(x => x.idTeam == attach.idTeam).First();
+            Team returnTeam = _con.Team.Where(x => x.idTeam == team.idTeam).First();
 
             if (returnTeam != null)
             {
-                returnTeam.Description = attach.Description == null ? returnTeam.Description : attach.Description;
-                returnTeam.Name = attach.Name == null ? returnTeam.Name : attach.Name;
+                returnTeam.Description = team.Description == null ? returnTeam.Description : team.Description;
+                returnTeam.Name = team.Name == null ? returnTeam.Name : team.Name;
 
                 _con.SaveChanges();
 

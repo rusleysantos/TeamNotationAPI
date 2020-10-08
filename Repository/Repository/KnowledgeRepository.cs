@@ -16,12 +16,12 @@ namespace Repository.Services
             _con = con;
         }
 
-        public Knowledge AddKnowledge(Knowledge notation)
+        public Knowledge AddKnowledge(Knowledge knowledge)
         {
-            _con.Add(notation);
+            _con.Add(knowledge);
             _con.SaveChanges();
 
-            return notation;
+            return knowledge;
         }
 
         public bool DeleteKnowledge(int idKnowledge)
@@ -53,16 +53,16 @@ namespace Repository.Services
                      .ToList();
         }
 
-        public bool PutKnowledge(Knowledge notation)
+        public bool PutKnowledge(Knowledge knowledge)
         {
-            Knowledge returnKnowledge = _con.Knowledge.Where(x => x.idKnowledge == notation.idKnowledge).First();
+            Knowledge returnKnowledge = _con.Knowledge.Where(x => x.idKnowledge == knowledge.idKnowledge).First();
 
             if (returnKnowledge != null)
             {
-                returnKnowledge.Attachments = notation.Attachments.Count == 0 ? returnKnowledge.Attachments : notation.Attachments;
-                returnKnowledge.Description = notation.Description == string.Empty ? returnKnowledge.Description : notation.Description;
-                returnKnowledge.Tasks = notation.Tasks.Count == 0 ? returnKnowledge.Tasks : notation.Tasks;
-                returnKnowledge.Title = notation.Title == null ? returnKnowledge.Title : notation.Title;
+                returnKnowledge.Attachments = knowledge.Attachments.Count == 0 ? returnKnowledge.Attachments : knowledge.Attachments;
+                returnKnowledge.Description = knowledge.Description == string.Empty ? returnKnowledge.Description : knowledge.Description;
+                returnKnowledge.Tasks = knowledge.Tasks.Count == 0 ? returnKnowledge.Tasks : knowledge.Tasks;
+                returnKnowledge.Title = knowledge.Title == null ? returnKnowledge.Title : knowledge.Title;
 
                 _con.SaveChanges();
 

@@ -17,12 +17,12 @@ namespace Repository.Services
             _con = con;
         }
 
-        public Mockup AddMockup(Mockup attach)
+        public Mockup AddMockup(Mockup mockup)
         {
-            _con.Add(attach);
+            _con.Add(mockup);
             _con.SaveChanges();
 
-            return attach;
+            return mockup;
         }
 
         public bool DeleteMockup(int idMockup)
@@ -54,14 +54,14 @@ namespace Repository.Services
                         .ToList();
         }
 
-        public bool PutMockup(Mockup attach)
+        public bool PutMockup(Mockup mockup)
         {
-            Mockup returnMockup = _con.Mockup.Where(x => x.idMockup == attach.idMockup).First();
+            Mockup returnMockup = _con.Mockup.Where(x => x.idMockup == mockup.idMockup).First();
 
             if (returnMockup != null)
             {
-                returnMockup.Blob = attach.Blob == 0 ? returnMockup.Blob : attach.Blob;
-                returnMockup.Type = attach.Type == null ? returnMockup.Type : attach.Type;
+                returnMockup.Blob = mockup.Blob == 0 ? returnMockup.Blob : mockup.Blob;
+                returnMockup.Type = mockup.Type == null ? returnMockup.Type : mockup.Type;
 
                 _con.SaveChanges();
 

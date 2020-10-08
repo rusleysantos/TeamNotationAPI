@@ -17,12 +17,12 @@ namespace Repository.Services
             _con = con;
         }
 
-        public Notation AddNotation(Notation attach)
+        public Notation AddNotation(Notation notation)
         {
-            _con.Add(attach);
+            _con.Add(notation);
             _con.SaveChanges();
 
-            return attach;
+            return notation;
         }
 
         public bool DeleteNotation(int idNotation)
@@ -54,17 +54,17 @@ namespace Repository.Services
                         .ToList();
         }
 
-        public bool PutNotation(Notation attach)
+        public bool PutNotation(Notation notation)
         {
-            Notation returnNotation = _con.Notation.Where(x => x.idNotation == attach.idNotation).First();
+            Notation returnNotation = _con.Notation.Where(x => x.idNotation == notation.idNotation).First();
 
             if (returnNotation != null)
             {
-                returnNotation.Attachments = attach.Attachments.Count == 0 ? returnNotation.Attachments : attach.Attachments;
-                returnNotation.Description = attach.Description == null ? returnNotation.Description : attach.Description;
-                returnNotation.Project = attach.Project == null ? returnNotation.Project : attach.Project;
-                returnNotation.Title = attach.Title == null ? returnNotation.Title : attach.Title;
-                returnNotation.User = attach.User == null ? returnNotation.User : attach.User;
+                returnNotation.Attachments = notation.Attachments.Count == 0 ? returnNotation.Attachments : notation.Attachments;
+                returnNotation.Description = notation.Description == null ? returnNotation.Description : notation.Description;
+                returnNotation.Project = notation.Project == null ? returnNotation.Project : notation.Project;
+                returnNotation.Title = notation.Title == null ? returnNotation.Title : notation.Title;
+                returnNotation.User = notation.User == null ? returnNotation.User : notation.User;
 
                 _con.SaveChanges();
 

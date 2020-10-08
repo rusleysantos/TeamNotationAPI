@@ -17,12 +17,12 @@ namespace Repository.Services
             _con = con;
         }
 
-        public Project AddProject(Project attach)
+        public Project AddProject(Project project)
         {
-            _con.Add(attach);
+            _con.Add(project);
             _con.SaveChanges();
 
-            return attach;
+            return project;
         }
 
         public bool DeleteProject(int idProject)
@@ -54,16 +54,16 @@ namespace Repository.Services
                         .ToList();
         }
 
-        public bool PutProject(Project attach)
+        public bool PutProject(Project project)
         {
-            Project returnProject = _con.Project.Where(x => x.idProject == attach.idProject).First();
+            Project returnProject = _con.Project.Where(x => x.idProject == project.idProject).First();
 
             if (returnProject != null)
             {
-                returnProject.PercentDone = attach.PercentDone == 0.0 ? returnProject.PercentDone : attach.PercentDone;
-                returnProject.Team = attach.Team == null ? returnProject.Team : attach.Team;
-                returnProject.Title = attach.Title == null ? returnProject.Title : attach.Title;
-                returnProject.User = attach.User == null ? returnProject.User : attach.User;
+                returnProject.PercentDone = project.PercentDone == 0.0 ? returnProject.PercentDone : project.PercentDone;
+                returnProject.Team = project.Team == null ? returnProject.Team : project.Team;
+                returnProject.Title = project.Title == null ? returnProject.Title : project.Title;
+                returnProject.User = project.User == null ? returnProject.User : project.User;
 
                 _con.SaveChanges();
 

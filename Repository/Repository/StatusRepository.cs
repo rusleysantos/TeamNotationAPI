@@ -10,92 +10,67 @@ namespace Repository.Services
 {
     public class StatusRepository : IStatusRepository
     {
-        //private NotationContext _con { get; set; }
+        private NotationContext _con { get; set; }
 
-        //public StatusRepository(NotationContext con)
-        //{
-        //    _con = con;
-        //}
-
-        //public StatusBacklog AddStatus(StatusBacklog statusBacklog)
-        //{
-        //    _con.Add(statusBacklog);
-        //    _con.SaveChanges();
-
-        //    return statusBacklog;
-        //}
-
-        //public bool DeleteStatus(int idStatus)
-        //{
-        //    StatusBacklog returnMockup = _con.StatusBacklog.Where(x => x.idStatusBacklog == idStatus).First();
-
-        //    if (returnMockup != null)
-        //    {
-        //        _con.Remove(returnMockup);
-        //        _con.SaveChanges();
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-
-        //public StatusBacklog GetStatusBacklog(int idStatus)
-        //{
-        //    return _con.StatusBacklog.Where(x => x.idMockup == idStatus).First();
-        //}
-
-        //public List<Status> GetStatusTask(int page, int size)
-        //{
-        //    return _con.Mockup
-        //             .Skip((page - 1) * size)
-        //             .Take(size)
-        //             .ToList();
-        //}
-
-        //public bool PutStatusTasks(Status statusTask)
-        //{
-        //    Mockup returnMockup = _con.Mockup.Where(x => x.idMockup == attach.idMockup).First();
-
-        //    if (returnMockup != null)
-        //    {
-        //        returnMockup.Blob = attach.Blob == 0 ? returnMockup.Blob : attach.Blob;
-        //        returnMockup.Title = attach.Title == null ? returnMockup.Title : attach.Title;
-        //        returnMockup.Type = attach.Type == null ? returnMockup.Type : attach.Type;
-
-        //        _con.SaveChanges();
-
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-        public Status AddStatus(Status statusBacklog)
+        public StatusRepository(NotationContext con)
         {
-            throw new NotImplementedException();
+            _con = con;
+        }
+
+        public Status AddStatus(Status status)
+        {
+            _con.Add(status);
+            _con.SaveChanges();
+
+            return status;
         }
 
         public bool DeleteStatus(int idStatus)
         {
-            throw new NotImplementedException();
+            Status returnStatus = _con.Status.Where(x => x.idStatus == idStatus).First();
+
+            if (returnStatus != null)
+            {
+                _con.Remove(returnStatus);
+                _con.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public Status GetStatus(int idStatus)
         {
-            throw new NotImplementedException();
+            return _con.Status.Where(x => x.idStatus == idStatus).First();
         }
 
-        public List<Status> GetStatus(int page, int size)
+        public List<Status> GetStatuss(int page, int size)
         {
-            throw new NotImplementedException();
+            return _con.Status
+                        .Skip((page - 1) * size)
+                        .Take(size)
+                        .ToList();
         }
 
-        public bool PutStatus(Status statusBacklog)
+        public bool PutStatus(Status attach)
         {
-            throw new NotImplementedException();
+            Status returnStatus = _con.Status.Where(x => x.idStatus == attach.idStatus).First();
+
+            if (returnStatus != null)
+            {
+                returnStatus.Description = attach.Description == string.Empty ? returnStatus.Description : attach.Description;
+                returnStatus.Tipo = attach.Tipo == string.Empty ? returnStatus.Tipo : attach.Tipo;
+
+                _con.SaveChanges();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

@@ -17,12 +17,12 @@ namespace Repository.Services
             _con = con;
         }
 
-        public User AddUser(User attach)
+        public User AddUser(User user)
         {
-            _con.Add(attach);
+            _con.Add(user);
             _con.SaveChanges();
 
-            return attach;
+            return user;
         }
 
         public bool DeleteUser(int idUser)
@@ -54,16 +54,16 @@ namespace Repository.Services
                         .ToList();
         }
 
-        public bool PutUser(User attach)
+        public bool PutUser(User user)
         {
-            User returnUser = _con.User.Where(x => x.idUser == attach.idUser).First();
+            User returnUser = _con.User.Where(x => x.idUser == user.idUser).First();
 
             if (returnUser != null)
             {
-                returnUser.Address = attach.Address == null ? returnUser.Address : attach.Address;
-                returnUser.Login = attach.Login == null ? returnUser.Login : attach.Login;
-                returnUser.Password = attach.Password == null ? returnUser.Password : attach.Password;
-                returnUser.Profile = attach.Profile == null ? returnUser.Profile : attach.Profile;
+                returnUser.Address = user.Address == null ? returnUser.Address : user.Address;
+                returnUser.Login = user.Login == null ? returnUser.Login : user.Login;
+                returnUser.Password = user.Password == null ? returnUser.Password : user.Password;
+                returnUser.Profile = user.Profile == null ? returnUser.Profile : user.Profile;
 
                 _con.SaveChanges();
 
