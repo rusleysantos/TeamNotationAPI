@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TeamNotationAPI.Models;
 
 namespace Service.Services
 {
@@ -13,8 +14,29 @@ namespace Service.Services
             _repository = repository;
         }
 
+        public Backlog AddBacklog(Backlog backlog)
+        {
+            return _repository.AddBacklog(backlog);
+        }
 
+        public bool PutBacklog(Backlog backlog)
+        {
+            return _repository.PutBacklog(backlog);
+        }
 
+        public List<Backlog> GetBacklog(int page, int size)
+        {
+            return _repository.GetBacklog(page, size);
+        }
 
+        public Backlog GetBacklog(int idBacklog)
+        {
+            return _repository.GetBacklog(idBacklog);
+        }
+
+        public bool DeleteBacklog(int idBacklog)
+        {
+            return _repository.DeleteBacklog(idBacklog);
+        }
     }
 }
