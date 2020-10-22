@@ -46,7 +46,7 @@ namespace Repository.Services
             return _con.Status.Where(x => x.idStatus == idStatus).First();
         }
 
-        public List<Status> GetStatuss(int page, int size)
+        public List<Status> GetStatus(int page, int size)
         {
             return _con.Status
                         .Skip((page - 1) * size)
