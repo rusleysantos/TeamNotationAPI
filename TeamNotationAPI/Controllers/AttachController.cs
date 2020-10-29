@@ -9,6 +9,7 @@ using TeamNotationAPI.Models;
 
 namespace TeamNotationAPI.Controllers
 {
+    [Route("api")]
     public class AttachController : Controller
     {
         private IAttachService _service { get; set; }

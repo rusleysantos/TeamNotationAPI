@@ -9,6 +9,7 @@ using TeamNotationAPI.Models;
 
 namespace TeamNotationAPI.Controllers
 {
+    [Route("api")]
     public class StatusController : Controller
     {
         private IStatusService _service { get; set; }
@@ -23,7 +24,7 @@ namespace TeamNotationAPI.Controllers
             try
             {
 
-                return Ok(new MessageReturn("Objeto Retornado Com Sucesso",
+                return Ok(new MessageReturn("Status Retornado Com Sucesso",
                                             "",
                                             true,
                                             _service.AddStatus(status)));
@@ -49,7 +50,7 @@ namespace TeamNotationAPI.Controllers
                 }
                 else
                 {
-                    return Ok(new MessageReturn("Endeço Não Encontrado",
+                    return Ok(new MessageReturn("Status Não Encontrado",
                                                 "Erro ao alterar status, não foi encontrado.",
                                                 false));
 
@@ -65,7 +66,7 @@ namespace TeamNotationAPI.Controllers
         }
 
         [HttpGet("[action]")]
-        public IActionResult GetStatus([FromQuery] int page, int size)
+        public IActionResult GetStatusAll([FromQuery] int page, int size)
         {
             try
             {

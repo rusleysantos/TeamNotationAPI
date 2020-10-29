@@ -1,4 +1,5 @@
-﻿using Service.Contracts;
+﻿using Repository.Contracts;
+using Service.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,8 +9,8 @@ namespace Service.Services
 {
     public class StatusService: IStatusService
     {
-        private IStatusService _repository { get; }
-        public StatusService(IStatusService repository)
+        private IStatusRepository _repository { get; }
+        public StatusService(IStatusRepository repository)
         {
             _repository = repository;
         }
