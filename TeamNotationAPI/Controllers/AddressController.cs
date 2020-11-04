@@ -117,7 +117,7 @@ namespace TeamNotationAPI.Controllers
             }
             else
             {
-                return Ok(new MessageReturn("Endeço Não Encontrado",
+                return BadRequest(new MessageReturn("Endeço Não Encontrado",
                                             "Erro ao deletar endereço.",
                                             false));
 

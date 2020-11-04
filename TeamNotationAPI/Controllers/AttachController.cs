@@ -116,7 +116,7 @@ namespace TeamNotationAPI.Controllers
             }
             else
             {
-                return Ok(new MessageReturn("Anexo Não Encontrado",
+                return BadRequest(new MessageReturn("Anexo Não Encontrado",
                                             "Erro ao deletar anexo.",
                                             false));
 

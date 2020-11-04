@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Repository.Contracts;
 using Repository.Models;
+using Repository.Repository;
 using Repository.Services;
 using Service.Contracts;
 using Service.Services;
@@ -50,6 +51,10 @@ namespace TeamNotationAPI
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IStatusRepository, StatusRepository>();
             services.AddScoped<IStatusService, StatusService>();
+
+            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<ILoginRepository, LoginRepository>();
+
 
             services.AddDbContext<NotationContext>(options =>
             options.UseSqlServer(

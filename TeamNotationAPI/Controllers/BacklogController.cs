@@ -9,6 +9,7 @@ using TeamNotationAPI.Models;
 
 namespace TeamNotationAPI.Controllers
 {
+    [Route("api")]
     public class BacklogController : Controller
     {
         private IBacklogService _service { get; set; }
@@ -115,7 +116,7 @@ namespace TeamNotationAPI.Controllers
             }
             else
             {
-                return Ok(new MessageReturn("Endeço Não Encontrado",
+                return BadRequest(new MessageReturn("Endeço Não Encontrado",
                                             "Erro ao deletar backlog.",
                                             false));
 

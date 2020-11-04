@@ -71,7 +71,7 @@ namespace TeamNotationAPI.Controllers
             try
             {
 
-                return Ok(new MessageReturn("Sucesso ao Consultar Statuss",
+                return Ok(new MessageReturn("Sucesso ao Consultar Status",
                                             "",
                                             true,
                                              _service.GetStatus(page, size)));
@@ -79,8 +79,8 @@ namespace TeamNotationAPI.Controllers
             }
             catch
             {
-                return BadRequest(new MessageReturn("Erro ao Consultar Statuss",
-                                                   "Erro ao consultar statuss, por favor tente noavmente mais tarde.",
+                return BadRequest(new MessageReturn("Erro ao Consultar Status",
+                                                   "Erro ao consultar status, por favor tente noavmente mais tarde.",
                                                    false));
 
             }
@@ -99,7 +99,7 @@ namespace TeamNotationAPI.Controllers
             }
             catch
             {
-                return BadRequest(new MessageReturn("Erro ao Consultar Statuss",
+                return BadRequest(new MessageReturn("Erro ao Consultar Status",
                                                     "Erro ao consultar statuss, por favor tente noavmente mais tarde.",
                                                     false));
             }
@@ -116,9 +116,9 @@ namespace TeamNotationAPI.Controllers
             }
             else
             {
-                return Ok(new MessageReturn("Endeço Não Encontrado",
-                                            "Erro ao deletar status.",
-                                            false));
+                return BadRequest(new MessageReturn("Status Não Encontrado",
+                                                    "Erro ao deletar status.",
+                                                    false));
 
             }
         }
