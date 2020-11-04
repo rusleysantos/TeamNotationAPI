@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamNotationAPI", "TeamNota
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{868B2DB4-5816-4738-BCA2-FC9A66FC39E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{BB954563-1C38-49B0-9C8C-603976A9C414}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{BB954563-1C38-49B0-9C8C-603976A9C414}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{AA8B17D5-3C0C-43E6-A302-34731B6AB11F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{AA8B17D5-3C0C-43E6-A302-34731B6AB11F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "Auth\Auth.csproj", "{3DA4EB34-F496-4D65-AD0A-7C22F1AD4F97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{AA8B17D5-3C0C-43E6-A302-34731B6AB11F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA8B17D5-3C0C-43E6-A302-34731B6AB11F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA8B17D5-3C0C-43E6-A302-34731B6AB11F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DA4EB34-F496-4D65-AD0A-7C22F1AD4F97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA4EB34-F496-4D65-AD0A-7C22F1AD4F97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DA4EB34-F496-4D65-AD0A-7C22F1AD4F97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA4EB34-F496-4D65-AD0A-7C22F1AD4F97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

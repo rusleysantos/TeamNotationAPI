@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TeamNotationAPI.Models;
 
 namespace Repository.Repository
 {
@@ -18,6 +19,7 @@ namespace Repository.Repository
 
         public bool Login(Login login)
         {
+
             if (_con.User.Any(x => x.Login == login.Username && x.Password == login.Password))
             {
                 return true;
