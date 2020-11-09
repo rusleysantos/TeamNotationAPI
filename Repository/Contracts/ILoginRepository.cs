@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository.Contracts
 {
     public interface ILoginRepository
     {
-        public bool Login(Login login);
+        public Task<bool> Login(Login login);
     }
 }

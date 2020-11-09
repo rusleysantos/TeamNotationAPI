@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Service.Services
 {
@@ -17,9 +18,9 @@ namespace Service.Services
             _repository = repository;
         }
 
-        public bool Login(Login login)
+        public async Task<bool> Login(Login login)
         {
-            return _repository.Login(login);
+            return await _repository.Login(login);
         }
     }
 }

@@ -23,13 +23,16 @@ namespace TeamNotationAPI.Controllers
         }
 
         [HttpPost("[action]")]
-        public IActionResult Login([FromBody] Login login)
+        public async Task<IActionResult> Login([FromBody] Login login)
         {
             try
             {
-                if (_service.Login(login))
+                if (await _service.Login(login))
                 {
-                    return Ok(_token.GenerateToken(login));
+
+                    return Ok(new MessageReturn("Login Efetuado Com Sucesso",
+                                                _token.GenerateToken(login),
+                                                true));
                 }
                 else
                 {
