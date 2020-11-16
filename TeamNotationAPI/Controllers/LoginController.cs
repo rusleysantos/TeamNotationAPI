@@ -27,11 +27,13 @@ namespace TeamNotationAPI.Controllers
         {
             try
             {
-                if (await _service.Login(login))
+                Login LoginReturn = _service.Login(login).Result;
+
+                if (LoginReturn.AuthorizationStatus)
                 {
 
                     return Ok(new MessageReturn("Login Efetuado Com Sucesso",
-                                                _token.GenerateToken(login),
+                                                _token.GenerateToken(LoginReturn),
                                                 true));
                 }
                 else

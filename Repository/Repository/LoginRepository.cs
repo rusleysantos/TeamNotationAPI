@@ -19,15 +19,30 @@ namespace Repository.Repository
             _con = con;
         }
 
-        public async Task<bool> Login(Login login)
+        public async Task<Login> Login(Login login)
         {
-            if (await _con.User.AnyAsync(x => x.Login == login.Username && x.Password == login.Password))
+
+            Login loginReturn = _con
+                                .User
+                                .Where(x => x.Login == login.Username
+                                       &&
+                                       x.Password == login.Password)
+                                .Select(x => new Login
+                                {
+                                    idUser = x.idUser,
+                                    Username = login.Username
+                                }).FirstAsync()
+                                .Result;
+
+            if (loginReturn != null)
             {
-                return true;
+                loginReturn.AuthorizationStatus = true;
+                return loginReturn;
             }
             else
             {
-                return false;
+                loginReturn.AuthorizationStatus = false;
+                return loginReturn;
             }
 
         }

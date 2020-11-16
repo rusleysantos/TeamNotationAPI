@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace TeamNotationAPI.Models
+namespace Repository.Models
 {
-    public class Project
+    public class ProjectOption
     {
         [Key]
-        public int idProject { get; set; }
+        public int idProjectOption { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
         public double PercentDone { get; set; }
     }
 }

@@ -1,22 +1,25 @@
-﻿using Service.Contracts;
+﻿using Repository.Contracts;
+using Repository.Models;
+using Service.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using TeamNotationAPI.Models;
 
 namespace Service.Services
 {
-    public class ProjectService: IProjectService
+    public class ProjectService : IProjectService
     {
-        private IProjectService _repository { get; }
-        public ProjectService(IProjectService repository)
+        private IProjectRepository _repository { get; }
+        public ProjectService(IProjectRepository repository)
         {
             _repository = repository;
         }
 
-        public Project AddProject(Project project)
+        public void AddProject(Project project)
         {
-            return _repository.AddProject(project);
+            _repository.AddProject(project);
         }
 
         public bool PutProject(Project project)
@@ -37,6 +40,11 @@ namespace Service.Services
         public bool DeleteProject(int idProject)
         {
             return _repository.DeleteProject(idProject);
+        }
+
+        public Task<List<ProjectOption>> GetProjectOptions(int idUser)
+        {
+            return _repository.GetProjectOptions(idUser);
         }
     }
 }

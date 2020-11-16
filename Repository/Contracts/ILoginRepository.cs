@@ -8,6 +8,6 @@ namespace Repository.Contracts
 {
     public interface ILoginRepository
     {
-        public Task<bool> Login(Login login);
+        public Task<Login> Login(Login login);
     }
 }

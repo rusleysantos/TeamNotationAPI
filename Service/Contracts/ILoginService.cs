@@ -8,6 +8,6 @@ namespace Service.Contracts
 {
     public interface ILoginService
     {
-        Task<bool> Login(Login login);
+        Task<Login> Login(Login login);
     }
 }

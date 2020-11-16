@@ -12,7 +12,7 @@ namespace TeamNotationAPI.Models
         public int idKnowledge { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public List<ExecutionTask> Tasks { get; set; }
-        public List<Attach> Attachments { get; set; }
+        public virtual List<ExecutionTask> Tasks { get; set; }
+        public virtual List<Attach> Attachments { get; set; }
     }
 }

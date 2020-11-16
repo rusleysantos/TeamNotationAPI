@@ -15,8 +15,8 @@ namespace TeamNotationAPI.Models
         public int Estimate { get; set; }
         public int Importance { get; set; }
         public int Story { get; set; }
-        public Project Project { get; set; }
-        public Mockup Mockup { get; set; }
-        public Status Status { get; set; }
+        public virtual Project Project { get; set; }
+        public virtual Mockup Mockup { get; set; }
+        public virtual Status Status { get; set; }
     }
 }

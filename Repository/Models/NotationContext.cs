@@ -46,6 +46,8 @@ namespace Repository.Models
         public DbSet<ExecutionTask> Task { get; set; }
         public DbSet<Team> Team { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<ProjectUser> ProjectUser { get; set; }
+        public DbSet<ProjectTeam> ProjectTeam { get; set; }
 
     }
 }

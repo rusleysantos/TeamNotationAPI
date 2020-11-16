@@ -29,6 +29,8 @@ namespace BearerAuthenticationApi.Services
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, login.Username.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, login.idUser.ToString())
+                     //new Claim(ClaimTypes., login.Username.ToString()),
                     //new Claim(ClaimTypes.Role, user.Role.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),

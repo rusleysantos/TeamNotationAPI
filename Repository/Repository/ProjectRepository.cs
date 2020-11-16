@@ -1,9 +1,11 @@
-﻿using Repository.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository.Contracts;
 using Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using TeamNotationAPI.Models;
 
 namespace Repository.Services
@@ -17,12 +19,10 @@ namespace Repository.Services
             _con = con;
         }
 
-        public Project AddProject(Project project)
+        public void AddProject(Project project)
         {
             _con.Add(project);
             _con.SaveChanges();
-
-            return project;
         }
 
         public bool DeleteProject(int idProject)
@@ -61,9 +61,9 @@ namespace Repository.Services
             if (returnProject != null)
             {
                 returnProject.PercentDone = project.PercentDone == 0.0 ? returnProject.PercentDone : project.PercentDone;
-                returnProject.Team = project.Team == null ? returnProject.Team : project.Team;
-                returnProject.Title = project.Title == null ? returnProject.Title : project.Title;
-                returnProject.User = project.User == null ? returnProject.User : project.User;
+                //returnProject.Team = project.Team == null ? returnProject.Team : project.Team;
+                //returnProject.Title = project.Title == null ? returnProject.Title : project.Title;
+                //returnProject.User = project.User == null ? returnProject.User : project.User;
 
                 _con.SaveChanges();
 
@@ -73,6 +73,32 @@ namespace Repository.Services
             {
                 return false;
             }
+        }
+
+        public Task<List<ProjectOption>> GetProjectOptions(int idUser)
+        {
+            List<int> ids = new List<int>();
+
+            Task<List<ProjectUser>> projects = _con.ProjectUser
+                                    .Include(j => j.User)
+                                    .Where(x => x.User.idUser == idUser)
+                                    .ToListAsync();
+
+            foreach (var id in projects.Result)
+            {
+                ids.Add(id.Project.idProject);
+            }
+
+            return _con.Project
+                        .Where(x => ids.Contains(x.idProject))
+                        .Select(y => new ProjectOption
+                        {
+                            PercentDone = y.PercentDone,
+                            idProjectOption = y.idProject,
+                            Title = y.Title
+                        })
+                        .ToListAsync();
+
         }
     }
 }

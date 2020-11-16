@@ -12,8 +12,8 @@ namespace TeamNotationAPI.Models
         public int idImpediment { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public User User { get; set; }
-        public List<Attach> Attachments { get; set; }
-        public List<ExecutionTask> Tasks { get; set; }
+        public virtual User User { get; set; }
+        public virtual List<Attach> Attachments { get; set; }
+        public virtual List<ExecutionTask> Tasks { get; set; }
     }
 }

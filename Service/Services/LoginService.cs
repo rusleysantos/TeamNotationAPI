@@ -18,7 +18,7 @@ namespace Service.Services
             _repository = repository;
         }
 
-        public async Task<bool> Login(Login login)
+        public async Task<Login> Login(Login login)
         {
             return await _repository.Login(login);
         }
