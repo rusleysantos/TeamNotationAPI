@@ -9,7 +9,7 @@ namespace Repository.Contracts
 {
     public interface IProjectRepository
     {
-        public void AddProject(Project project);
+        public void AddProject(Project project, int idUser);
         public bool PutProject(Project project);
         public Project GetProject(int idProject);
         public List<Project> GetProjects(int page, int size);

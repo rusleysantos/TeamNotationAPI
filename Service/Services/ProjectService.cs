@@ -17,9 +17,9 @@ namespace Service.Services
             _repository = repository;
         }
 
-        public void AddProject(Project project)
+        public async void AddProject(Project project, int idUser)
         {
-            _repository.AddProject(project);
+            _repository.AddProject(project, idUser);
         }
 
         public bool PutProject(Project project)

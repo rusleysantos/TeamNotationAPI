@@ -9,7 +9,7 @@ namespace Service.Contracts
 {
     public interface IProjectService
     {
-        public void AddProject(Project project);
+        public void AddProject(Project project, int idUser);
         public bool PutProject(Project project);
         public List<Project> GetProjects(int page, int size);
         public Project GetProject(int idProject);

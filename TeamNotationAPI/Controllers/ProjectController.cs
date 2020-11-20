@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Domain.Domains;
 using Microsoft.AspNetCore.Authorization;
@@ -22,23 +23,18 @@ namespace TeamNotationAPI.Controllers
         }
 
         [HttpGet("[action]")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> GetProjectOptions()
         {
-            var stream = "[encoded jwt]";
-            var handler = new JwtSecurityTokenHandler();
-            var jsonToken = handler.ReadToken(stream);
-            var tokenS = handler.ReadToken(stream) as JwtSecurityToken;
+            var identity = User.Identity as ClaimsIdentity;
 
             try
             {
-                return Ok("");
-                //int idUser = Convert.ToInt32(tokenS.Claims.First(claim => claim.Type == "idUser").Value);
 
-                //return Ok(new MessageReturn("Sucesso ao Consultar Options",
-                //                            "",
-                //                            true,
-                //                             await _service.GetProjectOptions(idUser)));
+                return Ok(new MessageReturn("Sucesso ao Consultar Options",
+                                            "",
+                                            true,
+                                             await _service.GetProjectOptions(Convert.ToInt32(identity.Claims.ToList()[1].Value))));
 
             }
             catch
@@ -51,18 +47,30 @@ namespace TeamNotationAPI.Controllers
         }
 
         [HttpPost("[action]")]
+        [Authorize]
         public async Task<IActionResult> AddProject([FromBody] Project project)
         {
+            var identity = User.Identity as ClaimsIdentity;
 
             try
             {
-                _service.AddProject(project);
+                if (ModelState.IsValid)
+                {
 
-                return Ok(new MessageReturn("Sucesso ao Adicionar Projeto",
-                                            "",
-                                            true,
-                                             ""));
+                    _service.AddProject(project, Convert.ToInt32(identity.Claims.ToList()[1].Value));
 
+                    return Ok(new MessageReturn("Sucesso ao Adicionar Projeto",
+                                                "",
+                                                true,
+                                                 ""));
+
+                }
+                else
+                {
+                    return BadRequest(new MessageReturn("Erro ao Adicionar Projeto",
+                                                        "Preencha todos os campos.",
+                                                        false));
+                }
             }
             catch
             {

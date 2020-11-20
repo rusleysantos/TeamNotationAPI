@@ -12,16 +12,26 @@ namespace Repository.Services
 {
     public class ProjectRepository : IProjectRepository
     {
-        private NotationContext _con { get; set; }
+        private NotationContext _con { get; }
 
         public ProjectRepository(NotationContext con)
         {
             _con = con;
         }
 
-        public void AddProject(Project project)
+        public void AddProject(Project project, int idUser)
         {
+            User user = _con.User.Where(x => x.idUser == idUser).First();
             _con.Add(project);
+            _con.SaveChanges();
+
+            ProjectUser projectUser = new ProjectUser
+            {
+                User = user,
+                Project = project
+            };
+
+            _con.ProjectUser.Add(projectUser);
             _con.SaveChanges();
         }
 
@@ -80,9 +90,14 @@ namespace Repository.Services
             List<int> ids = new List<int>();
 
             Task<List<ProjectUser>> projects = _con.ProjectUser
-                                    .Include(j => j.User)
-                                    .Where(x => x.User.idUser == idUser)
-                                    .ToListAsync();
+                                                .Include(j => j.User)
+                                                .Where(x => x.User.idUser == idUser)
+                                                .Select(x => new ProjectUser
+                                                {
+                                                    Project = x.Project,
+                                                    User = x.User
+                                                })
+                                                .ToListAsync();
 
             foreach (var id in projects.Result)
             {
