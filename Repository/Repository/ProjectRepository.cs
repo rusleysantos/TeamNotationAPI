@@ -19,11 +19,12 @@ namespace Repository.Services
             _con = con;
         }
 
-        public void AddProject(Project project, int idUser)
+        public async Task<int> AddProject(Project project, int idUser)
         {
             User user = _con.User.Where(x => x.idUser == idUser).First();
+
             _con.Add(project);
-            _con.SaveChanges();
+            await _con.SaveChangesAsync();
 
             ProjectUser projectUser = new ProjectUser
             {
@@ -32,7 +33,9 @@ namespace Repository.Services
             };
 
             _con.ProjectUser.Add(projectUser);
-            _con.SaveChanges();
+            await _con.SaveChangesAsync();
+
+            return project.idProject;
         }
 
         public bool DeleteProject(int idProject)
@@ -51,9 +54,9 @@ namespace Repository.Services
             }
         }
 
-        public Project GetProject(int idProject)
+        public async Task<Project> GetProject(int idProject)
         {
-            return _con.Project.Where(x => x.idProject == idProject).First();
+            return await _con.Project.Where(x => x.idProject == idProject).FirstAsync();
         }
 
         public List<Project> GetProjects(int page, int size)

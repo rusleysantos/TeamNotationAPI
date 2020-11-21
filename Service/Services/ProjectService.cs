@@ -17,9 +17,9 @@ namespace Service.Services
             _repository = repository;
         }
 
-        public async void AddProject(Project project, int idUser)
+        public Task<int> AddProject(Project project, int idUser)
         {
-            _repository.AddProject(project, idUser);
+            return _repository.AddProject(project, idUser);
         }
 
         public bool PutProject(Project project)
@@ -32,7 +32,7 @@ namespace Service.Services
             return _repository.GetProjects(page, size);
         }
 
-        public Project GetProject(int idProject)
+        public Task<Project> GetProject(int idProject)
         {
             return _repository.GetProject(idProject);
         }

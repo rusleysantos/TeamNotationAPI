@@ -9,10 +9,10 @@ namespace Service.Contracts
 {
     public interface IProjectService
     {
-        public void AddProject(Project project, int idUser);
+        public Task<int> AddProject(Project project, int idUser);
         public bool PutProject(Project project);
         public List<Project> GetProjects(int page, int size);
-        public Project GetProject(int idProject);
+        public Task<Project> GetProject(int idProject);
         public bool DeleteProject(int idProject);
         public Task<List<ProjectOption>> GetProjectOptions(int idUser);
     }

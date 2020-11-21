@@ -57,12 +57,12 @@ namespace TeamNotationAPI.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    _service.AddProject(project, Convert.ToInt32(identity.Claims.ToList()[1].Value));
+
 
                     return Ok(new MessageReturn("Sucesso ao Adicionar Projeto",
                                                 "",
                                                 true,
-                                                 ""));
+                                                 await _service.AddProject(project, Convert.ToInt32(identity.Claims.ToList()[1].Value))));
 
                 }
                 else
@@ -81,6 +81,28 @@ namespace TeamNotationAPI.Controllers
             }
         }
 
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<IActionResult> GetProject([FromQuery] int idProject)
+        {
 
+            try
+            {
+
+                return Ok(new MessageReturn("Sucesso ao Buscar Projetos",
+                                            "",
+                                            true,
+                                            await _service.GetProject(idProject)));
+
+
+            }
+            catch
+            {
+                return BadRequest(new MessageReturn("Erro ao Buscar Projeto",
+                                                   "Erro ao buscar projeto, por favor tente noavmente mais tarde.",
+                                                   false));
+
+            }
+        }
     }
 }
