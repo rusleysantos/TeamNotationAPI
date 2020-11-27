@@ -34,7 +34,7 @@ namespace TeamNotationAPI.Controllers
                 return Ok(new MessageReturn("Sucesso ao Consultar Options",
                                             "",
                                             true,
-                                             await _service.GetProjectOptions(Convert.ToInt32(identity.Claims.ToList()[1].Value))));
+                                            await _service.GetProjectOptions(Convert.ToInt32(identity.Claims.ToList()[1].Value))));
 
             }
             catch
@@ -56,13 +56,10 @@ namespace TeamNotationAPI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
-
-
                     return Ok(new MessageReturn("Sucesso ao Adicionar Projeto",
                                                 "",
                                                 true,
-                                                 await _service.AddProject(project, Convert.ToInt32(identity.Claims.ToList()[1].Value))));
+                                                await _service.AddProject(project, Convert.ToInt32(identity.Claims.ToList()[1].Value))));
 
                 }
                 else
@@ -75,8 +72,8 @@ namespace TeamNotationAPI.Controllers
             catch
             {
                 return BadRequest(new MessageReturn("Erro ao Adicionar Projeto",
-                                                   "Erro ao adicionar projeto, por favor tente noavmente mais tarde.",
-                                                   false));
+                                                    "Erro ao adicionar projeto, por favor tente noavmente mais tarde.",
+                                                    false));
 
             }
         }
@@ -104,5 +101,10 @@ namespace TeamNotationAPI.Controllers
 
             }
         }
+
+ 
+
+
+
     }
 }

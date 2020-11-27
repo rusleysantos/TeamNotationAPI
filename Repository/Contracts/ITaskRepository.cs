@@ -8,10 +8,11 @@ namespace Repository.Contracts
 {
     public interface ITaskRepository
     {
-        public ExecutionTask AddExecutionTask(ExecutionTask task);
-        public bool DeleteExecutionTask(int idTask);
-        public List<ExecutionTask> GetExecutionTasks(int page, int size);
-        public ExecutionTask GetExecutionTask(int idTask);
-        public bool PutExecutionTask(ExecutionTask task);
+        public Task<ExecutionTask> AddExecutionTask(ExecutionTask task);
+        public Task<bool> DeleteExecutionTask(int idTask);
+        public Task<List<ExecutionTask>> GetExecutionTasks(int page, int size);
+        Task<List<ExecutionTask>> GetTasksProject(int idProject, int page, int size);
+        public Task<ExecutionTask> GetExecutionTask(int idTask);
+        public Task<bool> PutExecutionTask(ExecutionTask task);
     }
 }

@@ -10,9 +10,10 @@ namespace TeamNotationAPI.Models
     {
         [Key]
         public int idProject { get; set; }
-        [Required]
         public string Title { get; set; }
         public string Description { get; set; }
         public double PercentDone { get; set; }
+        public List<ExecutionTask> ExecutionTasks { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Repository.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository.Contracts;
 using Repository.Models;
 using System;
 using System.Collections.Generic;
@@ -18,22 +19,22 @@ namespace Repository.Services
             _con = con;
         }
 
-        public ExecutionTask AddExecutionTask(ExecutionTask attach)
+        public async Task<ExecutionTask> AddExecutionTask(ExecutionTask attach)
         {
             _con.Add(attach);
-            _con.SaveChanges();
+            await _con.SaveChangesAsync();
 
             return attach;
         }
 
-        public bool DeleteExecutionTask(int idExecutionTask)
+        public async Task<bool> DeleteExecutionTask(int idExecutionTask)
         {
-            ExecutionTask returnExecutionTask = _con.Task.Where(x => x.idTask == idExecutionTask).First();
+            ExecutionTask returnExecutionTask = await _con.Task.Where(x => x.idTask == idExecutionTask).FirstAsync();
 
             if (returnExecutionTask != null)
             {
                 _con.Remove(returnExecutionTask);
-                _con.SaveChanges();
+                await _con.SaveChangesAsync();
                 return true;
             }
             else
@@ -42,20 +43,31 @@ namespace Repository.Services
             }
         }
 
-        public ExecutionTask GetExecutionTask(int idExecutionTask)
+        public Task<ExecutionTask> GetExecutionTask(int idExecutionTask)
         {
-            return _con.Task.Where(x => x.idTask == idExecutionTask).First();
+            return _con.Task.Where(x => x.idTask == idExecutionTask).FirstAsync();
         }
 
-        public List<ExecutionTask> GetExecutionTasks(int page, int size)
+        public async Task<List<ExecutionTask>> GetExecutionTasks(int page, int size)
         {
-            return _con.Task
+            return await _con.Task
                         .Skip((page - 1) * size)
                         .Take(size)
-                        .ToList();
+                        .ToListAsync();
         }
 
-        public bool PutExecutionTask(ExecutionTask attach)
+        public async Task<List<ExecutionTask>> GetTasksProject(int idProject, int page, int size)
+        {
+            return await _con.Project
+                         .Include(j => j.ExecutionTasks)
+                         .Where(x => x.idProject == idProject)
+                         .Skip((page - 1) * size)
+                         .Take(size)
+                         .SelectMany(y => y.ExecutionTasks)
+                         .ToListAsync();
+        }
+
+        public async Task<bool> PutExecutionTask(ExecutionTask attach)
         {
             ExecutionTask returnExecutionTask = _con.Task.Where(x => x.idTask == attach.idTask).First();
 
@@ -71,7 +83,7 @@ namespace Repository.Services
                 returnExecutionTask.User = attach.User == null ? returnExecutionTask.User : attach.User;
                 returnExecutionTask.Weight = attach.Weight == null ? returnExecutionTask.Weight : attach.Weight;
 
-                _con.SaveChanges();
+                await _con.SaveChangesAsync();
 
                 return true;
             }
@@ -80,6 +92,8 @@ namespace Repository.Services
                 return false;
             }
         }
+
+    
     }
 }
 

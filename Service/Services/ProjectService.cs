@@ -22,12 +22,12 @@ namespace Service.Services
             return _repository.AddProject(project, idUser);
         }
 
-        public bool PutProject(Project project)
+        public Task<bool> PutProject(Project project)
         {
             return _repository.PutProject(project);
         }
 
-        public List<Project> GetProjects(int page, int size)
+        public Task<List<Project>> GetProjects(int page, int size)
         {
             return _repository.GetProjects(page, size);
         }
@@ -37,7 +37,7 @@ namespace Service.Services
             return _repository.GetProject(idProject);
         }
 
-        public bool DeleteProject(int idProject)
+        public Task<bool> DeleteProject(int idProject)
         {
             return _repository.DeleteProject(idProject);
         }

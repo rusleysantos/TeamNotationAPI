@@ -14,9 +14,9 @@ namespace TeamNotationAPI.Models
         public string Description { get; set; }
         public string Weight { get; set; }
         public string Effort { get; set; }
-        public virtual List<Backlog> Backlogs { get; set; }
         public virtual Status Status { get; set; }
         public virtual ExecutionTask MainTask { get; set; }
+        public virtual List<Backlog> Backlogs { get; set; }
         public virtual User User { get; set; }
         public virtual List<Attach> Attachments { get; set; }
     }

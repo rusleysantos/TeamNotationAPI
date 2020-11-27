@@ -33,7 +33,7 @@ namespace TeamNotationAPI.Controllers
                 {
 
                     return Ok(new MessageReturn("Login Efetuado Com Sucesso",
-                                                _token.GenerateToken(LoginReturn),
+                                                 _token.GenerateToken(LoginReturn),
                                                 true));
                 }
                 else
@@ -43,7 +43,7 @@ namespace TeamNotationAPI.Controllers
                                                 false));
                 }
             }
-            catch(Exception e)
+            catch
             {
                 return BadRequest(new MessageReturn("Erro ao Fazer Login",
                                                      "Erro ao realizar login, por favor tente mais tarde.",
