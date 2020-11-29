@@ -72,8 +72,8 @@ namespace TeamNotationAPI
             services.AddScoped<IProfileRepository, ProfileRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IProjectService, ProjectService>();
-            services.AddScoped<ITaskRepository, TaskRepository>();
-            services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<IExecutionTaskRepository, ExecutionTaskRepository>();
+            services.AddScoped<IExecutionTaskService, ExecutionTaskService>();
             services.AddScoped<ITeamRepository, TeamRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IStatusRepository, StatusRepository>();

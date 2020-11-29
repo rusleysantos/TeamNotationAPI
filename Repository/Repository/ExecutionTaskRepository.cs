@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Repository.Contracts;
+using Repository.DTO;
 using Repository.Models;
 using System;
 using System.Collections.Generic;
@@ -10,21 +11,29 @@ using TeamNotationAPI.Models;
 
 namespace Repository.Services
 {
-    public class TaskRepository : ITaskRepository
+    public class ExecutionTaskRepository : IExecutionTaskRepository
     {
         private NotationContext _con { get; set; }
 
-        public TaskRepository(NotationContext con)
+        public ExecutionTaskRepository(NotationContext con)
         {
             _con = con;
         }
 
-        public async Task<ExecutionTask> AddExecutionTask(ExecutionTask attach)
+        public void AddExecutionTask(ExecutionTaskDTO task)
         {
-            _con.Add(attach);
-            await _con.SaveChangesAsync();
-
-            return attach;
+            _con.Task.Add(new ExecutionTask
+            {
+                Description = task.Description,
+                Effort = task.Effort.ToString(),
+                Weight = task.Weight.ToString(),
+                Title = task.Title,
+                StatusidStatus = task.idStatus,
+                UseridUser = task.idUser,
+                ProjectidProject = task.idProject
+                
+            });
+            _con.SaveChanges();
         }
 
         public async Task<bool> DeleteExecutionTask(int idExecutionTask)
@@ -93,7 +102,7 @@ namespace Repository.Services
             }
         }
 
-    
+
     }
 }
 

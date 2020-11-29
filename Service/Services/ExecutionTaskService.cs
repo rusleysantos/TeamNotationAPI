@@ -1,4 +1,5 @@
 ﻿using Repository.Contracts;
+using Repository.DTO;
 using Service.Contracts;
 using System;
 using System.Collections.Generic;
@@ -8,17 +9,17 @@ using TeamNotationAPI.Models;
 
 namespace Service.Services
 {
-    public class TaskService : ITaskService
+    public class ExecutionTaskService : IExecutionTaskService
     {
-        private ITaskRepository _repository { get; }
-        public TaskService(ITaskRepository repository)
+        private IExecutionTaskRepository _repository { get; }
+        public ExecutionTaskService(IExecutionTaskRepository repository)
         {
             _repository = repository;
         }
 
-        public Task<ExecutionTask> AddExecutionTask(ExecutionTask task)
+        public void AddExecutionTask(ExecutionTaskDTO task)
         {
-            return _repository.AddExecutionTask(task);
+            _repository.AddExecutionTask(task);
         }
 
         public Task<bool> PutExecutionTask(ExecutionTask task)

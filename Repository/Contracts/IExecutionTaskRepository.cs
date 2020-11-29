@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repository.DTO;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -6,9 +7,9 @@ using TeamNotationAPI.Models;
 
 namespace Repository.Contracts
 {
-    public interface ITaskRepository
+    public interface IExecutionTaskRepository
     {
-        public Task<ExecutionTask> AddExecutionTask(ExecutionTask task);
+        public void AddExecutionTask(ExecutionTaskDTO task);
         public Task<bool> DeleteExecutionTask(int idTask);
         public Task<List<ExecutionTask>> GetExecutionTasks(int page, int size);
         Task<List<ExecutionTask>> GetTasksProject(int idProject, int page, int size);
