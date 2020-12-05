@@ -2,7 +2,7 @@
 
 namespace Repository.Migrations
 {
-    public partial class Migration_Inicial : Migration
+    public partial class migration_inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -83,29 +83,17 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StatusBacklog",
-                columns: table => new
-                {
-                    idStatusBacklog = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StatusBacklog", x => x.idStatusBacklog);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StatusTask",
+                name: "Status",
                 columns: table => new
                 {
                     idStatus = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true),
+                    Tipo = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StatusTask", x => x.idStatus);
+                    table.PrimaryKey("PK_Status", x => x.idStatus);
                 });
 
             migrationBuilder.CreateTable(
@@ -115,18 +103,11 @@ namespace Repository.Migrations
                     idTeam = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    ProjectidProject = table.Column<int>(nullable: true)
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Team", x => x.idTeam);
-                    table.ForeignKey(
-                        name: "FK_Team_Project_ProjectidProject",
-                        column: x => x.ProjectidProject,
-                        principalTable: "Project",
-                        principalColumn: "idProject",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -138,8 +119,7 @@ namespace Repository.Migrations
                     Login = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     AddressidAddress = table.Column<int>(nullable: true),
-                    ProfileidProfile = table.Column<int>(nullable: true),
-                    ProjectidProject = table.Column<int>(nullable: true)
+                    ProfileidProfile = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -156,11 +136,31 @@ namespace Repository.Migrations
                         principalTable: "Profile",
                         principalColumn: "idProfile",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectTeam",
+                columns: table => new
+                {
+                    idProjectTeam = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProjectidProject = table.Column<int>(nullable: true),
+                    TeamidTeam = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectTeam", x => x.idProjectTeam);
                     table.ForeignKey(
-                        name: "FK_User_Project_ProjectidProject",
+                        name: "FK_ProjectTeam_Project_ProjectidProject",
                         column: x => x.ProjectidProject,
                         principalTable: "Project",
                         principalColumn: "idProject",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProjectTeam_Team_TeamidTeam",
+                        column: x => x.TeamidTeam,
+                        principalTable: "Team",
+                        principalColumn: "idTeam",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -193,20 +193,47 @@ namespace Repository.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    UseridUser = table.Column<int>(nullable: true),
-                    ProjectidProject = table.Column<int>(nullable: true)
+                    UseridUser1 = table.Column<int>(nullable: true),
+                    ProjectidProject1 = table.Column<int>(nullable: true),
+                    PositionCard = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Notation", x => x.idNotation);
                     table.ForeignKey(
-                        name: "FK_Notation_Project_ProjectidProject",
+                        name: "FK_Notation_Project_ProjectidProject1",
+                        column: x => x.ProjectidProject1,
+                        principalTable: "Project",
+                        principalColumn: "idProject",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Notation_User_UseridUser1",
+                        column: x => x.UseridUser1,
+                        principalTable: "User",
+                        principalColumn: "idUser",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectUser",
+                columns: table => new
+                {
+                    idProjectUser = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProjectidProject = table.Column<int>(nullable: true),
+                    UseridUser = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectUser", x => x.idProjectUser);
+                    table.ForeignKey(
+                        name: "FK_ProjectUser_Project_ProjectidProject",
                         column: x => x.ProjectidProject,
                         principalTable: "Project",
                         principalColumn: "idProject",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Notation_User_UseridUser",
+                        name: "FK_ProjectUser_User_UseridUser",
                         column: x => x.UseridUser,
                         principalTable: "User",
                         principalColumn: "idUser",
@@ -223,11 +250,12 @@ namespace Repository.Migrations
                     Description = table.Column<string>(nullable: true),
                     Weight = table.Column<string>(nullable: true),
                     Effort = table.Column<string>(nullable: true),
-                    StatusidStatus = table.Column<int>(nullable: true),
+                    StatusidStatus1 = table.Column<int>(nullable: true),
                     MainTaskidTask = table.Column<int>(nullable: true),
-                    UseridUser = table.Column<int>(nullable: true),
+                    UseridUser1 = table.Column<int>(nullable: true),
                     ImpedimentidImpediment = table.Column<int>(nullable: true),
-                    KnowledgeidKnowledge = table.Column<int>(nullable: true)
+                    KnowledgeidKnowledge = table.Column<int>(nullable: true),
+                    ProjectidProject1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -251,14 +279,20 @@ namespace Repository.Migrations
                         principalColumn: "idTask",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Task_StatusTask_StatusidStatus",
-                        column: x => x.StatusidStatus,
-                        principalTable: "StatusTask",
+                        name: "FK_Task_Project_ProjectidProject1",
+                        column: x => x.ProjectidProject1,
+                        principalTable: "Project",
+                        principalColumn: "idProject",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Task_Status_StatusidStatus1",
+                        column: x => x.StatusidStatus1,
+                        principalTable: "Status",
                         principalColumn: "idStatus",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Task_User_UseridUser",
-                        column: x => x.UseridUser,
+                        name: "FK_Task_User_UseridUser1",
+                        column: x => x.UseridUser1,
                         principalTable: "User",
                         principalColumn: "idUser",
                         onDelete: ReferentialAction.Restrict);
@@ -273,14 +307,20 @@ namespace Repository.Migrations
                     Title = table.Column<string>(nullable: true),
                     Type = table.Column<string>(nullable: true),
                     Blob = table.Column<byte>(nullable: false),
+                    ExecutionTaskidTask = table.Column<int>(nullable: true),
                     ImpedimentidImpediment = table.Column<int>(nullable: true),
                     KnowledgeidKnowledge = table.Column<int>(nullable: true),
-                    NotationidNotation = table.Column<int>(nullable: true),
-                    TaskidTask = table.Column<int>(nullable: true)
+                    NotationidNotation = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AttachT", x => x.idAttach);
+                    table.ForeignKey(
+                        name: "FK_AttachT_Task_ExecutionTaskidTask",
+                        column: x => x.ExecutionTaskidTask,
+                        principalTable: "Task",
+                        principalColumn: "idTask",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AttachT_Impediment_ImpedimentidImpediment",
                         column: x => x.ImpedimentidImpediment,
@@ -299,12 +339,6 @@ namespace Repository.Migrations
                         principalTable: "Notation",
                         principalColumn: "idNotation",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AttachT_Task_TaskidTask",
-                        column: x => x.TaskidTask,
-                        principalTable: "Task",
-                        principalColumn: "idTask",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -320,12 +354,18 @@ namespace Repository.Migrations
                     Story = table.Column<int>(nullable: false),
                     ProjectidProject = table.Column<int>(nullable: true),
                     MockupidMockup = table.Column<int>(nullable: true),
-                    StatusidStatusBacklog = table.Column<int>(nullable: true),
-                    TaskidTask = table.Column<int>(nullable: true)
+                    StatusidStatus = table.Column<int>(nullable: true),
+                    ExecutionTaskidTask = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Backlog", x => x.idBacklog);
+                    table.ForeignKey(
+                        name: "FK_Backlog_Task_ExecutionTaskidTask",
+                        column: x => x.ExecutionTaskidTask,
+                        principalTable: "Task",
+                        principalColumn: "idTask",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Backlog_Mockup_MockupidMockup",
                         column: x => x.MockupidMockup,
@@ -339,18 +379,17 @@ namespace Repository.Migrations
                         principalColumn: "idProject",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Backlog_StatusBacklog_StatusidStatusBacklog",
-                        column: x => x.StatusidStatusBacklog,
-                        principalTable: "StatusBacklog",
-                        principalColumn: "idStatusBacklog",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Backlog_Task_TaskidTask",
-                        column: x => x.TaskidTask,
-                        principalTable: "Task",
-                        principalColumn: "idTask",
+                        name: "FK_Backlog_Status_StatusidStatus",
+                        column: x => x.StatusidStatus,
+                        principalTable: "Status",
+                        principalColumn: "idStatus",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AttachT_ExecutionTaskidTask",
+                table: "AttachT",
+                column: "ExecutionTaskidTask");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AttachT_ImpedimentidImpediment",
@@ -368,9 +407,9 @@ namespace Repository.Migrations
                 column: "NotationidNotation");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AttachT_TaskidTask",
-                table: "AttachT",
-                column: "TaskidTask");
+                name: "IX_Backlog_ExecutionTaskidTask",
+                table: "Backlog",
+                column: "ExecutionTaskidTask");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Backlog_MockupidMockup",
@@ -383,14 +422,9 @@ namespace Repository.Migrations
                 column: "ProjectidProject");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Backlog_StatusidStatusBacklog",
+                name: "IX_Backlog_StatusidStatus",
                 table: "Backlog",
-                column: "StatusidStatusBacklog");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Backlog_TaskidTask",
-                table: "Backlog",
-                column: "TaskidTask");
+                column: "StatusidStatus");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Impediment_UseridUser",
@@ -398,13 +432,33 @@ namespace Repository.Migrations
                 column: "UseridUser");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Notation_ProjectidProject",
+                name: "IX_Notation_ProjectidProject1",
                 table: "Notation",
+                column: "ProjectidProject1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notation_UseridUser1",
+                table: "Notation",
+                column: "UseridUser1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectTeam_ProjectidProject",
+                table: "ProjectTeam",
                 column: "ProjectidProject");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Notation_UseridUser",
-                table: "Notation",
+                name: "IX_ProjectTeam_TeamidTeam",
+                table: "ProjectTeam",
+                column: "TeamidTeam");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectUser_ProjectidProject",
+                table: "ProjectUser",
+                column: "ProjectidProject");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectUser_UseridUser",
+                table: "ProjectUser",
                 column: "UseridUser");
 
             migrationBuilder.CreateIndex(
@@ -423,19 +477,19 @@ namespace Repository.Migrations
                 column: "MainTaskidTask");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Task_StatusidStatus",
+                name: "IX_Task_ProjectidProject1",
                 table: "Task",
-                column: "StatusidStatus");
+                column: "ProjectidProject1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Task_UseridUser",
+                name: "IX_Task_StatusidStatus1",
                 table: "Task",
-                column: "UseridUser");
+                column: "StatusidStatus1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Team_ProjectidProject",
-                table: "Team",
-                column: "ProjectidProject");
+                name: "IX_Task_UseridUser1",
+                table: "Task",
+                column: "UseridUser1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_AddressidAddress",
@@ -446,11 +500,6 @@ namespace Repository.Migrations
                 name: "IX_User_ProfileidProfile",
                 table: "User",
                 column: "ProfileidProfile");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_User_ProjectidProject",
-                table: "User",
-                column: "ProjectidProject");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -462,19 +511,22 @@ namespace Repository.Migrations
                 name: "Backlog");
 
             migrationBuilder.DropTable(
-                name: "Team");
+                name: "ProjectTeam");
+
+            migrationBuilder.DropTable(
+                name: "ProjectUser");
 
             migrationBuilder.DropTable(
                 name: "Notation");
 
             migrationBuilder.DropTable(
+                name: "Task");
+
+            migrationBuilder.DropTable(
                 name: "Mockup");
 
             migrationBuilder.DropTable(
-                name: "StatusBacklog");
-
-            migrationBuilder.DropTable(
-                name: "Task");
+                name: "Team");
 
             migrationBuilder.DropTable(
                 name: "Impediment");
@@ -483,7 +535,10 @@ namespace Repository.Migrations
                 name: "Knowledge");
 
             migrationBuilder.DropTable(
-                name: "StatusTask");
+                name: "Project");
+
+            migrationBuilder.DropTable(
+                name: "Status");
 
             migrationBuilder.DropTable(
                 name: "User");
@@ -493,9 +548,6 @@ namespace Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "Profile");
-
-            migrationBuilder.DropTable(
-                name: "Project");
         }
     }
 }

@@ -26,15 +26,15 @@ namespace TeamNotationAPI.Controllers
             try
             {
 
-                return Ok(new MessageReturn("Status Retornado Com Sucesso",
+                return Ok(new MessageReturn("Sucesso Ao Adicionar",
                                             "",
                                             true,
                                             await _service.AddStatus(status)));
             }
             catch
             {
-                return BadRequest(new MessageReturn("Erro ao Adicionar Status",
-                                                    "Erro ao adicionar status, por favor tente noavmente mais tarde",
+                return BadRequest(new MessageReturn("Erro ao Adicionar",
+                                                    "Erro ao adicionar, por favor tente noavmente mais tarde",
                                                     false));
             }
         }

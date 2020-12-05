@@ -19,7 +19,7 @@ namespace TeamNotationAPI.Models
         public List<Attach> Attachments { get; set; }
 
         [NotMapped]
-        [ForeignKey("FK_Task_Status_StatusidStatus")]
+        [ForeignKey("FK_Task_Status_StatusidStatus1")]
         public int StatusidStatus { get; set; }
         public Status Status { get; set; }
 
@@ -28,12 +28,12 @@ namespace TeamNotationAPI.Models
         public ExecutionTask MainTask { get; set; }
 
         [NotMapped]
-        [ForeignKey("FK_Task_User_UseridUser")]
+        [ForeignKey("FK_Task_User_UseridUser1")]
         public int UseridUser { get; set; }
         public User User { get; set; }
 
         [NotMapped]
-        [ForeignKey("FK_Task_Project_ProjectidProject")]
+        [ForeignKey("FK_Task_Project_ProjectidProject1")]
         public int ProjectidProject { get; set; }
 
     }

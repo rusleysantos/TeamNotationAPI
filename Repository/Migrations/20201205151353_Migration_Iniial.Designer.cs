@@ -10,8 +10,8 @@ using Repository.Models;
 namespace Repository.Migrations
 {
     [DbContext(typeof(NotationContext))]
-    [Migration("20201123020119_Adiciona_Execution_Migration")]
-    partial class Adiciona_Execution_Migration
+    [Migration("20201205151353_Migration_Iniial")]
+    partial class Migration_Iniial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -202,16 +202,16 @@ namespace Repository.Migrations
                     b.Property<int?>("MainTaskidTask")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProjectidProject")
+                    b.Property<int?>("ProjectidProject1")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StatusidStatus")
+                    b.Property<int?>("StatusidStatus1")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UseridUser")
+                    b.Property<int?>("UseridUser1")
                         .HasColumnType("int");
 
                     b.Property<string>("Weight")
@@ -225,11 +225,11 @@ namespace Repository.Migrations
 
                     b.HasIndex("MainTaskidTask");
 
-                    b.HasIndex("ProjectidProject");
+                    b.HasIndex("ProjectidProject1");
 
-                    b.HasIndex("StatusidStatus");
+                    b.HasIndex("StatusidStatus1");
 
-                    b.HasIndex("UseridUser");
+                    b.HasIndex("UseridUser1");
 
                     b.ToTable("Task");
                 });
@@ -303,20 +303,23 @@ namespace Repository.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProjectidProject")
+                    b.Property<string>("PositionCard")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProjectidProject1")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UseridUser")
+                    b.Property<int?>("UseridUser1")
                         .HasColumnType("int");
 
                     b.HasKey("idNotation");
 
-                    b.HasIndex("ProjectidProject");
+                    b.HasIndex("ProjectidProject1");
 
-                    b.HasIndex("UseridUser");
+                    b.HasIndex("UseridUser1");
 
                     b.ToTable("Notation");
                 });
@@ -506,15 +509,15 @@ namespace Repository.Migrations
 
                     b.HasOne("TeamNotationAPI.Models.Project", null)
                         .WithMany("ExecutionTasks")
-                        .HasForeignKey("ProjectidProject");
+                        .HasForeignKey("ProjectidProject1");
 
                     b.HasOne("TeamNotationAPI.Models.Status", "Status")
                         .WithMany()
-                        .HasForeignKey("StatusidStatus");
+                        .HasForeignKey("StatusidStatus1");
 
                     b.HasOne("TeamNotationAPI.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UseridUser");
+                        .HasForeignKey("UseridUser1");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Impediment", b =>
@@ -528,11 +531,11 @@ namespace Repository.Migrations
                 {
                     b.HasOne("TeamNotationAPI.Models.Project", "Project")
                         .WithMany()
-                        .HasForeignKey("ProjectidProject");
+                        .HasForeignKey("ProjectidProject1");
 
                     b.HasOne("TeamNotationAPI.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UseridUser");
+                        .HasForeignKey("UseridUser1");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.User", b =>

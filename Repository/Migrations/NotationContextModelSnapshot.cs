@@ -304,20 +304,20 @@ namespace Repository.Migrations
                     b.Property<string>("PositionCard")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProjectidProject")
+                    b.Property<int?>("ProjectidProject1")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UseridUser")
+                    b.Property<int?>("UseridUser1")
                         .HasColumnType("int");
 
                     b.HasKey("idNotation");
 
-                    b.HasIndex("ProjectidProject");
+                    b.HasIndex("ProjectidProject1");
 
-                    b.HasIndex("UseridUser");
+                    b.HasIndex("UseridUser1");
 
                     b.ToTable("Notation");
                 });
@@ -529,11 +529,11 @@ namespace Repository.Migrations
                 {
                     b.HasOne("TeamNotationAPI.Models.Project", "Project")
                         .WithMany()
-                        .HasForeignKey("ProjectidProject");
+                        .HasForeignKey("ProjectidProject1");
 
                     b.HasOne("TeamNotationAPI.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UseridUser");
+                        .HasForeignKey("UseridUser1");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.User", b =>

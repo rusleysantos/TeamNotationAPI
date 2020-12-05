@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Repository.Contracts;
+using Repository.DTO;
 using Repository.Models;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,20 @@ namespace Repository.Services
             _con = con;
         }
 
-        public async Task<Notation> AddNotation(Notation notation)
+        public async Task<int> AddNotation(NotationDTO notation)
         {
-            _con.Add(notation);
-            _con.SaveChanges();
+            _con.Add(new Notation
+            {
+                ProjectidProject = notation.idProject,
+                UseridUser = notation.idUser,
+                Description = notation.Description,
+                PositionCard = notation.PositionCard,
+                Title = notation.Title
+            });
 
-            return notation;
+            await _con.SaveChangesAsync();
+
+            return notation.idNotation;
         }
 
         public async Task<bool> DeleteNotation(int idNotation)
@@ -48,27 +57,29 @@ namespace Repository.Services
             return await _con.Notation.Where(x => x.idNotation == idNotation).FirstAsync();
         }
 
-        public async Task<List<Notation>> GetNotations(int page, int size)
+        public async Task<List<Notation>> GetNotations(int page, int size, int idProject)
         {
             return await _con.Notation
+                        .Include(y => y.Project)
                         .Skip((page - 1) * size)
                         .Take(size)
+                        .Where(x => x.Project.idProject == idProject)
                         .ToListAsync();
         }
 
-        public async Task<bool> PutNotation(Notation notation)
+        public async Task<bool> PutNotation(NotationDTO notation)
         {
             Task<Notation> returnNotation = _con.Notation.Where(x => x.idNotation == notation.idNotation).FirstAsync();
 
             if (returnNotation.Result != null)
             {
-                returnNotation.Result.Attachments = notation.Attachments.Count == 0 ? returnNotation.Result.Attachments : notation.Attachments;
+                //returnNotation.Result.Attachments = notation.Attachments.Count == 0 ? returnNotation.Result.Attachments : notation.Attachments;
                 returnNotation.Result.Description = notation.Description == null ? returnNotation.Result.Description : notation.Description;
-                returnNotation.Result.Project = notation.Project == null ? returnNotation.Result.Project : notation.Project;
+                //returnNotation.Result.Project = notation.Project == null ? returnNotation.Result.Project : notation.Project;
                 returnNotation.Result.Title = notation.Title == null ? returnNotation.Result.Title : notation.Title;
-                returnNotation.Result.User = notation.User == null ? returnNotation.Result.User : notation.User;
                 returnNotation.Result.PositionCard = notation.PositionCard == null ? returnNotation.Result.PositionCard : notation.PositionCard;
 
+                _con.Update(returnNotation.Result);
                 await _con.SaveChangesAsync();
 
                 return true;

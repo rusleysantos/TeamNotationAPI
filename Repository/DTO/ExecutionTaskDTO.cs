@@ -9,10 +9,10 @@ namespace Repository.DTO
 
         public string Title { get; set; }
         public string Description { get; set; }
-        public int Weight { get; set; }
-        public int Effort { get; set; }
+        public string Weight { get; set; }
+        public string Effort { get; set; }
         public int idStatus { get; set; }
-        public int idMainTask { get; set; }
+        //public int idMainTask { get; set; }
         public int idProject { get; set; }
         // public List<int> idsBacklogs { get; set; }
         public int idUser { get; set; }

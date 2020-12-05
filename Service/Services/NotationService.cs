@@ -1,4 +1,6 @@
-﻿using Service.Contracts;
+﻿using Repository.Contracts;
+using Repository.DTO;
+using Service.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,25 +11,25 @@ namespace Service.Services
 {
     public class NotationService: INotationService
     {
-        private INotationService _repository { get; }
-        public NotationService(INotationService repository)
+        private INotationRepository _repository { get; }
+        public NotationService(INotationRepository repository)
         {
             _repository = repository;
         }
 
-        public Task<Notation> AddNotation(Notation notation)
+        public Task<int> AddNotation(NotationDTO notation)
         {
             return _repository.AddNotation(notation);
         }
 
-        public Task<bool> PutNotation(Notation notation)
+        public Task<bool> PutNotation(NotationDTO notation)
         {
             return _repository.PutNotation(notation);
         }
 
-        public Task<List<Notation>> GetNotations(int page, int size)
+        public Task<List<Notation>> GetNotations(int page, int size, int idProject)
         {
-            return _repository.GetNotations(page, size);
+            return _repository.GetNotations(page, size, idProject);
         }
 
         public Task<Notation> GetNotation(int idNotation)

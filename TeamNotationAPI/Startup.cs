@@ -69,6 +69,7 @@ namespace TeamNotationAPI
             services.AddScoped<IKnowledgeRepository, KnowledgeRepository>();
             services.AddScoped<IMockupRepository, MockupRepository>();
             services.AddScoped<INotationRepository, NotationRepository>();
+            services.AddScoped<INotationService, NotationService>();
             services.AddScoped<IProfileRepository, ProfileRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IProjectService, ProjectService>();
@@ -82,7 +83,6 @@ namespace TeamNotationAPI
 
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ILoginRepository, LoginRepository>();
-
 
             services.AddDbContext<NotationContext>(options =>
             options.UseSqlServer(

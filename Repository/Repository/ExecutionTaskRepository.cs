@@ -25,8 +25,8 @@ namespace Repository.Services
             _con.Task.Add(new ExecutionTask
             {
                 Description = task.Description,
-                Effort = task.Effort.ToString(),
-                Weight = task.Weight.ToString(),
+                Effort = task.Effort,
+                Weight = task.Weight,
                 Title = task.Title,
                 StatusidStatus = task.idStatus,
                 UseridUser = task.idUser,
@@ -35,7 +35,7 @@ namespace Repository.Services
             });
             await _con.SaveChangesAsync();
 
-            return task.idMainTask;
+            return 0;
         }
 
         public async Task<bool> DeleteExecutionTask(int idExecutionTask)
