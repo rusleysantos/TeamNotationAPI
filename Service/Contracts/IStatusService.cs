@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using TeamNotationAPI.Models;
 
 namespace Service.Contracts
 {
     public interface IStatusService
     {
-        public Status AddStatus(Status backlog);
-        public bool PutStatus(Status backlog);
-        public List<Status> GetStatus(int page, int size);
-        public Status GetStatus(int idStatus);
-        public bool DeleteStatus(int idStatus);
+        public Task<Status> AddStatus(Status backlog);
+        public Task<bool> PutStatus(Status backlog);
+        public Task<List<Status>> GetStatus(int page, int size);
+        public Task<List<Status>> GetStatusAllByType(int page, int size, string type);
+        public Task<Status> GetStatus(int idStatus);
+        public Task<bool> DeleteStatus(int idStatus);
     }
 }

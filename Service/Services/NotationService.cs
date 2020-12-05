@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using TeamNotationAPI.Models;
 
 namespace Service.Services
@@ -14,27 +15,27 @@ namespace Service.Services
             _repository = repository;
         }
 
-        public Notation AddNotation(Notation notation)
+        public Task<Notation> AddNotation(Notation notation)
         {
             return _repository.AddNotation(notation);
         }
 
-        public bool PutNotation(Notation notation)
+        public Task<bool> PutNotation(Notation notation)
         {
             return _repository.PutNotation(notation);
         }
 
-        public List<Notation> GetNotations(int page, int size)
+        public Task<List<Notation>> GetNotations(int page, int size)
         {
             return _repository.GetNotations(page, size);
         }
 
-        public Notation GetNotation(int idNotation)
+        public Task<Notation> GetNotation(int idNotation)
         {
             return _repository.GetNotation(idNotation);
         }
 
-        public bool DeleteNotation(int idNotation)
+        public Task<bool> DeleteNotation(int idNotation)
         {
             return _repository.DeleteNotation(idNotation);
         }

@@ -21,14 +21,14 @@ namespace Repository.Services
 
         public async Task<int> AddProject(Project project, int idUser)
         {
-            User user = _con.User.Where(x => x.idUser == idUser).First();
+            Task<User> user = _con.User.Where(x => x.idUser == idUser).FirstAsync();
 
             _con.Add(project);
             await _con.SaveChangesAsync();
 
             ProjectUser projectUser = new ProjectUser
             {
-                User = user,
+                User = user.Result,
                 Project = project
             };
 
@@ -40,12 +40,12 @@ namespace Repository.Services
 
         public async Task<bool> DeleteProject(int idProject)
         {
-            Project returnProject = _con.Project.Where(x => x.idProject == idProject).First();
+            Task<Project> returnProject = _con.Project.Where(x => x.idProject == idProject).FirstAsync();
 
             if (returnProject != null)
             {
                 _con.Remove(returnProject);
-                _con.SaveChanges();
+                await _con.SaveChangesAsync();
                 return true;
             }
             else
@@ -69,12 +69,12 @@ namespace Repository.Services
 
         public async Task<bool> PutProject(Project project)
         {
-            Project returnProject = _con.Project.Where(x => x.idProject == project.idProject).First();
+            Task<Project> returnProject = _con.Project.Where(x => x.idProject == project.idProject).FirstAsync();
 
-            if (returnProject != null)
+            if (returnProject.Result != null)
             {
-                returnProject.PercentDone = project.PercentDone == 0.0 ? returnProject.PercentDone : project.PercentDone;
-                returnProject.Title = project.Title == null ? returnProject.Title : project.Title;
+                returnProject.Result.PercentDone = project.PercentDone == 0.0 ? returnProject.Result.PercentDone : project.PercentDone;
+                returnProject.Result.Title = project.Title == null ? returnProject.Result.Title : project.Title;
 
                 await _con.SaveChangesAsync();
 

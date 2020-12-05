@@ -9,7 +9,7 @@ namespace Repository.Contracts
 {
     public interface IExecutionTaskRepository
     {
-        public void AddExecutionTask(ExecutionTaskDTO task);
+        public Task<int> AddExecutionTask(ExecutionTaskDTO task);
         public Task<bool> DeleteExecutionTask(int idTask);
         public Task<List<ExecutionTask>> GetExecutionTasks(int page, int size);
         Task<List<ExecutionTask>> GetTasksProject(int idProject, int page, int size);

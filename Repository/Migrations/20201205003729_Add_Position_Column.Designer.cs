@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.Models;
 
 namespace Repository.Migrations
 {
     [DbContext(typeof(NotationContext))]
-    partial class NotationContextModelSnapshot : ModelSnapshot
+    [Migration("20201205003729_Add_Position_Column")]
+    partial class Add_Position_Column
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

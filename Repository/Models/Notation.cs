@@ -12,6 +12,7 @@ namespace TeamNotationAPI.Models
         public int idNotation { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string PositionCard { get; set; }
         public User User { get; set; }
         public Project Project { get; set; }
         public List<Attach> Attachments { get; set; }

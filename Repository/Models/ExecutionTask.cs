@@ -18,6 +18,7 @@ namespace TeamNotationAPI.Models
         public List<Backlog> Backlogs { get; set; }
         public List<Attach> Attachments { get; set; }
 
+        [NotMapped]
         [ForeignKey("FK_Task_Status_StatusidStatus")]
         public int StatusidStatus { get; set; }
         public Status Status { get; set; }
@@ -26,10 +27,12 @@ namespace TeamNotationAPI.Models
         //public int MainTaskidTask { get; set; }
         public ExecutionTask MainTask { get; set; }
 
+        [NotMapped]
         [ForeignKey("FK_Task_User_UseridUser")]
         public int UseridUser { get; set; }
         public User User { get; set; }
 
+        [NotMapped]
         [ForeignKey("FK_Task_Project_ProjectidProject")]
         public int ProjectidProject { get; set; }
 

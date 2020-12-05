@@ -51,15 +51,20 @@ namespace TeamNotationAPI.Controllers
             try
             {
                 var identity = User.Identity as ClaimsIdentity;
+                
+                //var lista = identity.Claims.ToList();
+                //var id = lista[1];
+                //var numeroIdDoInfeliz = (id);
+
                 task.idUser = Convert.ToInt32(identity.Claims.ToList()[1].Value);
 
-                _service.AddExecutionTask(task);
+                 await _service.AddExecutionTask(task);
 
                 return Ok(new MessageReturn("Sucesso ao Adicionar Tarefa",
                                             "Tarefa adiciona com sucesso",
                                             true));
             }
-            catch (Exception e)
+            catch
             {
                 return BadRequest(new MessageReturn("Erro ao Adicionar Tarefa",
                                                    "Erro ao cadastrar item.",

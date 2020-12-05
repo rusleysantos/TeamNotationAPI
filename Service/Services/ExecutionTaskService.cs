@@ -17,9 +17,9 @@ namespace Service.Services
             _repository = repository;
         }
 
-        public void AddExecutionTask(ExecutionTaskDTO task)
+        public Task<int> AddExecutionTask(ExecutionTaskDTO task)
         {
-            _repository.AddExecutionTask(task);
+            return _repository.AddExecutionTask(task);
         }
 
         public Task<bool> PutExecutionTask(ExecutionTask task)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.Domains;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using TeamNotationAPI.Models;
@@ -19,7 +20,8 @@ namespace TeamNotationAPI.Controllers
         }
 
         [HttpPost("[action]")]
-        public IActionResult AddStatus([FromBody] Status status)
+        [Authorize]
+        public async Task<IActionResult> AddStatus([FromBody] Status status)
         {
             try
             {
@@ -27,7 +29,7 @@ namespace TeamNotationAPI.Controllers
                 return Ok(new MessageReturn("Status Retornado Com Sucesso",
                                             "",
                                             true,
-                                            _service.AddStatus(status)));
+                                            await _service.AddStatus(status)));
             }
             catch
             {
@@ -38,11 +40,12 @@ namespace TeamNotationAPI.Controllers
         }
 
         [HttpPut("[action]")]
-        public IActionResult PutStatus([FromBody] Status status)
+        [Authorize]
+        public async Task<IActionResult> PutStatus([FromBody] Status status)
         {
             try
             {
-                if (_service.PutStatus(status))
+                if (_service.PutStatus(status).Result)
                 {
                     return Ok(new MessageReturn("Sucesso ao Alterar Status",
                                                 "Muito bom, sempre mantenha seus dados atualizados!",
@@ -66,7 +69,8 @@ namespace TeamNotationAPI.Controllers
         }
 
         [HttpGet("[action]")]
-        public IActionResult GetStatusAll([FromQuery] int page, int size)
+        [Authorize]
+        public async Task<IActionResult> GetStatusAll([FromQuery] int page, int size)
         {
             try
             {
@@ -74,7 +78,7 @@ namespace TeamNotationAPI.Controllers
                 return Ok(new MessageReturn("Sucesso ao Consultar Status",
                                             "",
                                             true,
-                                             _service.GetStatus(page, size)));
+                                             await _service.GetStatus(page, size)));
 
             }
             catch
@@ -87,7 +91,8 @@ namespace TeamNotationAPI.Controllers
         }
 
         [HttpGet("[action]")]
-        public IActionResult GetStatus([FromQuery] int idStatus)
+        [Authorize]
+        public async Task<IActionResult> GetStatusAllByType([FromQuery] int page, int size, string type)
         {
             try
             {
@@ -95,7 +100,29 @@ namespace TeamNotationAPI.Controllers
                 return Ok(new MessageReturn("Sucesso ao Consultar Status",
                                             "",
                                             true,
-                                            _service.GetStatus(idStatus)));
+                                            await _service.GetStatusAllByType(page, size, type)));
+
+            }
+            catch
+            {
+                return BadRequest(new MessageReturn("Erro ao Consultar Status",
+                                                   "Erro ao consultar status, por favor tente noavmente mais tarde.",
+                                                   false));
+
+            }
+        }
+
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<IActionResult> GetStatus([FromQuery] int idStatus)
+        {
+            try
+            {
+
+                return Ok(new MessageReturn("Sucesso ao Consultar Status",
+                                            "",
+                                            true,
+                                            await _service.GetStatus(idStatus)));
             }
             catch
             {
@@ -106,9 +133,10 @@ namespace TeamNotationAPI.Controllers
         }
 
         [HttpDelete("[action]")]
-        public IActionResult DeleteStatus([FromQuery] int idStatus)
+        [Authorize]
+        public async Task<IActionResult> DeleteStatus([FromQuery] int idStatus)
         {
-            if (_service.DeleteStatus(idStatus))
+            if (_service.DeleteStatus(idStatus).Result)
             {
                 return Ok(new MessageReturn("Sucesso ao Deletar Status",
                                             "Matenha seu status atualizado",

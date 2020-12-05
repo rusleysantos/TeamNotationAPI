@@ -20,7 +20,7 @@ namespace Repository.Services
             _con = con;
         }
 
-        public void AddExecutionTask(ExecutionTaskDTO task)
+        public async Task<int> AddExecutionTask(ExecutionTaskDTO task)
         {
             _con.Task.Add(new ExecutionTask
             {
@@ -33,7 +33,9 @@ namespace Repository.Services
                 ProjectidProject = task.idProject
                 
             });
-            _con.SaveChanges();
+            await _con.SaveChangesAsync();
+
+            return task.idMainTask;
         }
 
         public async Task<bool> DeleteExecutionTask(int idExecutionTask)

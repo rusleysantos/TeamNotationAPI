@@ -1,9 +1,11 @@
-﻿using Repository.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository.Contracts;
 using Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using TeamNotationAPI.Models;
 
 namespace Repository.Services
@@ -17,7 +19,7 @@ namespace Repository.Services
             _con = con;
         }
 
-        public Notation AddNotation(Notation notation)
+        public async Task<Notation> AddNotation(Notation notation)
         {
             _con.Add(notation);
             _con.SaveChanges();
@@ -25,14 +27,14 @@ namespace Repository.Services
             return notation;
         }
 
-        public bool DeleteNotation(int idNotation)
+        public async Task<bool> DeleteNotation(int idNotation)
         {
-            Notation returnNotation = _con.Notation.Where(x => x.idNotation == idNotation).First();
+            Task<Notation> returnNotation = _con.Notation.Where(x => x.idNotation == idNotation).FirstAsync();
 
-            if (returnNotation != null)
+            if (returnNotation.Result != null)
             {
                 _con.Remove(returnNotation);
-                _con.SaveChanges();
+                await _con.SaveChangesAsync();
                 return true;
             }
             else
@@ -41,32 +43,33 @@ namespace Repository.Services
             }
         }
 
-        public Notation GetNotation(int idNotation)
+        public async Task<Notation> GetNotation(int idNotation)
         {
-            return _con.Notation.Where(x => x.idNotation == idNotation).First();
+            return await _con.Notation.Where(x => x.idNotation == idNotation).FirstAsync();
         }
 
-        public List<Notation> GetNotations(int page, int size)
+        public async Task<List<Notation>> GetNotations(int page, int size)
         {
-            return _con.Notation
+            return await _con.Notation
                         .Skip((page - 1) * size)
                         .Take(size)
-                        .ToList();
+                        .ToListAsync();
         }
 
-        public bool PutNotation(Notation notation)
+        public async Task<bool> PutNotation(Notation notation)
         {
-            Notation returnNotation = _con.Notation.Where(x => x.idNotation == notation.idNotation).First();
+            Task<Notation> returnNotation = _con.Notation.Where(x => x.idNotation == notation.idNotation).FirstAsync();
 
-            if (returnNotation != null)
+            if (returnNotation.Result != null)
             {
-                returnNotation.Attachments = notation.Attachments.Count == 0 ? returnNotation.Attachments : notation.Attachments;
-                returnNotation.Description = notation.Description == null ? returnNotation.Description : notation.Description;
-                returnNotation.Project = notation.Project == null ? returnNotation.Project : notation.Project;
-                returnNotation.Title = notation.Title == null ? returnNotation.Title : notation.Title;
-                returnNotation.User = notation.User == null ? returnNotation.User : notation.User;
+                returnNotation.Result.Attachments = notation.Attachments.Count == 0 ? returnNotation.Result.Attachments : notation.Attachments;
+                returnNotation.Result.Description = notation.Description == null ? returnNotation.Result.Description : notation.Description;
+                returnNotation.Result.Project = notation.Project == null ? returnNotation.Result.Project : notation.Project;
+                returnNotation.Result.Title = notation.Title == null ? returnNotation.Result.Title : notation.Title;
+                returnNotation.Result.User = notation.User == null ? returnNotation.Result.User : notation.User;
+                returnNotation.Result.PositionCard = notation.PositionCard == null ? returnNotation.Result.PositionCard : notation.PositionCard;
 
-                _con.SaveChanges();
+                await _con.SaveChangesAsync();
 
                 return true;
             }

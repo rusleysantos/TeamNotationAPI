@@ -3,11 +3,12 @@ using Service.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using TeamNotationAPI.Models;
 
 namespace Service.Services
 {
-    public class StatusService: IStatusService
+    public class StatusService : IStatusService
     {
         private IStatusRepository _repository { get; }
         public StatusService(IStatusRepository repository)
@@ -15,27 +16,32 @@ namespace Service.Services
             _repository = repository;
         }
 
-        public Status AddStatus(Status status)
+        public Task<Status> AddStatus(Status status)
         {
             return _repository.AddStatus(status);
         }
 
-        public bool PutStatus(Status impediment)
+        public Task<bool> PutStatus(Status impediment)
         {
             return _repository.PutStatus(impediment);
         }
 
-        public List<Status> GetStatus(int page, int size)
+        public Task<List<Status>> GetStatus(int page, int size)
         {
             return _repository.GetStatus(page, size);
         }
 
-        public Status GetStatus(int idStatus)
+        public Task<List<Status>> GetStatusAllByType(int page, int size, string type)
+        {
+            return _repository.GetStatusAllByType(page, size, type);
+        }
+
+        public Task<Status> GetStatus(int idStatus)
         {
             return _repository.GetStatus(idStatus);
         }
 
-        public bool DeleteStatus(int idStatus)
+        public Task<bool> DeleteStatus(int idStatus)
         {
             return _repository.DeleteStatus(idStatus);
         }
