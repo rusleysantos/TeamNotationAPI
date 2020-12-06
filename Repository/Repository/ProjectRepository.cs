@@ -90,12 +90,16 @@ namespace Repository.Services
             List<int> ids = new List<int>();
 
             Task<List<ProjectUser>> projects = _con.ProjectUser
+                                                    .Include(j => j.Project) 
                                                     .Where(x => x.idUser == idUser)
                                                     .ToListAsync();
 
-            foreach (var id in projects.Result)
+            if (projects.Result != null)
             {
-                ids.Add(id.Project.idProject);
+                foreach (var id in projects.Result)
+                {
+                    ids.Add(id.Project.idProject);
+                }
             }
 
             return await _con.Project
@@ -110,6 +114,6 @@ namespace Repository.Services
 
         }
 
-   
+
     }
 }
