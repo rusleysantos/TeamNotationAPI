@@ -59,14 +59,14 @@ namespace Repository.Services
 
             if (returnBacklog != null)
             {
-                returnBacklog.Category = backlog.Category == 0 ? returnBacklog.Category : backlog.Category;
-                returnBacklog.Estimate = backlog.Estimate == 0 ? returnBacklog.Estimate : backlog.Estimate;
-                returnBacklog.Importance = backlog.Importance == 0 ? returnBacklog.Importance : backlog.Importance;
-                returnBacklog.Mockup = backlog.Mockup == null ? returnBacklog.Mockup : backlog.Mockup;
-                returnBacklog.Precedence = backlog.Precedence == 0 ? returnBacklog.Precedence : backlog.Precedence;
-                returnBacklog.Project = backlog.Project == null ? returnBacklog.Project : backlog.Project;
-                returnBacklog.Status = backlog.Status == null ? returnBacklog.Status : backlog.Status;
-                returnBacklog.Story = backlog.Story == 0 ? returnBacklog.Story : backlog.Story;
+                returnBacklog.Category = String.IsNullOrEmpty(backlog.Category) ? returnBacklog.Category : backlog.Category;
+                returnBacklog.Estimate = String.IsNullOrEmpty(backlog.Estimate) ? returnBacklog.Estimate : backlog.Estimate;
+                returnBacklog.Importance = String.IsNullOrEmpty(backlog.Importance) ? returnBacklog.Importance : backlog.Importance;
+                //returnBacklog.Mockup = String.IsNullOrEmpty(backlog.Mockup) ? returnBacklog.Mockup : backlog.Mockup;
+                //returnBacklog.Precedence = backlog.Precedence == 0 ? returnBacklog.Precedence : backlog.Precedence;
+                //returnBacklog.Project = backlog.Project == null ? returnBacklog.Project : backlog.Project;
+                //returnBacklog.Status = backlog.Status == null ? returnBacklog.Status : backlog.Status;
+                //returnBacklog.Story = backlog.Story == 0 ? returnBacklog.Story : backlog.Story;
 
                 _con.SaveChanges();
 

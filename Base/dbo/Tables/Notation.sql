@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[Notation] (
+    [IDNOTATION]   INT            IDENTITY (1, 1) NOT NULL,
+    [TITLE]        NVARCHAR (MAX) NULL,
+    [DESCRIPTION]  NVARCHAR (MAX) NULL,
+    [POSITIONCARD] NVARCHAR (MAX) NULL,
+    [IDUSER]       INT            NOT NULL,
+    [IDPROJECT]    INT            NOT NULL,
+    CONSTRAINT [PK_Notation] PRIMARY KEY CLUSTERED ([IDNOTATION] ASC)
+);
+

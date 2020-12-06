@@ -7,23 +7,35 @@ using System.Threading.Tasks;
 
 namespace TeamNotationAPI.Models
 {
+    [Table("Notation")]
     public class Notation
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("ID_NOTATION")]
         public int idNotation { get; set; }
+        
+        [Column("TITLE")]
         public string Title { get; set; }
+
+        [Column("DESCRIPTION")]
         public string Description { get; set; }
-        public User User { get; set; }
-        public Project Project { get; set; }
+
+        [Column("ATTACHMENTS")]
         public List<Attach> Attachments { get; set; }
+
+        [Column("POSITIONCARD")]
         public string PositionCard { get; set; }
 
-        [NotMapped]
-        [ForeignKey("FK_Notation_Project_ProjectidProject")]
-        public int ProjectidProject { get; set; }
+        [ForeignKey("User")]
+        [Column("ID_USER")]
+        public int idUser { get; set; }
+        public User User { get; set; }
 
-        [NotMapped]
-        [ForeignKey("FK_Notation_User_UseridUser")]
-        public int UseridUser { get; set; }
+        [ForeignKey("Project")]
+        [Column("ID_PROJECT")]
+        public int idProject { get; set; }
+        public Project Project { get; set; }
+
     }
 }

@@ -60,10 +60,10 @@ namespace Repository.Services
 
             if (returnUser != null)
             {
-                returnUser.Address = user.Address == null ? returnUser.Address : user.Address;
-                returnUser.Login = user.Login == null ? returnUser.Login : user.Login;
-                returnUser.Password = user.Password == null ? returnUser.Password : user.Password;
-                returnUser.Profile = user.Profile == null ? returnUser.Profile : user.Profile;
+                //returnUser.Address = user.Address == null ? returnUser.Address : user.Address;
+                //returnUser.Login = user.Login == null ? returnUser.Login : user.Login;
+                //returnUser.Password = user.Password == null ? returnUser.Password : user.Password;
+                //returnUser.Profile = user.Profile == null ? returnUser.Profile : user.Profile;
 
                 _con.SaveChanges();
 

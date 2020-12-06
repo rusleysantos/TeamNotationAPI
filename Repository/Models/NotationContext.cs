@@ -43,7 +43,7 @@ namespace Repository.Models
         public DbSet<Profile> Profile { get; set; }
         public DbSet<Project> Project { get; set; }
         public DbSet<Status> Status { get; set; }
-        public DbSet<ExecutionTask> Task { get; set; }
+        public DbSet<ExecutionTask> ExecutionTask { get; set; }
         public DbSet<Team> Team { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<ProjectUser> ProjectUser { get; set; }

@@ -22,15 +22,15 @@ namespace Repository.Services
 
         public async Task<int> AddExecutionTask(ExecutionTaskDTO task)
         {
-            _con.Task.Add(new ExecutionTask
+            _con.ExecutionTask.Add(new ExecutionTask
             {
                 Description = task.Description,
                 Effort = task.Effort,
                 Weight = task.Weight,
                 Title = task.Title,
-                StatusidStatus = task.idStatus,
-                UseridUser = task.idUser,
-                ProjectidProject = task.idProject
+                idStatus = task.idStatus,
+                idUser = task.idUser,
+                idProject = task.idProject
                 
             });
             await _con.SaveChangesAsync();
@@ -40,7 +40,7 @@ namespace Repository.Services
 
         public async Task<bool> DeleteExecutionTask(int idExecutionTask)
         {
-            ExecutionTask returnExecutionTask = await _con.Task.Where(x => x.idTask == idExecutionTask).FirstAsync();
+            ExecutionTask returnExecutionTask = await _con.ExecutionTask.Where(x => x.idTask == idExecutionTask).FirstAsync();
 
             if (returnExecutionTask != null)
             {
@@ -56,12 +56,12 @@ namespace Repository.Services
 
         public Task<ExecutionTask> GetExecutionTask(int idExecutionTask)
         {
-            return _con.Task.Where(x => x.idTask == idExecutionTask).FirstAsync();
+            return _con.ExecutionTask.Where(x => x.idTask == idExecutionTask).FirstAsync();
         }
 
         public async Task<List<ExecutionTask>> GetExecutionTasks(int page, int size)
         {
-            return await _con.Task
+            return await _con.ExecutionTask
                         .Skip((page - 1) * size)
                         .Take(size)
                         .ToListAsync();
@@ -80,7 +80,7 @@ namespace Repository.Services
 
         public async Task<bool> PutExecutionTask(ExecutionTask attach)
         {
-            ExecutionTask returnExecutionTask = _con.Task.Where(x => x.idTask == attach.idTask).First();
+            ExecutionTask returnExecutionTask = _con.ExecutionTask.Where(x => x.idTask == attach.idTask).First();
 
             if (returnExecutionTask != null)
             {
@@ -88,11 +88,11 @@ namespace Repository.Services
                 returnExecutionTask.Backlogs = attach.Backlogs == null ? returnExecutionTask.Backlogs : attach.Backlogs;
                 returnExecutionTask.Description = attach.Description == null ? returnExecutionTask.Description : attach.Description;
                 returnExecutionTask.Effort = attach.Effort == null ? returnExecutionTask.Effort : attach.Effort;
-                returnExecutionTask.MainTask = attach.MainTask == null ? returnExecutionTask.MainTask : attach.MainTask;
-                returnExecutionTask.Status = attach.Status == null ? returnExecutionTask.Status : attach.Status;
-                returnExecutionTask.Title = attach.Title == null ? returnExecutionTask.Title : attach.Title;
-                returnExecutionTask.User = attach.User == null ? returnExecutionTask.User : attach.User;
-                returnExecutionTask.Weight = attach.Weight == null ? returnExecutionTask.Weight : attach.Weight;
+                //returnExecutionTask.MainTask = attach.MainTask == null ? returnExecutionTask.MainTask : attach.MainTask;
+                //returnExecutionTask.Status = attach.Status == null ? returnExecutionTask.Status : attach.Status;
+                //returnExecutionTask.Title = attach.Title == null ? returnExecutionTask.Title : attach.Title;
+                //returnExecutionTask.User = attach.User == null ? returnExecutionTask.User : attach.User;
+                //returnExecutionTask.Weight = attach.Weight == null ? returnExecutionTask.Weight : attach.Weight;
 
                 await _con.SaveChangesAsync();
 

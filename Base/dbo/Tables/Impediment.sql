@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Impediment] (
+    [IDIMPEDIMENT] INT            IDENTITY (1, 1) NOT NULL,
+    [TITLE]        NVARCHAR (MAX) NULL,
+    [DESCRIPTION]  NVARCHAR (MAX) NULL,
+    [IDUSER]       INT            NOT NULL,
+    CONSTRAINT [PK_Impediment] PRIMARY KEY CLUSTERED ([IDIMPEDIMENT] ASC)
+);
+

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using System.Text;
 using Repository.Models;
 using Auth.Contracts;
+using Repository.DTO;
 
 namespace BearerAuthenticationApi.Services
 {
@@ -20,7 +21,7 @@ namespace BearerAuthenticationApi.Services
             _conf = configuration;
         }
 
-        public string GenerateToken(Login login)
+        public string GenerateToken(LoginDTO login)
         {
             var tokenHendler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_conf.GetValue<string>("Secret"));

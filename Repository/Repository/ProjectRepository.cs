@@ -21,14 +21,13 @@ namespace Repository.Services
 
         public async Task<int> AddProject(Project project, int idUser)
         {
-            Task<User> user = _con.User.Where(x => x.idUser == idUser).FirstAsync();
 
             _con.Add(project);
             await _con.SaveChangesAsync();
 
             ProjectUser projectUser = new ProjectUser
             {
-                User = user.Result,
+                idUser = idUser,
                 Project = project
             };
 
@@ -91,13 +90,7 @@ namespace Repository.Services
             List<int> ids = new List<int>();
 
             Task<List<ProjectUser>> projects = _con.ProjectUser
-                                                    .Include(j => j.User)
-                                                    .Where(x => x.User.idUser == idUser)
-                                                    .Select(x => new ProjectUser
-                                                    {
-                                                        Project = x.Project,
-                                                        User = x.User
-                                                    })
+                                                    .Where(x => x.idUser == idUser)
                                                     .ToListAsync();
 
             foreach (var id in projects.Result)

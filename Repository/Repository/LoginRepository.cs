@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Repository.Contracts;
+using Repository.DTO;
 using Repository.Models;
 using System;
 using System.Collections.Generic;
@@ -19,20 +20,20 @@ namespace Repository.Repository
             _con = con;
         }
 
-        public async Task<Login> Login(Login login)
+        public async Task<LoginDTO> Login(LoginDTO login)
         {
 
-            Login loginReturn = _con
+            LoginDTO loginReturn = _con
                                 .User
                                 .Where(x => x.Login == login.Username
                                        &&
                                        x.Password == login.Password)
-                                .Select(x => new Login
+                                .Select(x => new LoginDTO
                                 {
                                     idUser = x.idUser,
                                     Username = login.Username
-                                }).FirstAsync()
-                                .Result;
+                                }).FirstOrDefault();
+                               
 
             if (loginReturn != null)
             {
@@ -41,8 +42,8 @@ namespace Repository.Repository
             }
             else
             {
-                loginReturn.AuthorizationStatus = false;
-                return loginReturn;
+                login.AuthorizationStatus = false;
+                return login;
             }
 
         }

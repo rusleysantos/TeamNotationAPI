@@ -61,7 +61,7 @@ namespace Repository.Services
             if (returnProfile != null)
             {
                 returnProfile.BirthDate = profile.BirthDate == null ? returnProfile.BirthDate : profile.BirthDate;
-                returnProfile.Gender = profile.Gender == null ? returnProfile.Gender : profile.Gender;
+                //returnProfile.Gender = profile.Gender == null ? returnProfile.Gender : profile.Gender;
                 returnProfile.Name = profile.Name == null ? returnProfile.Name : profile.Name;
                 returnProfile.Surname = profile.Surname == null ? returnProfile.Surname : profile.Surname;
 

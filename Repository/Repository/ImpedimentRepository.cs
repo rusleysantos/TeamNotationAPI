@@ -63,7 +63,7 @@ namespace Repository.Services
                 returnImpediment.Description = impediment.Description == string.Empty ? returnImpediment.Description : impediment.Description;
                 returnImpediment.Tasks = impediment.Tasks.Count == 0 ? returnImpediment.Tasks : impediment.Tasks;
                 returnImpediment.Title = impediment.Title == string.Empty ? returnImpediment.Title : impediment.Title;
-                returnImpediment.User = impediment.User == null ? returnImpediment.User : impediment.User;
+                //returnImpediment.User = impediment.User == null ? returnImpediment.User : impediment.User;
            
                 _con.SaveChanges();
 

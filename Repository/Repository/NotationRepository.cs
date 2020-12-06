@@ -24,8 +24,8 @@ namespace Repository.Services
         {
             _con.Add(new Notation
             {
-                ProjectidProject = notation.idProject,
-                UseridUser = notation.idUser,
+                idProject = notation.idProject,
+                idUser = notation.idUser,
                 Description = notation.Description,
                 PositionCard = notation.PositionCard,
                 Title = notation.Title
@@ -60,10 +60,9 @@ namespace Repository.Services
         public async Task<List<Notation>> GetNotations(int page, int size, int idProject)
         {
             return await _con.Notation
-                        .Include(y => y.Project)
                         .Skip((page - 1) * size)
                         .Take(size)
-                        .Where(x => x.Project.idProject == idProject)
+                        .Where(x => x.idProject == idProject)
                         .ToListAsync();
         }
 

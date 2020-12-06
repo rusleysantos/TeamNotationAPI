@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Team] (
+    [IDTEAM]      INT            IDENTITY (1, 1) NOT NULL,
+    [NAME]        NVARCHAR (MAX) NULL,
+    [DESCRIPTION] NVARCHAR (MAX) NULL,
+    CONSTRAINT [PK_Team] PRIMARY KEY CLUSTERED ([IDTEAM] ASC)
+);
+

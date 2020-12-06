@@ -1,4 +1,5 @@
-﻿using Repository.Models;
+﻿using Repository.DTO;
+using Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Service.Contracts
 {
     public interface ILoginService
     {
-        Task<Login> Login(Login login);
+        Task<LoginDTO> Login(LoginDTO login);
     }
 }

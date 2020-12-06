@@ -1,4 +1,5 @@
 ﻿using Repository.Contracts;
+using Repository.DTO;
 using Repository.Models;
 using Service.Contracts;
 using System;
@@ -18,9 +19,9 @@ namespace Service.Services
             _repository = repository;
         }
 
-        public async Task<Login> Login(Login login)
+        public Task<LoginDTO> Login(LoginDTO login)
         {
-            return await _repository.Login(login);
+            return _repository.Login(login);
         }
     }
 }

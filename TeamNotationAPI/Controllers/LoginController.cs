@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Auth.Contracts;
 using Domain.Domains;
 using Microsoft.AspNetCore.Mvc;
+using Repository.DTO;
 using Repository.Models;
 using Service.Contracts;
 
@@ -23,11 +24,11 @@ namespace TeamNotationAPI.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> Login([FromBody] Login login)
+        public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
             try
             {
-                Login LoginReturn = _service.Login(login).Result;
+                LoginDTO LoginReturn = _service.Login(login).Result;
 
                 if (LoginReturn.AuthorizationStatus)
                 {
@@ -43,7 +44,7 @@ namespace TeamNotationAPI.Controllers
                                                 false));
                 }
             }
-            catch
+            catch (Exception e)
             {
                 return BadRequest(new MessageReturn("Erro ao Fazer Login",
                                                      "Erro ao realizar login, por favor tente mais tarde.",

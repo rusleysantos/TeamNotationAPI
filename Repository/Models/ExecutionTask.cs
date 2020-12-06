@@ -7,34 +7,47 @@ using System.Threading.Tasks;
 
 namespace TeamNotationAPI.Models
 {
+    [Table("ExecutionTask")]
     public class ExecutionTask
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("ID_TASK")]
         public int idTask { get; set; }
+
+        [Column("TITLE")]
         public string Title { get; set; }
+
+        [Column("DESCRIPTION")]
         public string Description { get; set; }
+
+        [Column("WEIGHT")]
         public string Weight { get; set; }
+
+        [Column("EFFORT")]
         public string Effort { get; set; }
+
+        [Column("BACKLOGS")]
         public List<Backlog> Backlogs { get; set; }
+
+        [Column("ATTACHMENTS")]
         public List<Attach> Attachments { get; set; }
 
-        [NotMapped]
-        [ForeignKey("FK_Task_Status_StatusidStatus1")]
-        public int StatusidStatus { get; set; }
+        [ForeignKey("Status")]
+        [Column("ID_STATUS")]
+        public int idStatus { get; set; }
         public Status Status { get; set; }
 
-        //[ForeignKey("FK_Task_Task_MainTaskidTask")]
-        //public int MainTaskidTask { get; set; }
-        public ExecutionTask MainTask { get; set; }
-
-        [NotMapped]
-        [ForeignKey("FK_Task_User_UseridUser1")]
-        public int UseridUser { get; set; }
+        [ForeignKey("User")]
+        [Column("ID_USER")]
+        public int idUser { get; set; }
         public User User { get; set; }
 
-        [NotMapped]
-        [ForeignKey("FK_Task_Project_ProjectidProject1")]
-        public int ProjectidProject { get; set; }
+        [ForeignKey("Project")]
+        [Column("ID_PROJECT")]
+        public int idProject { get; set; }
+        public Project Project { get; set; }
+
 
     }
 }
