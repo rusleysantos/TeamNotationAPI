@@ -14,6 +14,6 @@ namespace Repository.Contracts
         public Task<List<ExecutionTask>> GetExecutionTasks(int page, int size);
         Task<List<ExecutionTask>> GetTasksProject(int idProject, int page, int size);
         public Task<ExecutionTask> GetExecutionTask(int idTask);
-        public Task<bool> PutExecutionTask(ExecutionTask task);
+        public Task<bool> PutExecutionTask(ExecutionTaskDTO task);
     }
 }

@@ -6,7 +6,7 @@ namespace Repository.DTO
 {
     public class ExecutionTaskDTO
     {
-
+        public int idTask { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Weight { get; set; }

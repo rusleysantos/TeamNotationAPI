@@ -10,7 +10,7 @@ namespace Service.Contracts
     public interface IExecutionTaskService
     {
         public Task<int> AddExecutionTask(ExecutionTaskDTO task);
-        public Task<bool> PutExecutionTask(ExecutionTask task);
+        public Task<bool> PutExecutionTask(ExecutionTaskDTO task);
         public Task<List<ExecutionTask>> GetExecutionTasks(int page, int size);
         public Task<List<ExecutionTask>> GetTasksProject(int idProject, int page, int size);
         public Task<ExecutionTask> GetExecutionTask(int idTask);

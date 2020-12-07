@@ -51,14 +51,10 @@ namespace TeamNotationAPI.Controllers
             try
             {
                 var identity = User.Identity as ClaimsIdentity;
-                
-                //var lista = identity.Claims.ToList();
-                //var id = lista[1];
-                //var numeroIdDoInfeliz = (id);
 
                 task.idUser = Convert.ToInt32(identity.Claims.ToList()[1].Value);
 
-                 await _service.AddExecutionTask(task);
+                await _service.AddExecutionTask(task);
 
                 return Ok(new MessageReturn("Sucesso ao Adicionar Tarefa",
                                             "Tarefa adiciona com sucesso",
@@ -72,5 +68,58 @@ namespace TeamNotationAPI.Controllers
 
             }
         }
+
+
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<IActionResult> GetExecutionTask([FromQuery] int idTask)
+        {
+
+            try
+            {
+
+                return Ok(new MessageReturn("Sucesso ao Buscar",
+                                            "",
+                                            true,
+                                            await _service.GetExecutionTask(idTask)));
+
+
+            }
+            catch
+            {
+                return BadRequest(new MessageReturn("Erro ao Buscar",
+                                                   "Erro ao buscar, por favor tente noavmente mais tarde.",
+                                                   false));
+
+            }
+        }
+
+
+        [HttpPut("[action]")]
+        [Authorize]
+        public async Task<IActionResult> PutExecutionTask([FromBody] ExecutionTaskDTO Task)
+        {
+
+            try
+            {
+
+                return Ok(new MessageReturn("Sucesso ao Alterar Tarefa",
+                                            "",
+                                            true,
+                                            await _service.PutExecutionTask(Task)));
+
+
+            }
+            catch
+            {
+                return BadRequest(new MessageReturn("Erro",
+                                                   "Erro, por favor tente noavmente mais tarde.",
+                                                   false));
+
+            }
+        }
+
+
+
     }
 }

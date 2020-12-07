@@ -22,7 +22,7 @@ namespace Service.Services
             return _repository.AddExecutionTask(task);
         }
 
-        public Task<bool> PutExecutionTask(ExecutionTask task)
+        public Task<bool> PutExecutionTask(ExecutionTaskDTO task)
         {
             return _repository.PutExecutionTask(task);
         }
