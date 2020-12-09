@@ -12,7 +12,8 @@ namespace Repository.Migrations
                                     ('Em Andamento','TA'),
                                     ('Impedida','TA'),
                                     ('Concluída','TA'),
-                                    ('Bloqueada','TA')");
+                                    ('Bloqueada','TA'),
+                                    ('Excluir','TA')");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_AttachT_ExecutionTask_ExecutionTaskidTask",

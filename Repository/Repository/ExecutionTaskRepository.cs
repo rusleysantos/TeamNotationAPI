@@ -80,21 +80,31 @@ namespace Repository.Services
 
         public async Task<bool> PutExecutionTask(ExecutionTaskDTO executionTask)
         {
-            Task<ExecutionTask> returnExecutionTask = _con.EXECUTION_TASK.Where(x => x.idTask == executionTask.idTask).FirstAsync();
+            //Task<ExecutionTask> returnExecutionTask = _con.EXECUTION_TASK.Where(x => x.idTask == executionTask.idTask).FirstAsync();
+            ExecutionTask returnExecutionTask = _con.EXECUTION_TASK.Where(x => x.idTask == executionTask.idTask).First();
+            Status status = _con.STATUS.Where(x => x.idStatus == executionTask.idStatus).First();
 
-            if (returnExecutionTask.Result != null)
+            if (status.Description == "Excluir") {
+
+                _con.Remove(returnExecutionTask);
+                _con.SaveChanges();
+
+                return true;
+            }
+
+            if (returnExecutionTask != null)
             {
                 //returnExecutionTask.Result.Attachments = executionTask.Attachments.Count == 0 ? returnExecutionTask.Attachments : executionTask.Attachments;
                 //returnExecutionTask.Result.Backlogs = executionTask.Backlogs == null ? returnExecutionTask.Backlogs : executionTask.Backlogs;
-                returnExecutionTask.Result.Description = executionTask.Description == null ? returnExecutionTask.Result.Description : executionTask.Description;
-                returnExecutionTask.Result.Effort = executionTask.Effort == null ? returnExecutionTask.Result.Effort : executionTask.Effort;
+                returnExecutionTask.Description = executionTask.Description == null ? returnExecutionTask.Description : executionTask.Description;
+                returnExecutionTask.Effort = executionTask.Effort == null ? returnExecutionTask.Effort : executionTask.Effort;
                 //returnExecutionTa.Resultsk.MainTask = attach.MainTask == null ? returnExecutionTask.MainTask : attach.MainTask;
-                returnExecutionTask.Result.idStatus = executionTask.idStatus == returnExecutionTask.Result.idStatus ? returnExecutionTask.Result.idStatus : executionTask.idStatus;
-                returnExecutionTask.Result.Title = executionTask.Title == null ? returnExecutionTask.Result.Title : executionTask.Title;
+                returnExecutionTask.idStatus = executionTask.idStatus == returnExecutionTask.idStatus ? returnExecutionTask.idStatus : executionTask.idStatus;
+                returnExecutionTask.Title = executionTask.Title == null ? returnExecutionTask.Title : executionTask.Title;
                 //returnExecutionTa.Resultsk.User = attach.User == null ? returnExecutionTask.User : attach.User;
-                returnExecutionTask.Result.Weight = executionTask.Weight == null ? returnExecutionTask.Result.Weight : executionTask.Weight;
+                returnExecutionTask.Weight = executionTask.Weight == null ? returnExecutionTask.Weight : executionTask.Weight;
 
-                _con.Update(returnExecutionTask.Result);
+                _con.Update(returnExecutionTask);
                 await _con.SaveChangesAsync();
 
                 return true;
