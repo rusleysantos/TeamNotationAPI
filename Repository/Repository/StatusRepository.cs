@@ -29,7 +29,7 @@ namespace Repository.Services
 
         public async Task<bool> DeleteStatus(int idStatus)
         {
-            Status returnStatus = _con.Status.Where(x => x.idStatus == idStatus).First();
+            Status returnStatus = _con.STATUS.Where(x => x.idStatus == idStatus).First();
 
             if (returnStatus != null)
             {
@@ -45,12 +45,12 @@ namespace Repository.Services
 
         public async Task<Status> GetStatus(int idStatus)
         {
-            return await _con.Status.Where(x => x.idStatus == idStatus).FirstAsync();
+            return await _con.STATUS.Where(x => x.idStatus == idStatus).FirstAsync();
         }
 
         public async Task<List<Status>> GetStatus(int page, int size)
         {
-            return await _con.Status
+            return await _con.STATUS
                         .Skip((page - 1) * size)
                         .Take(size)
                         .ToListAsync();
@@ -58,7 +58,7 @@ namespace Repository.Services
 
         public async Task<List<Status>> GetStatusAllByType(int page, int size, string type)
         {
-            return await _con.Status
+            return await _con.STATUS
                         .Skip((page - 1) * size)
                         .Take(size)
                         .Where(x => x.Tipo == type)
@@ -67,7 +67,7 @@ namespace Repository.Services
 
         public async Task<bool> PutStatus(Status status)
         {
-            Task<Status> returnStatus = _con.Status.Where(x => x.idStatus == status.idStatus).FirstAsync();
+            Task<Status> returnStatus = _con.STATUS.Where(x => x.idStatus == status.idStatus).FirstAsync();
 
             if (returnStatus.Result != null)
             {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TeamNotationAPI.Models
 {
-    [Table("Team")]
+    [Table("TEAM")]
     public class Team
     {
         [Key]

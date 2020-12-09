@@ -7,7 +7,7 @@ using TeamNotationAPI.Models;
 
 namespace Repository.Models
 {
-    [Table("ProjectTeam")]
+    [Table("PROJECT_TEAM")]
     public class ProjectTeam
     {
         [Key]

@@ -38,12 +38,15 @@ namespace Repository.Services
 
         public async Task<bool> DeleteNotation(int idNotation)
         {
-            Task<Notation> returnNotation = _con.Notation.Where(x => x.idNotation == idNotation).FirstAsync();
+            Task<Notation> returnNotation = _con.NOTATION.Where(x => x.idNotation == idNotation).FirstAsync();
 
             if (returnNotation.Result != null)
             {
-                _con.Remove(returnNotation);
+                returnNotation.Result.Deleted = true;
+
+                _con.Update(returnNotation.Result);
                 await _con.SaveChangesAsync();
+
                 return true;
             }
             else
@@ -54,21 +57,21 @@ namespace Repository.Services
 
         public async Task<Notation> GetNotation(int idNotation)
         {
-            return await _con.Notation.Where(x => x.idNotation == idNotation).FirstAsync();
+            return await _con.NOTATION.Where(x => x.idNotation == idNotation).FirstAsync();
         }
 
         public async Task<List<Notation>> GetNotations(int page, int size, int idProject)
         {
-            return await _con.Notation
+            return await _con.NOTATION
                         .Skip((page - 1) * size)
                         .Take(size)
-                        .Where(x => x.idProject == idProject)
+                        .Where(x => x.idProject == idProject && x.Deleted != true)
                         .ToListAsync();
         }
 
         public async Task<bool> PutNotation(NotationDTO notation)
         {
-            Task<Notation> returnNotation = _con.Notation.Where(x => x.idNotation == notation.idNotation).FirstAsync();
+            Task<Notation> returnNotation = _con.NOTATION.Where(x => x.idNotation == notation.idNotation).FirstAsync();
 
             if (returnNotation.Result != null)
             {

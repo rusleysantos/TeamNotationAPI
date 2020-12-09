@@ -7,13 +7,13 @@ using TeamNotationAPI.Models;
 
 namespace Repository.Models
 {
-    [Table("ProjectUser")]
-    public class ProjectUser
+    [Table("PROJECT_USER")]
+    public class PROJECT_USER
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("ID_PROJECTUSER")]
-        public int idProjectUser { get; set; }
+        [Column("ID_PROJECT_USER")]
+        public int idPROJECT_USER { get; set; }
 
         [ForeignKey("User")]
         [Column("ID_USER")]

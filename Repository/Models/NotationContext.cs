@@ -33,21 +33,21 @@ namespace Repository.Models
             optionsBuilder.UseSqlServer(_conf.GetConnectionString("myconn"));
         }
 
-        public DbSet<Address> Address { get; set; }
-        public DbSet<Attach> AttachT { get; set; }
-        public DbSet<Backlog> Backlog { get; set; }
-        public DbSet<Impediment> Impediment { get; set; }
-        public DbSet<Knowledge> Knowledge { get; set; }
-        public DbSet<Mockup> Mockup { get; set; }
-        public DbSet<Notation> Notation { get; set; }
-        public DbSet<Profile> Profile { get; set; }
-        public DbSet<Project> Project { get; set; }
-        public DbSet<Status> Status { get; set; }
-        public DbSet<ExecutionTask> ExecutionTask { get; set; }
-        public DbSet<Team> Team { get; set; }
-        public DbSet<User> User { get; set; }
-        public DbSet<ProjectUser> ProjectUser { get; set; }
-        public DbSet<ProjectTeam> ProjectTeam { get; set; }
+        public DbSet<Address> ADDRESS { get; set; }
+        public DbSet<Attach> ATTACH_T { get; set; }
+        public DbSet<Backlog> BACKLOG { get; set; }
+        public DbSet<Impediment> IMPEDIMENT { get; set; }
+        public DbSet<Knowledge> KNOWLEDGE { get; set; }
+        public DbSet<Mockup> MOCKUP { get; set; }
+        public DbSet<Notation> NOTATION { get; set; }
+        public DbSet<Profile> PROFILE { get; set; }
+        public DbSet<Project> PROJECT { get; set; }
+        public DbSet<Status> STATUS { get; set; }
+        public DbSet<ExecutionTask> EXECUTION_TASK { get; set; }
+        public DbSet<Team> TEAM { get; set; }
+        public DbSet<User> USER { get; set; }
+        public DbSet<PROJECT_USER> PROJECT_USER { get; set; }
+        public DbSet<ProjectTeam> PROJECT_TEAM { get; set; }
 
     }
 }

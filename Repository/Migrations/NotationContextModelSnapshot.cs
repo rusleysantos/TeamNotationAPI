@@ -19,6 +19,31 @@ namespace Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Repository.Models.PROJECT_USER", b =>
+                {
+                    b.Property<int>("idPROJECT_USER")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("ID_PROJECT_USER")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("idProject")
+                        .HasColumnName("ID_PROJECT")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idUser")
+                        .HasColumnName("ID_USER")
+                        .HasColumnType("int");
+
+                    b.HasKey("idPROJECT_USER");
+
+                    b.HasIndex("idProject");
+
+                    b.HasIndex("idUser");
+
+                    b.ToTable("PROJECT_USER");
+                });
+
             modelBuilder.Entity("Repository.Models.ProjectTeam", b =>
                 {
                     b.Property<int>("idProjectTeam")
@@ -41,32 +66,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("idUser");
 
-                    b.ToTable("ProjectTeam");
-                });
-
-            modelBuilder.Entity("Repository.Models.ProjectUser", b =>
-                {
-                    b.Property<int>("idProjectUser")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("ID_PROJECTUSER")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("idProject")
-                        .HasColumnName("ID_PROJECT")
-                        .HasColumnType("int");
-
-                    b.Property<int>("idUser")
-                        .HasColumnName("ID_USER")
-                        .HasColumnType("int");
-
-                    b.HasKey("idProjectUser");
-
-                    b.HasIndex("idProject");
-
-                    b.HasIndex("idUser");
-
-                    b.ToTable("ProjectUser");
+                    b.ToTable("PROJECT_TEAM");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Address", b =>
@@ -99,7 +99,7 @@ namespace Repository.Migrations
 
                     b.HasKey("idAddress");
 
-                    b.ToTable("Address");
+                    b.ToTable("ADDRESS");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Attach", b =>
@@ -144,7 +144,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("NotationidNotation");
 
-                    b.ToTable("AttachT");
+                    b.ToTable("ATTACH_T");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Backlog", b =>
@@ -203,7 +203,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("idProject");
 
-                    b.ToTable("Backlog");
+                    b.ToTable("BACKLOG");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.ExecutionTask", b =>
@@ -213,6 +213,10 @@ namespace Repository.Migrations
                         .HasColumnName("ID_TASK")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnName("DELETED")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Description")
                         .HasColumnName("DESCRIPTION")
@@ -260,7 +264,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("idUser");
 
-                    b.ToTable("ExecutionTask");
+                    b.ToTable("EXECUTION_TASK");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Impediment", b =>
@@ -287,7 +291,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("idUser");
 
-                    b.ToTable("Impediment");
+                    b.ToTable("IMPEDIMENT");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Knowledge", b =>
@@ -308,7 +312,7 @@ namespace Repository.Migrations
 
                     b.HasKey("idKnowledge");
 
-                    b.ToTable("Knowledge");
+                    b.ToTable("KNOWLEDGE");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Mockup", b =>
@@ -329,7 +333,7 @@ namespace Repository.Migrations
 
                     b.HasKey("idMockup");
 
-                    b.ToTable("Mockup");
+                    b.ToTable("MOCKUP");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Notation", b =>
@@ -339,6 +343,10 @@ namespace Repository.Migrations
                         .HasColumnName("ID_NOTATION")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnName("DELETED")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Description")
                         .HasColumnName("DESCRIPTION")
@@ -366,7 +374,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("idUser");
 
-                    b.ToTable("Notation");
+                    b.ToTable("NOTATION");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Profile", b =>
@@ -391,7 +399,7 @@ namespace Repository.Migrations
 
                     b.HasKey("idProfile");
 
-                    b.ToTable("Profile");
+                    b.ToTable("PROFILE");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Project", b =>
@@ -416,7 +424,7 @@ namespace Repository.Migrations
 
                     b.HasKey("idProject");
 
-                    b.ToTable("Project");
+                    b.ToTable("PROJECT");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Status", b =>
@@ -437,7 +445,7 @@ namespace Repository.Migrations
 
                     b.HasKey("idStatus");
 
-                    b.ToTable("Status");
+                    b.ToTable("STATUS");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Team", b =>
@@ -458,7 +466,7 @@ namespace Repository.Migrations
 
                     b.HasKey("idTeam");
 
-                    b.ToTable("Team");
+                    b.ToTable("TEAM");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.User", b =>
@@ -491,10 +499,10 @@ namespace Repository.Migrations
 
                     b.HasIndex("idProfile");
 
-                    b.ToTable("User");
+                    b.ToTable("USER");
                 });
 
-            modelBuilder.Entity("Repository.Models.ProjectTeam", b =>
+            modelBuilder.Entity("Repository.Models.PROJECT_USER", b =>
                 {
                     b.HasOne("TeamNotationAPI.Models.Project", "Project")
                         .WithMany()
@@ -509,7 +517,7 @@ namespace Repository.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Repository.Models.ProjectUser", b =>
+            modelBuilder.Entity("Repository.Models.ProjectTeam", b =>
                 {
                     b.HasOne("TeamNotationAPI.Models.Project", "Project")
                         .WithMany()

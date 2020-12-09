@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Repository.Models
 {
-    [Table("ProjectOption")]
+    [Table("PROJECT_OPTION")]
     public class ProjectOption
     {
         [Key]

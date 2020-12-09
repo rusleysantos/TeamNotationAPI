@@ -25,13 +25,13 @@ namespace Repository.Services
             _con.Add(project);
             await _con.SaveChangesAsync();
 
-            ProjectUser projectUser = new ProjectUser
+            PROJECT_USER PROJECT_USER = new PROJECT_USER
             {
                 idUser = idUser,
                 Project = project
             };
 
-            _con.ProjectUser.Add(projectUser);
+            _con.PROJECT_USER.Add(PROJECT_USER);
             await _con.SaveChangesAsync();
 
             return project.idProject;
@@ -39,7 +39,7 @@ namespace Repository.Services
 
         public async Task<bool> DeleteProject(int idProject)
         {
-            Task<Project> returnProject = _con.Project.Where(x => x.idProject == idProject).FirstAsync();
+            Task<Project> returnProject = _con.PROJECT.Where(x => x.idProject == idProject).FirstAsync();
 
             if (returnProject != null)
             {
@@ -55,12 +55,12 @@ namespace Repository.Services
 
         public async Task<Project> GetProject(int idProject)
         {
-            return await _con.Project.Where(x => x.idProject == idProject).FirstAsync();
+            return await _con.PROJECT.Where(x => x.idProject == idProject).FirstAsync();
         }
 
         public async Task<List<Project>> GetProjects(int page, int size)
         {
-            return await _con.Project
+            return await _con.PROJECT
                         .Skip((page - 1) * size)
                         .Take(size)
                         .ToListAsync();
@@ -68,7 +68,7 @@ namespace Repository.Services
 
         public async Task<bool> PutProject(Project project)
         {
-            Task<Project> returnProject = _con.Project.Where(x => x.idProject == project.idProject).FirstAsync();
+            Task<Project> returnProject = _con.PROJECT.Where(x => x.idProject == project.idProject).FirstAsync();
 
             if (returnProject.Result != null)
             {
@@ -89,7 +89,7 @@ namespace Repository.Services
         {
             List<int> ids = new List<int>();
 
-            Task<List<ProjectUser>> projects = _con.ProjectUser
+            Task<List<PROJECT_USER>> projects = _con.PROJECT_USER
                                                     .Include(j => j.Project) 
                                                     .Where(x => x.idUser == idUser)
                                                     .ToListAsync();
@@ -102,7 +102,7 @@ namespace Repository.Services
                 }
             }
 
-            return await _con.Project
+            return await _con.PROJECT
                         .Where(x => ids.Contains(x.idProject))
                         .Select(y => new ProjectOption
                         {

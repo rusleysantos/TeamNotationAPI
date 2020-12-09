@@ -212,10 +212,10 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProjectUser",
+                name: "PROJECT_USER",
                 columns: table => new
                 {
-                    IDPROJECTUSER = table.Column<int>(nullable: false)
+                    IDPROJECT_USER = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProjectidProject = table.Column<int>(nullable: true),
                     IDUSER = table.Column<int>(nullable: false),
@@ -223,9 +223,9 @@ namespace Repository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProjectUser", x => x.IDPROJECTUSER);
+                    table.PrimaryKey("PK_PROJECT_USER", x => x.IDPROJECT_USER);
                     table.ForeignKey(
-                        name: "FK_ProjectUser_Project_ProjectidProject",
+                        name: "FK_PROJECT_USER_Project_ProjectidProject",
                         column: x => x.ProjectidProject,
                         principalTable: "Project",
                         principalColumn: "IDPROJECT",
@@ -343,8 +343,8 @@ namespace Repository.Migrations
                 column: "ProjectidProject");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectUser_ProjectidProject",
-                table: "ProjectUser",
+                name: "IX_PROJECT_USER_ProjectidProject",
+                table: "PROJECT_USER",
                 column: "ProjectidProject");
         }
 
@@ -369,7 +369,7 @@ namespace Repository.Migrations
                 name: "ProjectTeam");
 
             migrationBuilder.DropTable(
-                name: "ProjectUser");
+                name: "PROJECT_USER");
 
             migrationBuilder.DropTable(
                 name: "Status");

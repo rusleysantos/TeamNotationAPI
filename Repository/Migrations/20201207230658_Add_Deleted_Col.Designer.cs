@@ -10,8 +10,8 @@ using Repository.Models;
 namespace Repository.Migrations
 {
     [DbContext(typeof(NotationContext))]
-    [Migration("20201206015849_Adiciona_Project")]
-    partial class Adiciona_Project
+    [Migration("20201207230658_Add_Deleted_Col")]
+    partial class Add_Deleted_Col
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,41 +21,20 @@ namespace Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Repository.Models.ProjectTeam", b =>
-                {
-                    b.Property<int>("idProjectTeam")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("IDPROJECTTEAM")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("idProject")
-                        .HasColumnName("IDPROJECT")
-                        .HasColumnType("int");
-
-                    b.Property<int>("idUser")
-                        .HasColumnName("IDUSER")
-                        .HasColumnType("int");
-
-                    b.HasKey("idProjectTeam");
-
-                    b.ToTable("ProjectTeam");
-                });
-
             modelBuilder.Entity("Repository.Models.PROJECT_USER", b =>
                 {
                     b.Property<int>("idPROJECT_USER")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IDPROJECT_USER")
+                        .HasColumnName("ID_PROJECT_USER")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("idProject")
-                        .HasColumnName("IDPROJECT")
+                        .HasColumnName("ID_PROJECT")
                         .HasColumnType("int");
 
                     b.Property<int>("idUser")
-                        .HasColumnName("IDUSER")
+                        .HasColumnName("ID_USER")
                         .HasColumnType("int");
 
                     b.HasKey("idPROJECT_USER");
@@ -67,11 +46,36 @@ namespace Repository.Migrations
                     b.ToTable("PROJECT_USER");
                 });
 
+            modelBuilder.Entity("Repository.Models.ProjectTeam", b =>
+                {
+                    b.Property<int>("idProjectTeam")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("ID_PROJECTTEAM")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("idProject")
+                        .HasColumnName("ID_PROJECT")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idUser")
+                        .HasColumnName("ID_USER")
+                        .HasColumnType("int");
+
+                    b.HasKey("idProjectTeam");
+
+                    b.HasIndex("idProject");
+
+                    b.HasIndex("idUser");
+
+                    b.ToTable("PROJECT_TEAM");
+                });
+
             modelBuilder.Entity("TeamNotationAPI.Models.Address", b =>
                 {
                     b.Property<int>("idAddress")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IDADDRESS")
+                        .HasColumnName("ID_ADDRESS")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -97,14 +101,14 @@ namespace Repository.Migrations
 
                     b.HasKey("idAddress");
 
-                    b.ToTable("Address");
+                    b.ToTable("ADDRESS");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Attach", b =>
                 {
                     b.Property<int>("idAttach")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IDATTACH")
+                        .HasColumnName("ID_ATTACH")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -142,14 +146,14 @@ namespace Repository.Migrations
 
                     b.HasIndex("NotationidNotation");
 
-                    b.ToTable("AttachT");
+                    b.ToTable("ATTACH_T");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Backlog", b =>
                 {
                     b.Property<int>("idBacklog")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IDBACKLOG")
+                        .HasColumnName("ID_BACKLOG")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -172,36 +176,49 @@ namespace Repository.Migrations
                         .HasColumnName("PRECEDENCE")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("StatusidStatus")
+                        .HasColumnType("int");
+
                     b.Property<string>("Story")
                         .HasColumnName("STORY")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("idMockup")
-                        .HasColumnName("IDMOCKUP")
+                        .HasColumnName("ID_MOCKUP")
                         .HasColumnType("int");
 
                     b.Property<int>("idProject")
-                        .HasColumnName("IDPROJECT")
+                        .HasColumnName("ID_PROJECT")
                         .HasColumnType("int");
 
                     b.Property<int>("idStatus")
-                        .HasColumnName("IDSTATUS")
+                        .HasColumnName("ID_STATUS")
                         .HasColumnType("int");
 
                     b.HasKey("idBacklog");
 
                     b.HasIndex("ExecutionTaskidTask");
 
-                    b.ToTable("Backlog");
+                    b.HasIndex("StatusidStatus");
+
+                    b.HasIndex("idMockup");
+
+                    b.HasIndex("idProject");
+
+                    b.ToTable("BACKLOG");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.ExecutionTask", b =>
                 {
                     b.Property<int>("idTask")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IDTASK")
+                        .HasColumnName("ID_TASK")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnName("DELETED")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Description")
                         .HasColumnName("DESCRIPTION")
@@ -217,9 +234,6 @@ namespace Repository.Migrations
                     b.Property<int?>("KnowledgeidKnowledge")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProjectidProject")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnName("TITLE")
                         .HasColumnType("nvarchar(max)");
@@ -229,15 +243,15 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("idProject")
-                        .HasColumnName("IDPROJECT")
+                        .HasColumnName("ID_PROJECT")
                         .HasColumnType("int");
 
                     b.Property<int>("idStatus")
-                        .HasColumnName("IDSTATUS")
+                        .HasColumnName("ID_STATUS")
                         .HasColumnType("int");
 
                     b.Property<int>("idUser")
-                        .HasColumnName("IDUSER")
+                        .HasColumnName("ID_USER")
                         .HasColumnType("int");
 
                     b.HasKey("idTask");
@@ -246,16 +260,20 @@ namespace Repository.Migrations
 
                     b.HasIndex("KnowledgeidKnowledge");
 
-                    b.HasIndex("ProjectidProject");
+                    b.HasIndex("idProject");
 
-                    b.ToTable("ExecutionTask");
+                    b.HasIndex("idStatus");
+
+                    b.HasIndex("idUser");
+
+                    b.ToTable("EXECUTION_TASK");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Impediment", b =>
                 {
                     b.Property<int>("idImpediment")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IDIMPEDIMENT")
+                        .HasColumnName("ID_IMPEDIMENT")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -268,19 +286,21 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("idUser")
-                        .HasColumnName("IDUSER")
+                        .HasColumnName("ID_USER")
                         .HasColumnType("int");
 
                     b.HasKey("idImpediment");
 
-                    b.ToTable("Impediment");
+                    b.HasIndex("idUser");
+
+                    b.ToTable("IMPEDIMENT");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Knowledge", b =>
                 {
                     b.Property<int>("idKnowledge")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IDKNOWLEDGE")
+                        .HasColumnName("ID_KNOWLEDGE")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -294,14 +314,14 @@ namespace Repository.Migrations
 
                     b.HasKey("idKnowledge");
 
-                    b.ToTable("Knowledge");
+                    b.ToTable("KNOWLEDGE");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Mockup", b =>
                 {
                     b.Property<int>("idMockup")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IDMOCKUP")
+                        .HasColumnName("ID_MOCKUP")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -315,16 +335,20 @@ namespace Repository.Migrations
 
                     b.HasKey("idMockup");
 
-                    b.ToTable("Mockup");
+                    b.ToTable("MOCKUP");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Notation", b =>
                 {
                     b.Property<int>("idNotation")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IDNOTATION")
+                        .HasColumnName("ID_NOTATION")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnName("DELETED")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Description")
                         .HasColumnName("DESCRIPTION")
@@ -339,23 +363,27 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("idProject")
-                        .HasColumnName("IDPROJECT")
+                        .HasColumnName("ID_PROJECT")
                         .HasColumnType("int");
 
                     b.Property<int>("idUser")
-                        .HasColumnName("IDUSER")
+                        .HasColumnName("ID_USER")
                         .HasColumnType("int");
 
                     b.HasKey("idNotation");
 
-                    b.ToTable("Notation");
+                    b.HasIndex("idProject");
+
+                    b.HasIndex("idUser");
+
+                    b.ToTable("NOTATION");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Profile", b =>
                 {
                     b.Property<int>("idProfile")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IDPROFILE")
+                        .HasColumnName("ID_PROFILE")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -373,14 +401,14 @@ namespace Repository.Migrations
 
                     b.HasKey("idProfile");
 
-                    b.ToTable("Profile");
+                    b.ToTable("PROFILE");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Project", b =>
                 {
                     b.Property<int>("idProject")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IDPROJECT")
+                        .HasColumnName("ID_PROJECT")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -398,14 +426,14 @@ namespace Repository.Migrations
 
                     b.HasKey("idProject");
 
-                    b.ToTable("Project");
+                    b.ToTable("PROJECT");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Status", b =>
                 {
                     b.Property<int>("idStatus")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IDSTATUS")
+                        .HasColumnName("ID_STATUS")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -419,14 +447,14 @@ namespace Repository.Migrations
 
                     b.HasKey("idStatus");
 
-                    b.ToTable("Status");
+                    b.ToTable("STATUS");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Team", b =>
                 {
                     b.Property<int>("idTeam")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IDTEAM")
+                        .HasColumnName("ID_TEAM")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -440,14 +468,14 @@ namespace Repository.Migrations
 
                     b.HasKey("idTeam");
 
-                    b.ToTable("Team");
+                    b.ToTable("TEAM");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.User", b =>
                 {
                     b.Property<int>("idUser")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IDUSER")
+                        .HasColumnName("ID_USER")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -460,11 +488,11 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("idAddress")
-                        .HasColumnName("IDADDRESS")
+                        .HasColumnName("ID_ADDRESS")
                         .HasColumnType("int");
 
                     b.Property<int?>("idProfile")
-                        .HasColumnName("IDPROFILE")
+                        .HasColumnName("ID_PROFILE")
                         .HasColumnType("int");
 
                     b.HasKey("idUser");
@@ -473,10 +501,25 @@ namespace Repository.Migrations
 
                     b.HasIndex("idProfile");
 
-                    b.ToTable("User");
+                    b.ToTable("USER");
                 });
 
             modelBuilder.Entity("Repository.Models.PROJECT_USER", b =>
+                {
+                    b.HasOne("TeamNotationAPI.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("idProject")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TeamNotationAPI.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("idUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Repository.Models.ProjectTeam", b =>
                 {
                     b.HasOne("TeamNotationAPI.Models.Project", "Project")
                         .WithMany()
@@ -515,6 +558,22 @@ namespace Repository.Migrations
                     b.HasOne("TeamNotationAPI.Models.ExecutionTask", null)
                         .WithMany("Backlogs")
                         .HasForeignKey("ExecutionTaskidTask");
+
+                    b.HasOne("TeamNotationAPI.Models.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusidStatus");
+
+                    b.HasOne("TeamNotationAPI.Models.Mockup", "Mockup")
+                        .WithMany()
+                        .HasForeignKey("idMockup")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TeamNotationAPI.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("idProject")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.ExecutionTask", b =>
@@ -527,9 +586,47 @@ namespace Repository.Migrations
                         .WithMany("Tasks")
                         .HasForeignKey("KnowledgeidKnowledge");
 
-                    b.HasOne("TeamNotationAPI.Models.Project", null)
+                    b.HasOne("TeamNotationAPI.Models.Project", "Project")
                         .WithMany("ExecutionTasks")
-                        .HasForeignKey("ProjectidProject");
+                        .HasForeignKey("idProject")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TeamNotationAPI.Models.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("idStatus")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TeamNotationAPI.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("idUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TeamNotationAPI.Models.Impediment", b =>
+                {
+                    b.HasOne("TeamNotationAPI.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("idUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TeamNotationAPI.Models.Notation", b =>
+                {
+                    b.HasOne("TeamNotationAPI.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("idProject")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TeamNotationAPI.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("idUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.User", b =>

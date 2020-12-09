@@ -12,6 +12,7 @@ namespace Repository.DTO
         public string PositionCard { get; set; }
         public int idUser { get; set; }
         public int idProject { get; set; }
-       // public List<Attach> Attachments { get; set; }
+        public bool Deleted { get; set; }
+        // public List<Attach> Attachments { get; set; }
     }
 }

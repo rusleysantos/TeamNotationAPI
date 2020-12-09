@@ -26,7 +26,7 @@ namespace Repository.Services
 
         public bool DeleteKnowledge(int idKnowledge)
         {
-            Knowledge returKnowledge = _con.Knowledge.Where(x => x.idKnowledge == idKnowledge).First();
+            Knowledge returKnowledge = _con.KNOWLEDGE.Where(x => x.idKnowledge == idKnowledge).First();
 
             if (returKnowledge != null)
             {
@@ -42,12 +42,12 @@ namespace Repository.Services
 
         public Knowledge GetKnowledge(int idKnowledge)
         {
-            return _con.Knowledge.Where(x => x.idKnowledge == idKnowledge).First();
+            return _con.KNOWLEDGE.Where(x => x.idKnowledge == idKnowledge).First();
         }
 
         public List<Knowledge> GetKnowledge(int page, int size)
         {
-            return _con.Knowledge
+            return _con.KNOWLEDGE
                      .Skip((page - 1) * size)
                      .Take(size)
                      .ToList();
@@ -55,7 +55,7 @@ namespace Repository.Services
 
         public bool PutKnowledge(Knowledge knowledge)
         {
-            Knowledge returnKnowledge = _con.Knowledge.Where(x => x.idKnowledge == knowledge.idKnowledge).First();
+            Knowledge returnKnowledge = _con.KNOWLEDGE.Where(x => x.idKnowledge == knowledge.idKnowledge).First();
 
             if (returnKnowledge != null)
             {

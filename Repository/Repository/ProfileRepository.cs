@@ -27,7 +27,7 @@ namespace Repository.Services
 
         public bool DeleteProfile(int idProfile)
         {
-            Profile returnProfile = _con.Profile.Where(x => x.idProfile == idProfile).First();
+            Profile returnProfile = _con.PROFILE.Where(x => x.idProfile == idProfile).First();
 
             if (returnProfile != null)
             {
@@ -43,12 +43,12 @@ namespace Repository.Services
 
         public Profile GetProfile(int idProfile)
         {
-            return _con.Profile.Where(x => x.idProfile == idProfile).First();
+            return _con.PROFILE.Where(x => x.idProfile == idProfile).First();
         }
 
         public List<Profile> GetProfiles(int page, int size)
         {
-            return _con.Profile
+            return _con.PROFILE
                         .Skip((page - 1) * size)
                         .Take(size)
                         .ToList();
@@ -56,7 +56,7 @@ namespace Repository.Services
 
         public bool PutProfile(Profile profile)
         {
-            Profile returnProfile = _con.Profile.Where(x => x.idProfile == profile.idProfile).First();
+            Profile returnProfile = _con.PROFILE.Where(x => x.idProfile == profile.idProfile).First();
 
             if (returnProfile != null)
             {

@@ -27,7 +27,7 @@ namespace Repository.Services
 
         public bool DeleteAttach(int idAttach)
         {
-            Attach returnAttach = _con.AttachT.Where(x => x.idAttach == idAttach).First();
+            Attach returnAttach = _con.ATTACH_T.Where(x => x.idAttach == idAttach).First();
 
             if (returnAttach != null)
             {
@@ -43,12 +43,12 @@ namespace Repository.Services
 
         public Attach GetAttach(int idAttach)
         {
-            return _con.AttachT.Where(x => x.idAttach == idAttach).First();
+            return _con.ATTACH_T.Where(x => x.idAttach == idAttach).First();
         }
 
         public List<Attach> GetAttachments(int page, int size)
         {
-            return _con.AttachT
+            return _con.ATTACH_T
                         .Skip((page - 1) * size)
                         .Take(size)
                         .ToList();
@@ -56,7 +56,7 @@ namespace Repository.Services
 
         public bool PutAttach(Attach attach)
         {
-            Attach returnAttach = _con.AttachT.Where(x => x.idAttach == attach.idAttach).First();
+            Attach returnAttach = _con.ATTACH_T.Where(x => x.idAttach == attach.idAttach).First();
 
             if (returnAttach != null)
             {

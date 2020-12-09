@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TeamNotationAPI.Models
 {
-    [Table("Mockup")]
+    [Table("MOCKUP")]
     public class Mockup
     {
         [Key]

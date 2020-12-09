@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TeamNotationAPI.Models
 {
-    [Table("AttachT")]
+    [Table("ATTACH_T")]
     public class Attach
     {
         [Key]

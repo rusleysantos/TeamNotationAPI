@@ -26,7 +26,7 @@ namespace Repository.Services
 
         public bool DeleteImpediment(int idImpediment)
         {
-            Impediment returImpediment = _con.Impediment.Where(x => x.idImpediment == idImpediment).First();
+            Impediment returImpediment = _con.IMPEDIMENT.Where(x => x.idImpediment == idImpediment).First();
 
             if (returImpediment != null)
             {
@@ -42,12 +42,12 @@ namespace Repository.Services
 
         public Impediment GetImpediment(int idImpediment)
         {
-            return _con.Impediment.Where(x => x.idImpediment == idImpediment).First();
+            return _con.IMPEDIMENT.Where(x => x.idImpediment == idImpediment).First();
         }
 
         public List<Impediment> GetImpediments(int page, int size)
         {
-            return _con.Impediment
+            return _con.IMPEDIMENT
                          .Skip((page - 1) * size)
                          .Take(size)
                          .ToList();
@@ -55,7 +55,7 @@ namespace Repository.Services
 
         public bool PutImpediment(Impediment impediment)
         {
-            Impediment returnImpediment = _con.Impediment.Where(x => x.idImpediment == impediment.idImpediment).First();
+            Impediment returnImpediment = _con.IMPEDIMENT.Where(x => x.idImpediment == impediment.idImpediment).First();
 
             if (returnImpediment != null)
             {

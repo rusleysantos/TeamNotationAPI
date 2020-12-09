@@ -48,6 +48,29 @@ namespace TeamNotationAPI.Controllers
             }
         }
 
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<IActionResult> GetNotation([FromQuery] int idNotation)
+        {
+
+            try
+            {
+
+                return Ok(new MessageReturn("Sucesso ao Consultar",
+                                            "",
+                                            true,
+                                            await _service.GetNotation(idNotation)));
+
+            }
+            catch
+            {
+                return BadRequest(new MessageReturn("Erro",
+                                                   "Erro, por favor tente noavmente mais tarde.",
+                                                   false));
+
+            }
+        }
+
 
         [HttpPost("[action]")]
         [Authorize]
@@ -77,7 +100,7 @@ namespace TeamNotationAPI.Controllers
 
 
         [HttpPut("[action]")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> PutNotation([FromBody] NotationDTO notatition)
         {
             try
@@ -104,5 +127,36 @@ namespace TeamNotationAPI.Controllers
 
             }
         }
+
+        [HttpDelete("[action]")]
+        [Authorize]
+        public async Task<IActionResult> DeleteNotation([FromQuery] int idNotation)
+        {
+            try
+            {
+                if (await _service.DeleteNotation(idNotation))
+                {
+                    return Ok(new MessageReturn("Sucesso ao Deletar",
+                                                "",
+                                                true));
+                }
+                else
+                {
+                    return Ok(new MessageReturn("Não Encontrado",
+                                                "Erro ao deletar, não foi encontrado.",
+                                                false));
+
+                }
+            }
+            catch
+            {
+                return BadRequest(new MessageReturn("Erro ao Deletar",
+                                                     "Erro ao deletar, por favor tente novamente mais tarde.",
+                                                     false));
+
+            }
+        }
+
+
     }
 }

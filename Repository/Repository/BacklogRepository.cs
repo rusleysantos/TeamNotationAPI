@@ -26,7 +26,7 @@ namespace Repository.Services
 
         public bool DeleteBacklog(int idBacklog)
         {
-            Backlog returBacklog = _con.Backlog.Where(x => x.idBacklog == idBacklog).First();
+            Backlog returBacklog = _con.BACKLOG.Where(x => x.idBacklog == idBacklog).First();
 
             if (returBacklog != null)
             {
@@ -42,12 +42,12 @@ namespace Repository.Services
 
         public Backlog GetBacklog(int idBacklog)
         {
-            return _con.Backlog.Where(x => x.idBacklog == idBacklog).First();
+            return _con.BACKLOG.Where(x => x.idBacklog == idBacklog).First();
         }
 
         public List<Backlog> GetBacklogs(int page, int size)
         {
-            return _con.Backlog
+            return _con.BACKLOG
                      .Skip((page - 1) * size)
                      .Take(size)
                      .ToList();
@@ -55,7 +55,7 @@ namespace Repository.Services
 
         public bool PutBacklog(Backlog backlog)
         {
-            Backlog returnBacklog = _con.Backlog.Where(x => x.idBacklog == backlog.idBacklog).First();
+            Backlog returnBacklog = _con.BACKLOG.Where(x => x.idBacklog == backlog.idBacklog).First();
 
             if (returnBacklog != null)
             {

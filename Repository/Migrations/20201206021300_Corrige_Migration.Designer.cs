@@ -46,11 +46,11 @@ namespace Repository.Migrations
                     b.ToTable("ProjectTeam");
                 });
 
-            modelBuilder.Entity("Repository.Models.ProjectUser", b =>
+            modelBuilder.Entity("Repository.Models.PROJECT_USER", b =>
                 {
-                    b.Property<int>("idProjectUser")
+                    b.Property<int>("idPROJECT_USER")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ID_PROJECTUSER")
+                        .HasColumnName("ID_PROJECT_USER")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -62,13 +62,13 @@ namespace Repository.Migrations
                         .HasColumnName("ID_USER")
                         .HasColumnType("int");
 
-                    b.HasKey("idProjectUser");
+                    b.HasKey("idPROJECT_USER");
 
                     b.HasIndex("idProject");
 
                     b.HasIndex("idUser");
 
-                    b.ToTable("ProjectUser");
+                    b.ToTable("PROJECT_USER");
                 });
 
             modelBuilder.Entity("TeamNotationAPI.Models.Address", b =>
@@ -511,7 +511,7 @@ namespace Repository.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Repository.Models.ProjectUser", b =>
+            modelBuilder.Entity("Repository.Models.PROJECT_USER", b =>
                 {
                     b.HasOne("TeamNotationAPI.Models.Project", "Project")
                         .WithMany()

@@ -27,7 +27,7 @@ namespace Repository.Services
 
         public bool DeleteUser(int idUser)
         {
-            User returnUser = _con.User.Where(x => x.idUser == idUser).First();
+            User returnUser = _con.USER.Where(x => x.idUser == idUser).First();
 
             if (returnUser != null)
             {
@@ -43,12 +43,12 @@ namespace Repository.Services
 
         public User GetUser(int idUser)
         {
-            return _con.User.Where(x => x.idUser == idUser).First();
+            return _con.USER.Where(x => x.idUser == idUser).First();
         }
 
         public List<User> GetUsers(int page, int size)
         {
-            return _con.User
+            return _con.USER
                         .Skip((page - 1) * size)
                         .Take(size)
                         .ToList();
@@ -56,7 +56,7 @@ namespace Repository.Services
 
         public bool PutUser(User user)
         {
-            User returnUser = _con.User.Where(x => x.idUser == user.idUser).First();
+            User returnUser = _con.USER.Where(x => x.idUser == user.idUser).First();
 
             if (returnUser != null)
             {

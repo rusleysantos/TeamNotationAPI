@@ -22,7 +22,7 @@ namespace Repository.Services
 
         public async Task<int> AddExecutionTask(ExecutionTaskDTO task)
         {
-            _con.ExecutionTask.Add(new ExecutionTask
+            _con.EXECUTION_TASK.Add(new ExecutionTask
             {
                 Description = task.Description,
                 Effort = task.Effort,
@@ -40,7 +40,7 @@ namespace Repository.Services
 
         public async Task<bool> DeleteExecutionTask(int idExecutionTask)
         {
-            ExecutionTask returnExecutionTask = await _con.ExecutionTask.Where(x => x.idTask == idExecutionTask).FirstAsync();
+            ExecutionTask returnExecutionTask = await _con.EXECUTION_TASK.Where(x => x.idTask == idExecutionTask).FirstAsync();
 
             if (returnExecutionTask != null)
             {
@@ -56,12 +56,12 @@ namespace Repository.Services
 
         public Task<ExecutionTask> GetExecutionTask(int idExecutionTask)
         {
-            return _con.ExecutionTask.Where(x => x.idTask == idExecutionTask).FirstAsync();
+            return _con.EXECUTION_TASK.Where(x => x.idTask == idExecutionTask).FirstAsync();
         }
 
         public async Task<List<ExecutionTask>> GetExecutionTasks(int page, int size)
         {
-            return await _con.ExecutionTask
+            return await _con.EXECUTION_TASK
                         .Skip((page - 1) * size)
                         .Take(size)
                         .ToListAsync();
@@ -69,7 +69,7 @@ namespace Repository.Services
 
         public async Task<List<ExecutionTask>> GetTasksProject(int idProject, int page, int size)
         {
-            return await _con.Project
+            return await _con.PROJECT
                          .Include(j => j.ExecutionTasks)
                          .Where(x => x.idProject == idProject)
                          .Skip((page - 1) * size)
@@ -80,7 +80,7 @@ namespace Repository.Services
 
         public async Task<bool> PutExecutionTask(ExecutionTaskDTO executionTask)
         {
-            Task<ExecutionTask> returnExecutionTask = _con.ExecutionTask.Where(x => x.idTask == executionTask.idTask).FirstAsync();
+            Task<ExecutionTask> returnExecutionTask = _con.EXECUTION_TASK.Where(x => x.idTask == executionTask.idTask).FirstAsync();
 
             if (returnExecutionTask.Result != null)
             {

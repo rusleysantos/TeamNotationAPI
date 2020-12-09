@@ -29,7 +29,7 @@ namespace Repository.Services
 
         public bool DeleteAddress(int idAdress)
         {
-            Address returnAddress = _con.Address.Where(x => x.idAddress == idAdress).First();
+            Address returnAddress = _con.ADDRESS.Where(x => x.idAddress == idAdress).First();
 
             if (returnAddress != null)
             {
@@ -46,12 +46,12 @@ namespace Repository.Services
 
         public Address GetAddress(int idAdress)
         {
-            return _con.Address.Where(x => x.idAddress == idAdress).First();
+            return _con.ADDRESS.Where(x => x.idAddress == idAdress).First();
         }
 
         public List<Address> GetAdresses(int page, int size)
         {
-            return _con.Address
+            return _con.ADDRESS
                         .Skip((page - 1) * size)
                         .Take(size)
                         .ToList();
@@ -59,7 +59,7 @@ namespace Repository.Services
 
         public bool PutAddress(Address address)
         {
-            Address returnAddress = _con.Address.Where(x => x.idAddress == address.idAddress).First();
+            Address returnAddress = _con.ADDRESS.Where(x => x.idAddress == address.idAddress).First();
 
             if (returnAddress != null)
             {

@@ -27,7 +27,7 @@ namespace Repository.Services
 
         public bool DeleteTeam(int idTeam)
         {
-            Team returnTeam = _con.Team.Where(x => x.idTeam == idTeam).First();
+            Team returnTeam = _con.TEAM.Where(x => x.idTeam == idTeam).First();
 
             if (returnTeam != null)
             {
@@ -43,12 +43,12 @@ namespace Repository.Services
 
         public Team GetTeam(int idTeam)
         {
-            return _con.Team.Where(x => x.idTeam == idTeam).First();
+            return _con.TEAM.Where(x => x.idTeam == idTeam).First();
         }
 
         public List<Team> GetTeams(int page, int size)
         {
-            return _con.Team
+            return _con.TEAM
                         .Skip((page - 1) * size)
                         .Take(size)
                         .ToList();
@@ -56,7 +56,7 @@ namespace Repository.Services
 
         public bool PutTeam(Team team)
         {
-            Team returnTeam = _con.Team.Where(x => x.idTeam == team.idTeam).First();
+            Team returnTeam = _con.TEAM.Where(x => x.idTeam == team.idTeam).First();
 
             if (returnTeam != null)
             {

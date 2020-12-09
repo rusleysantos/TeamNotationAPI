@@ -27,7 +27,7 @@ namespace Repository.Services
 
         public bool DeleteMockup(int idMockup)
         {
-            Mockup returnMockup = _con.Mockup.Where(x => x.idMockup == idMockup).First();
+            Mockup returnMockup = _con.MOCKUP.Where(x => x.idMockup == idMockup).First();
 
             if (returnMockup != null)
             {
@@ -43,12 +43,12 @@ namespace Repository.Services
 
         public Mockup GetMockup(int idMockup)
         {
-            return _con.Mockup.Where(x => x.idMockup == idMockup).First();
+            return _con.MOCKUP.Where(x => x.idMockup == idMockup).First();
         }
 
         public List<Mockup> GetMockups(int page, int size)
         {
-            return _con.Mockup
+            return _con.MOCKUP
                         .Skip((page - 1) * size)
                         .Take(size)
                         .ToList();
@@ -56,7 +56,7 @@ namespace Repository.Services
 
         public bool PutMockup(Mockup mockup)
         {
-            Mockup returnMockup = _con.Mockup.Where(x => x.idMockup == mockup.idMockup).First();
+            Mockup returnMockup = _con.MOCKUP.Where(x => x.idMockup == mockup.idMockup).First();
 
             if (returnMockup != null)
             {

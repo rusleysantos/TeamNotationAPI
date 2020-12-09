@@ -24,7 +24,7 @@ namespace Repository.Repository
         {
 
             LoginDTO loginReturn = _con
-                                .User
+                                .USER
                                 .Where(x => x.Login == login.Username
                                        &&
                                        x.Password == login.Password)

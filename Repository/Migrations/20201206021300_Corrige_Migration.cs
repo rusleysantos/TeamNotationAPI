@@ -11,12 +11,12 @@ namespace Repository.Migrations
                 table: "ExecutionTask");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_ProjectUser_Project_IDPROJECT",
-                table: "ProjectUser");
+                name: "FK_PROJECT_USER_Project_IDPROJECT",
+                table: "PROJECT_USER");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_ProjectUser_User_IDUSER",
-                table: "ProjectUser");
+                name: "FK_PROJECT_USER_User_IDUSER",
+                table: "PROJECT_USER");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_User_Address_IDADDRESS",
@@ -71,28 +71,28 @@ namespace Repository.Migrations
 
             migrationBuilder.RenameColumn(
                 name: "IDUSER",
-                table: "ProjectUser",
+                table: "PROJECT_USER",
                 newName: "ID_USER");
 
             migrationBuilder.RenameColumn(
                 name: "IDPROJECT",
-                table: "ProjectUser",
+                table: "PROJECT_USER",
                 newName: "ID_PROJECT");
 
             migrationBuilder.RenameColumn(
-                name: "IDPROJECTUSER",
-                table: "ProjectUser",
-                newName: "ID_PROJECTUSER");
+                name: "IDPROJECT_USER",
+                table: "PROJECT_USER",
+                newName: "ID_PROJECT_USER");
 
             migrationBuilder.RenameIndex(
-                name: "IX_ProjectUser_IDUSER",
-                table: "ProjectUser",
-                newName: "IX_ProjectUser_ID_USER");
+                name: "IX_PROJECT_USER_IDUSER",
+                table: "PROJECT_USER",
+                newName: "IX_PROJECT_USER_ID_USER");
 
             migrationBuilder.RenameIndex(
-                name: "IX_ProjectUser_IDPROJECT",
-                table: "ProjectUser",
-                newName: "IX_ProjectUser_ID_PROJECT");
+                name: "IX_PROJECT_USER_IDPROJECT",
+                table: "PROJECT_USER",
+                newName: "IX_PROJECT_USER_ID_PROJECT");
 
             migrationBuilder.RenameColumn(
                 name: "IDUSER",
@@ -353,16 +353,16 @@ namespace Repository.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_ProjectUser_Project_ID_PROJECT",
-                table: "ProjectUser",
+                name: "FK_PROJECT_USER_Project_ID_PROJECT",
+                table: "PROJECT_USER",
                 column: "ID_PROJECT",
                 principalTable: "Project",
                 principalColumn: "ID_PROJECT",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_ProjectUser_User_ID_USER",
-                table: "ProjectUser",
+                name: "FK_PROJECT_USER_User_ID_USER",
+                table: "PROJECT_USER",
                 column: "ID_USER",
                 principalTable: "User",
                 principalColumn: "ID_USER",
@@ -432,12 +432,12 @@ namespace Repository.Migrations
                 table: "ProjectTeam");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_ProjectUser_Project_ID_PROJECT",
-                table: "ProjectUser");
+                name: "FK_PROJECT_USER_Project_ID_PROJECT",
+                table: "PROJECT_USER");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_ProjectUser_User_ID_USER",
-                table: "ProjectUser");
+                name: "FK_PROJECT_USER_User_ID_USER",
+                table: "PROJECT_USER");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_User_Address_ID_ADDRESS",
@@ -532,28 +532,28 @@ namespace Repository.Migrations
 
             migrationBuilder.RenameColumn(
                 name: "ID_USER",
-                table: "ProjectUser",
+                table: "PROJECT_USER",
                 newName: "IDUSER");
 
             migrationBuilder.RenameColumn(
                 name: "ID_PROJECT",
-                table: "ProjectUser",
+                table: "PROJECT_USER",
                 newName: "IDPROJECT");
 
             migrationBuilder.RenameColumn(
-                name: "ID_PROJECTUSER",
-                table: "ProjectUser",
-                newName: "IDPROJECTUSER");
+                name: "ID_PROJECT_USER",
+                table: "PROJECT_USER",
+                newName: "IDPROJECT_USER");
 
             migrationBuilder.RenameIndex(
-                name: "IX_ProjectUser_ID_USER",
-                table: "ProjectUser",
-                newName: "IX_ProjectUser_IDUSER");
+                name: "IX_PROJECT_USER_ID_USER",
+                table: "PROJECT_USER",
+                newName: "IX_PROJECT_USER_IDUSER");
 
             migrationBuilder.RenameIndex(
-                name: "IX_ProjectUser_ID_PROJECT",
-                table: "ProjectUser",
-                newName: "IX_ProjectUser_IDPROJECT");
+                name: "IX_PROJECT_USER_ID_PROJECT",
+                table: "PROJECT_USER",
+                newName: "IX_PROJECT_USER_IDPROJECT");
 
             migrationBuilder.RenameColumn(
                 name: "ID_USER",
@@ -685,16 +685,16 @@ namespace Repository.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_ProjectUser_Project_IDPROJECT",
-                table: "ProjectUser",
+                name: "FK_PROJECT_USER_Project_IDPROJECT",
+                table: "PROJECT_USER",
                 column: "IDPROJECT",
                 principalTable: "Project",
                 principalColumn: "IDPROJECT",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_ProjectUser_User_IDUSER",
-                table: "ProjectUser",
+                name: "FK_PROJECT_USER_User_IDUSER",
+                table: "PROJECT_USER",
                 column: "IDUSER",
                 principalTable: "User",
                 principalColumn: "IDUSER",

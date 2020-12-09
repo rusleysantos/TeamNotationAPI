@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TeamNotationAPI.Models
 {
-    [Table("Backlog")]
+    [Table("BACKLOG")]
     public class Backlog
     {
         [Key]
