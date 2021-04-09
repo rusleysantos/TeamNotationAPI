@@ -86,7 +86,7 @@ namespace TeamNotationAPI
 
             services.AddDbContext<NotationContext>(options =>
             options.UseSqlServer(
-            Configuration.GetConnectionString("myconn")));
+            Configuration.GetConnectionString("ConnDB")));
 
         }
 

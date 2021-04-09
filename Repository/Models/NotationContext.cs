@@ -30,7 +30,7 @@ namespace Repository.Models
        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_conf.GetConnectionString("myconn"));
+            optionsBuilder.UseSqlServer(_conf.GetConnectionString("ConnDB"));
         }
 
         public DbSet<Address> ADDRESS { get; set; }
