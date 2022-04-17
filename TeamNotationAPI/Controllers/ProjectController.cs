@@ -8,9 +8,9 @@ using Domain.Domains;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
-using TeamNotationAPI.Models;
+using TeamAnnotationAPI.Models;
 
-namespace TeamNotationAPI.Controllers
+namespace TeamAnnotationAPI.Controllers
 {
     [Route("api")]
     public class ProjectController : Controller

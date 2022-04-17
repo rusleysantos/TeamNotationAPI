@@ -9,7 +9,7 @@ using Repository.DTO;
 using Repository.Models;
 using Service.Contracts;
 
-namespace TeamNotationAPI.Controllers
+namespace TeamAnnotationAPI.Controllers
 {
     [Route("api")]
     public class LoginController : Controller

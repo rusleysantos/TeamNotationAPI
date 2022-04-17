@@ -67,7 +67,7 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Notation",
+                name: "Annotation",
                 columns: table => new
                 {
                     IDNOTATION = table.Column<int>(nullable: false)
@@ -80,7 +80,7 @@ namespace Repository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Notation", x => x.IDNOTATION);
+                    table.PrimaryKey("PK_Annotation", x => x.IDNOTATION);
                 });
 
             migrationBuilder.CreateTable(
@@ -244,7 +244,7 @@ namespace Repository.Migrations
                     ExecutionTaskidTask = table.Column<int>(nullable: true),
                     ImpedimentidImpediment = table.Column<int>(nullable: true),
                     KnowledgeidKnowledge = table.Column<int>(nullable: true),
-                    NotationidNotation = table.Column<int>(nullable: true)
+                    AnnotationidAnnotation = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -268,9 +268,9 @@ namespace Repository.Migrations
                         principalColumn: "IDKNOWLEDGE",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AttachT_Notation_NotationidNotation",
-                        column: x => x.NotationidNotation,
-                        principalTable: "Notation",
+                        name: "FK_AttachT_Annotation_AnnotationidAnnotation",
+                        column: x => x.AnnotationidAnnotation,
+                        principalTable: "Annotation",
                         principalColumn: "IDNOTATION",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -318,9 +318,9 @@ namespace Repository.Migrations
                 column: "KnowledgeidKnowledge");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AttachT_NotationidNotation",
+                name: "IX_AttachT_AnnotationidAnnotation",
                 table: "AttachT",
-                column: "NotationidNotation");
+                column: "AnnotationidAnnotation");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Backlog_ExecutionTaskidTask",
@@ -381,7 +381,7 @@ namespace Repository.Migrations
                 name: "User");
 
             migrationBuilder.DropTable(
-                name: "Notation");
+                name: "Annotation");
 
             migrationBuilder.DropTable(
                 name: "ExecutionTask");

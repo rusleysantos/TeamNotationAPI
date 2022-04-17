@@ -6,15 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TeamNotationAPI.Models;
+using TeamAnnotationAPI.Models;
 
 namespace Repository.Services
 {
     public class StatusRepository : IStatusRepository
     {
-        private NotationContext _con { get; set; }
+        private AnnotationContext _con { get; set; }
 
-        public StatusRepository(NotationContext con)
+        public StatusRepository(AnnotationContext con)
         {
             _con = con;
         }
@@ -61,7 +61,7 @@ namespace Repository.Services
             return await _con.STATUS
                         .Skip((page - 1) * size)
                         .Take(size)
-                        .Where(x => x.Tipo == type)
+                        .Where(x => x.Type == type)
                         .ToListAsync();
         }
 
@@ -72,7 +72,7 @@ namespace Repository.Services
             if (returnStatus.Result != null)
             {
                 returnStatus.Result.Description = status.Description == string.Empty ? returnStatus.Result.Description : status.Description;
-                returnStatus.Result.Tipo = status.Tipo == string.Empty ? returnStatus.Result.Tipo : status.Tipo;
+                returnStatus.Result.Type = status.Type == string.Empty ? returnStatus.Result.Type : status.Type;
 
                 await _con.SaveChangesAsync();
 

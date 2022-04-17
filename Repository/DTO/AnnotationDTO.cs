@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Repository.DTO
 {
-    public class NotationDTO
+    public class AnnotationDTO
     {
-        public int idNotation { get; set; }
+        public int idAnnotation { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string PositionCard { get; set; }

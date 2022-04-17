@@ -1,7 +1,7 @@
 ﻿using Repository.Contracts;
 using Service.Contracts;
 using System.Collections.Generic;
-using TeamNotationAPI.Models;
+using TeamAnnotationAPI.Models;
 
 namespace Service.Services
 {

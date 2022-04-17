@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
-using TeamNotationAPI.Models;
+using TeamAnnotationAPI.Models;
 
 namespace Repository.Models
 {
-    public class NotationContext : DbContext
+    public class AnnotationContext : DbContext
     {
 
         [Key]
@@ -18,12 +18,12 @@ namespace Repository.Models
         [NotMapped]
         private IConfiguration _conf { get; set; }
 
-        public NotationContext(DbContextOptions options, IConfiguration configuration) : base(options)
+        public AnnotationContext(DbContextOptions options, IConfiguration configuration) : base(options)
         {
             _conf = configuration;
         }
 
-        public NotationContext() : base()
+        public AnnotationContext() : base()
         {
 
         }
@@ -39,7 +39,7 @@ namespace Repository.Models
         public DbSet<Impediment> IMPEDIMENT { get; set; }
         public DbSet<Knowledge> KNOWLEDGE { get; set; }
         public DbSet<Mockup> MOCKUP { get; set; }
-        public DbSet<Notation> NOTATION { get; set; }
+        public DbSet<Annotation> NOTATION { get; set; }
         public DbSet<Profile> PROFILE { get; set; }
         public DbSet<Project> PROJECT { get; set; }
         public DbSet<Status> STATUS { get; set; }

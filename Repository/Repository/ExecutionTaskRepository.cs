@@ -7,15 +7,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TeamNotationAPI.Models;
+using TeamAnnotationAPI.Models;
 
 namespace Repository.Services
 {
     public class ExecutionTaskRepository : IExecutionTaskRepository
     {
-        private NotationContext _con { get; set; }
+        private AnnotationContext _con { get; set; }
 
-        public ExecutionTaskRepository(NotationContext con)
+        public ExecutionTaskRepository(AnnotationContext con)
         {
             _con = con;
         }

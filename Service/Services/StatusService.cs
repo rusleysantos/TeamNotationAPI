@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using TeamNotationAPI.Models;
+using TeamAnnotationAPI.Models;
 
 namespace Service.Services
 {

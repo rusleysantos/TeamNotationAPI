@@ -121,17 +121,17 @@ namespace Repository.Migrations
 
             migrationBuilder.RenameColumn(
                 name: "IDUSER",
-                table: "Notation",
+                table: "Annotation",
                 newName: "ID_USER");
 
             migrationBuilder.RenameColumn(
                 name: "IDPROJECT",
-                table: "Notation",
+                table: "Annotation",
                 newName: "ID_PROJECT");
 
             migrationBuilder.RenameColumn(
                 name: "IDNOTATION",
-                table: "Notation",
+                table: "Annotation",
                 newName: "ID_NOTATION");
 
             migrationBuilder.RenameColumn(
@@ -220,13 +220,13 @@ namespace Repository.Migrations
                 column: "ID_USER");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Notation_ID_PROJECT",
-                table: "Notation",
+                name: "IX_Annotation_ID_PROJECT",
+                table: "Annotation",
                 column: "ID_PROJECT");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Notation_ID_USER",
-                table: "Notation",
+                name: "IX_Annotation_ID_USER",
+                table: "Annotation",
                 column: "ID_USER");
 
             migrationBuilder.CreateIndex(
@@ -321,16 +321,16 @@ namespace Repository.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Notation_Project_ID_PROJECT",
-                table: "Notation",
+                name: "FK_Annotation_Project_ID_PROJECT",
+                table: "Annotation",
                 column: "ID_PROJECT",
                 principalTable: "Project",
                 principalColumn: "ID_PROJECT",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Notation_User_ID_USER",
-                table: "Notation",
+                name: "FK_Annotation_User_ID_USER",
+                table: "Annotation",
                 column: "ID_USER",
                 principalTable: "User",
                 principalColumn: "ID_USER",
@@ -416,12 +416,12 @@ namespace Repository.Migrations
                 table: "Impediment");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Notation_Project_ID_PROJECT",
-                table: "Notation");
+                name: "FK_Annotation_Project_ID_PROJECT",
+                table: "Annotation");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Notation_User_ID_USER",
-                table: "Notation");
+                name: "FK_Annotation_User_ID_USER",
+                table: "Annotation");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_ProjectTeam_Project_ID_PROJECT",
@@ -456,12 +456,12 @@ namespace Repository.Migrations
                 table: "ProjectTeam");
 
             migrationBuilder.DropIndex(
-                name: "IX_Notation_ID_PROJECT",
-                table: "Notation");
+                name: "IX_Annotation_ID_PROJECT",
+                table: "Annotation");
 
             migrationBuilder.DropIndex(
-                name: "IX_Notation_ID_USER",
-                table: "Notation");
+                name: "IX_Annotation_ID_USER",
+                table: "Annotation");
 
             migrationBuilder.DropIndex(
                 name: "IX_Impediment_ID_USER",
@@ -582,17 +582,17 @@ namespace Repository.Migrations
 
             migrationBuilder.RenameColumn(
                 name: "ID_USER",
-                table: "Notation",
+                table: "Annotation",
                 newName: "IDUSER");
 
             migrationBuilder.RenameColumn(
                 name: "ID_PROJECT",
-                table: "Notation",
+                table: "Annotation",
                 newName: "IDPROJECT");
 
             migrationBuilder.RenameColumn(
                 name: "ID_NOTATION",
-                table: "Notation",
+                table: "Annotation",
                 newName: "IDNOTATION");
 
             migrationBuilder.RenameColumn(

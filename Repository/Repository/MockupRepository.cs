@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TeamNotationAPI.Models;
+using TeamAnnotationAPI.Models;
 
 namespace Repository.Services
 {
     public class MockupRepository : IMockupRepository
     {
-        private NotationContext _con { get; set; }
+        private AnnotationContext _con { get; set; }
 
-        public MockupRepository(NotationContext con)
+        public MockupRepository(AnnotationContext con)
         {
             _con = con;
         }

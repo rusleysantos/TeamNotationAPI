@@ -7,22 +7,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TeamNotationAPI.Models;
+using TeamAnnotationAPI.Models;
 
 namespace Repository.Services
 {
-    public class NotationRepository : INotationRepository
+    public class AnnotationRepository : IAnnotationRepository
     {
-        private NotationContext _con { get; set; }
+        private AnnotationContext _con { get; set; }
 
-        public NotationRepository(NotationContext con)
+        public AnnotationRepository(AnnotationContext con)
         {
             _con = con;
         }
 
-        public async Task<int> AddNotation(NotationDTO notation)
+        public async Task<int> AddAnnotation(AnnotationDTO notation)
         {
-            _con.Add(new Notation
+            _con.Add(new Annotation
             {
                 idProject = notation.idProject,
                 idUser = notation.idUser,
@@ -33,18 +33,18 @@ namespace Repository.Services
 
             await _con.SaveChangesAsync();
 
-            return notation.idNotation;
+            return notation.idAnnotation;
         }
 
-        public async Task<bool> DeleteNotation(int idNotation)
+        public async Task<bool> DeleteAnnotation(int idAnnotation)
         {
-            Task<Notation> returnNotation = _con.NOTATION.Where(x => x.idNotation == idNotation).FirstAsync();
+            Task<Annotation> returnAnnotation = _con.NOTATION.Where(x => x.idAnnotation == idAnnotation).FirstAsync();
 
-            if (returnNotation.Result != null)
+            if (returnAnnotation.Result != null)
             {
-                returnNotation.Result.Deleted = true;
+                returnAnnotation.Result.Deleted = true;
 
-                _con.Update(returnNotation.Result);
+                _con.Update(returnAnnotation.Result);
                 await _con.SaveChangesAsync();
 
                 return true;
@@ -55,12 +55,12 @@ namespace Repository.Services
             }
         }
 
-        public async Task<Notation> GetNotation(int idNotation)
+        public async Task<Annotation> GetAnnotation(int idAnnotation)
         {
-            return await _con.NOTATION.Where(x => x.idNotation == idNotation).FirstAsync();
+            return await _con.NOTATION.Where(x => x.idAnnotation == idAnnotation).FirstAsync();
         }
 
-        public async Task<List<Notation>> GetNotations(int page, int size, int idProject)
+        public async Task<List<Annotation>> GetAnnotations(int page, int size, int idProject)
         {
             return await _con.NOTATION
                         .Skip((page - 1) * size)
@@ -69,19 +69,19 @@ namespace Repository.Services
                         .ToListAsync();
         }
 
-        public async Task<bool> PutNotation(NotationDTO notation)
+        public async Task<bool> PutAnnotation(AnnotationDTO notation)
         {
-            Task<Notation> returnNotation = _con.NOTATION.Where(x => x.idNotation == notation.idNotation).FirstAsync();
+            Task<Annotation> returnAnnotation = _con.NOTATION.Where(x => x.idAnnotation == notation.idAnnotation).FirstAsync();
 
-            if (returnNotation.Result != null)
+            if (returnAnnotation.Result != null)
             {
-                //returnNotation.Result.Attachments = notation.Attachments.Count == 0 ? returnNotation.Result.Attachments : notation.Attachments;
-                returnNotation.Result.Description = notation.Description == null ? returnNotation.Result.Description : notation.Description;
-                //returnNotation.Result.Project = notation.Project == null ? returnNotation.Result.Project : notation.Project;
-                returnNotation.Result.Title = notation.Title == null ? returnNotation.Result.Title : notation.Title;
-                returnNotation.Result.PositionCard = notation.PositionCard == null ? returnNotation.Result.PositionCard : notation.PositionCard;
+                //returnAnnotation.Result.Attachments = notation.Attachments.Count == 0 ? returnAnnotation.Result.Attachments : notation.Attachments;
+                returnAnnotation.Result.Description = notation.Description == null ? returnAnnotation.Result.Description : notation.Description;
+                //returnAnnotation.Result.Project = notation.Project == null ? returnAnnotation.Result.Project : notation.Project;
+                returnAnnotation.Result.Title = notation.Title == null ? returnAnnotation.Result.Title : notation.Title;
+                returnAnnotation.Result.PositionCard = notation.PositionCard == null ? returnAnnotation.Result.PositionCard : notation.PositionCard;
 
-                _con.Update(returnNotation.Result);
+                _con.Update(returnAnnotation.Result);
                 await _con.SaveChangesAsync();
 
                 return true;

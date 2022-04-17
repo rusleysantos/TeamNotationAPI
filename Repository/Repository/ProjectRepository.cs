@@ -6,15 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TeamNotationAPI.Models;
+using TeamAnnotationAPI.Models;
 
 namespace Repository.Services
 {
     public class ProjectRepository : IProjectRepository
     {
-        private NotationContext _con { get; }
+        private AnnotationContext _con { get; }
 
-        public ProjectRepository(NotationContext con)
+        public ProjectRepository(AnnotationContext con)
         {
             _con = con;
         }

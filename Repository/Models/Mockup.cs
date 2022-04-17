@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
-namespace TeamNotationAPI.Models
+namespace TeamAnnotationAPI.Models
 {
     [Table("MOCKUP")]
     public class Mockup

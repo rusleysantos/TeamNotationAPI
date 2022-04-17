@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TeamNotationAPI.Models
+namespace TeamAnnotationAPI.Models
 {
     [Table("ADDRESS")]
     public class Address

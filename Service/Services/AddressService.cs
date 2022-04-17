@@ -3,7 +3,7 @@ using Service.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using TeamNotationAPI.Models;
+using TeamAnnotationAPI.Models;
 
 namespace Service.Services
 {

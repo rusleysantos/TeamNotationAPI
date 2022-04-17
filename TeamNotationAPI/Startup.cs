@@ -22,7 +22,7 @@ using Repository.Services;
 using Service.Contracts;
 using Service.Services;
 
-namespace TeamNotationAPI
+namespace TeamAnnotationAPI
 {
     public class Startup
     {
@@ -57,7 +57,7 @@ namespace TeamNotationAPI
             });
 
             services.AddControllers();
-            services.AddScoped(typeof(NotationContext));
+            services.AddScoped(typeof(AnnotationContext));
 
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IAddressService, AddressService>();
@@ -68,8 +68,8 @@ namespace TeamNotationAPI
             services.AddScoped<IImpedimentRepository, ImpedimentRepository>();
             services.AddScoped<IKnowledgeRepository, KnowledgeRepository>();
             services.AddScoped<IMockupRepository, MockupRepository>();
-            services.AddScoped<INotationRepository, NotationRepository>();
-            services.AddScoped<INotationService, NotationService>();
+            services.AddScoped<IAnnotationRepository, AnnotationRepository>();
+            services.AddScoped<IAnnotationService, AnnotationService>();
             services.AddScoped<IProfileRepository, ProfileRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IProjectService, ProjectService>();
@@ -84,7 +84,7 @@ namespace TeamNotationAPI
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ILoginRepository, LoginRepository>();
 
-            services.AddDbContext<NotationContext>(options =>
+            services.AddDbContext<AnnotationContext>(options =>
             options.UseSqlServer(
             Configuration.GetConnectionString("ConnDB")));
 

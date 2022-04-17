@@ -5,15 +5,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TeamNotationAPI.Models
+namespace TeamAnnotationAPI.Models
 {
-    [Table("NOTATION")]
-    public class Notation
+    [Table("ANNOTATION")]
+    public class Annotation
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("ID_NOTATION")]
-        public int idNotation { get; set; }
+        [Column("ID_ANNOTATION")]
+        public int idAnnotation { get; set; }
         
         [Column("TITLE")]
         public string Title { get; set; }

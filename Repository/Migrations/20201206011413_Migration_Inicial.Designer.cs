@@ -9,7 +9,7 @@ using Repository.Models;
 
 namespace Repository.Migrations
 {
-    [DbContext(typeof(NotationContext))]
+    [DbContext(typeof(AnnotationContext))]
     [Migration("20201206011413_Migration_Inicial")]
     partial class Migration_Inicial
     {
@@ -68,7 +68,7 @@ namespace Repository.Migrations
                     b.ToTable("PROJECT_USER");
                 });
 
-            modelBuilder.Entity("TeamNotationAPI.Models.Address", b =>
+            modelBuilder.Entity("TeamAnnotationAPI.Models.Address", b =>
                 {
                     b.Property<int>("idAddress")
                         .ValueGeneratedOnAdd()
@@ -101,7 +101,7 @@ namespace Repository.Migrations
                     b.ToTable("Address");
                 });
 
-            modelBuilder.Entity("TeamNotationAPI.Models.Attach", b =>
+            modelBuilder.Entity("TeamAnnotationAPI.Models.Attach", b =>
                 {
                     b.Property<int>("idAttach")
                         .ValueGeneratedOnAdd()
@@ -122,7 +122,7 @@ namespace Repository.Migrations
                     b.Property<int?>("KnowledgeidKnowledge")
                         .HasColumnType("int");
 
-                    b.Property<int?>("NotationidNotation")
+                    b.Property<int?>("AnnotationidAnnotation")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -141,12 +141,12 @@ namespace Repository.Migrations
 
                     b.HasIndex("KnowledgeidKnowledge");
 
-                    b.HasIndex("NotationidNotation");
+                    b.HasIndex("AnnotationidAnnotation");
 
                     b.ToTable("AttachT");
                 });
 
-            modelBuilder.Entity("TeamNotationAPI.Models.Backlog", b =>
+            modelBuilder.Entity("TeamAnnotationAPI.Models.Backlog", b =>
                 {
                     b.Property<int>("idBacklog")
                         .ValueGeneratedOnAdd()
@@ -196,7 +196,7 @@ namespace Repository.Migrations
                     b.ToTable("Backlog");
                 });
 
-            modelBuilder.Entity("TeamNotationAPI.Models.ExecutionTask", b =>
+            modelBuilder.Entity("TeamAnnotationAPI.Models.ExecutionTask", b =>
                 {
                     b.Property<int>("idTask")
                         .ValueGeneratedOnAdd()
@@ -252,7 +252,7 @@ namespace Repository.Migrations
                     b.ToTable("ExecutionTask");
                 });
 
-            modelBuilder.Entity("TeamNotationAPI.Models.Impediment", b =>
+            modelBuilder.Entity("TeamAnnotationAPI.Models.Impediment", b =>
                 {
                     b.Property<int>("idImpediment")
                         .ValueGeneratedOnAdd()
@@ -277,7 +277,7 @@ namespace Repository.Migrations
                     b.ToTable("Impediment");
                 });
 
-            modelBuilder.Entity("TeamNotationAPI.Models.Knowledge", b =>
+            modelBuilder.Entity("TeamAnnotationAPI.Models.Knowledge", b =>
                 {
                     b.Property<int>("idKnowledge")
                         .ValueGeneratedOnAdd()
@@ -298,7 +298,7 @@ namespace Repository.Migrations
                     b.ToTable("Knowledge");
                 });
 
-            modelBuilder.Entity("TeamNotationAPI.Models.Mockup", b =>
+            modelBuilder.Entity("TeamAnnotationAPI.Models.Mockup", b =>
                 {
                     b.Property<int>("idMockup")
                         .ValueGeneratedOnAdd()
@@ -319,9 +319,9 @@ namespace Repository.Migrations
                     b.ToTable("Mockup");
                 });
 
-            modelBuilder.Entity("TeamNotationAPI.Models.Notation", b =>
+            modelBuilder.Entity("TeamAnnotationAPI.Models.Annotation", b =>
                 {
-                    b.Property<int>("idNotation")
+                    b.Property<int>("idAnnotation")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("IDNOTATION")
                         .HasColumnType("int")
@@ -347,12 +347,12 @@ namespace Repository.Migrations
                         .HasColumnName("IDUSER")
                         .HasColumnType("int");
 
-                    b.HasKey("idNotation");
+                    b.HasKey("idAnnotation");
 
-                    b.ToTable("Notation");
+                    b.ToTable("Annotation");
                 });
 
-            modelBuilder.Entity("TeamNotationAPI.Models.Profile", b =>
+            modelBuilder.Entity("TeamAnnotationAPI.Models.Profile", b =>
                 {
                     b.Property<int>("idProfile")
                         .ValueGeneratedOnAdd()
@@ -377,7 +377,7 @@ namespace Repository.Migrations
                     b.ToTable("Profile");
                 });
 
-            modelBuilder.Entity("TeamNotationAPI.Models.Project", b =>
+            modelBuilder.Entity("TeamAnnotationAPI.Models.Project", b =>
                 {
                     b.Property<int>("idProject")
                         .ValueGeneratedOnAdd()
@@ -402,7 +402,7 @@ namespace Repository.Migrations
                     b.ToTable("Project");
                 });
 
-            modelBuilder.Entity("TeamNotationAPI.Models.Status", b =>
+            modelBuilder.Entity("TeamAnnotationAPI.Models.Status", b =>
                 {
                     b.Property<int>("idStatus")
                         .ValueGeneratedOnAdd()
@@ -423,7 +423,7 @@ namespace Repository.Migrations
                     b.ToTable("Status");
                 });
 
-            modelBuilder.Entity("TeamNotationAPI.Models.Team", b =>
+            modelBuilder.Entity("TeamAnnotationAPI.Models.Team", b =>
                 {
                     b.Property<int>("idTeam")
                         .ValueGeneratedOnAdd()
@@ -444,7 +444,7 @@ namespace Repository.Migrations
                     b.ToTable("Team");
                 });
 
-            modelBuilder.Entity("TeamNotationAPI.Models.User", b =>
+            modelBuilder.Entity("TeamAnnotationAPI.Models.User", b =>
                 {
                     b.Property<int>("idUser")
                         .ValueGeneratedOnAdd()
@@ -475,48 +475,48 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Repository.Models.PROJECT_USER", b =>
                 {
-                    b.HasOne("TeamNotationAPI.Models.Project", "Project")
+                    b.HasOne("TeamAnnotationAPI.Models.Project", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectidProject");
                 });
 
-            modelBuilder.Entity("TeamNotationAPI.Models.Attach", b =>
+            modelBuilder.Entity("TeamAnnotationAPI.Models.Attach", b =>
                 {
-                    b.HasOne("TeamNotationAPI.Models.ExecutionTask", null)
+                    b.HasOne("TeamAnnotationAPI.Models.ExecutionTask", null)
                         .WithMany("Attachments")
                         .HasForeignKey("ExecutionTaskidTask");
 
-                    b.HasOne("TeamNotationAPI.Models.Impediment", null)
+                    b.HasOne("TeamAnnotationAPI.Models.Impediment", null)
                         .WithMany("Attachments")
                         .HasForeignKey("ImpedimentidImpediment");
 
-                    b.HasOne("TeamNotationAPI.Models.Knowledge", null)
+                    b.HasOne("TeamAnnotationAPI.Models.Knowledge", null)
                         .WithMany("Attachments")
                         .HasForeignKey("KnowledgeidKnowledge");
 
-                    b.HasOne("TeamNotationAPI.Models.Notation", null)
+                    b.HasOne("TeamAnnotationAPI.Models.Annotation", null)
                         .WithMany("Attachments")
-                        .HasForeignKey("NotationidNotation");
+                        .HasForeignKey("AnnotationidAnnotation");
                 });
 
-            modelBuilder.Entity("TeamNotationAPI.Models.Backlog", b =>
+            modelBuilder.Entity("TeamAnnotationAPI.Models.Backlog", b =>
                 {
-                    b.HasOne("TeamNotationAPI.Models.ExecutionTask", null)
+                    b.HasOne("TeamAnnotationAPI.Models.ExecutionTask", null)
                         .WithMany("Backlogs")
                         .HasForeignKey("ExecutionTaskidTask");
                 });
 
-            modelBuilder.Entity("TeamNotationAPI.Models.ExecutionTask", b =>
+            modelBuilder.Entity("TeamAnnotationAPI.Models.ExecutionTask", b =>
                 {
-                    b.HasOne("TeamNotationAPI.Models.Impediment", null)
+                    b.HasOne("TeamAnnotationAPI.Models.Impediment", null)
                         .WithMany("Tasks")
                         .HasForeignKey("ImpedimentidImpediment");
 
-                    b.HasOne("TeamNotationAPI.Models.Knowledge", null)
+                    b.HasOne("TeamAnnotationAPI.Models.Knowledge", null)
                         .WithMany("Tasks")
                         .HasForeignKey("KnowledgeidKnowledge");
 
-                    b.HasOne("TeamNotationAPI.Models.Project", null)
+                    b.HasOne("TeamAnnotationAPI.Models.Project", null)
                         .WithMany("ExecutionTasks")
                         .HasForeignKey("ProjectidProject");
                 });

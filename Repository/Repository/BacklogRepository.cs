@@ -4,14 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TeamNotationAPI.Models;
+using TeamAnnotationAPI.Models;
 
 namespace Repository.Services
 {
     public class BacklogRepository : IBacklogRepository
     {
-        private NotationContext _con { get; set; }
-        public BacklogRepository(NotationContext con)
+        private AnnotationContext _con { get; set; }
+        public BacklogRepository(AnnotationContext con)
         {
             _con = con;
         }

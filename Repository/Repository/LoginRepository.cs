@@ -7,15 +7,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TeamNotationAPI.Models;
+using TeamAnnotationAPI.Models;
 
 namespace Repository.Repository
 {
     public class LoginRepository : ILoginRepository
     {
-        private NotationContext _con { get; set; }
+        private AnnotationContext _con { get; set; }
 
-        public LoginRepository(NotationContext con)
+        public LoginRepository(AnnotationContext con)
         {
             _con = con;
         }

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TeamNotationAPI.Models
+namespace TeamAnnotationAPI.Models
 {
     [Table("STATUS")]
     public class Status
@@ -18,8 +18,8 @@ namespace TeamNotationAPI.Models
         [Column("DESCRIPTION")]
         public string Description { get; set; }
 
-        [Column("TIPO")]
-        public string Tipo { get; set; }
+        [Column("TYPE")]
+        public string Type { get; set; }
 
     }
 }

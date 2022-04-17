@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
-namespace TeamNotationAPI.Models
+namespace TeamAnnotationAPI.Models
 {
     [Table("ATTACH_T")]
     public class Attach

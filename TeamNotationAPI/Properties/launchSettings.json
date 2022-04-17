@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "TeamNotationAPI": {
+    "TeamAnnotationAPI": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "index",

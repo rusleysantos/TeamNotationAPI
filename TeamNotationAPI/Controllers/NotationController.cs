@@ -9,17 +9,17 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repository.DTO;
 using Service.Contracts;
-using TeamNotationAPI.Models;
+using TeamAnnotationAPI.Models;
 
-namespace TeamNotationAPI.Controllers
+namespace TeamAnnotationAPI.Controllers
 {
     [Route("api")]
-    public class NotationController : Controller
+    public class AnnotationController : Controller
     {
-        private INotationService _service { get; set; }
+        private IAnnotationService _service { get; set; }
         private ITokenService _token { get; set; }
 
-        public NotationController(INotationService service, ITokenService token)
+        public AnnotationController(IAnnotationService service, ITokenService token)
         {
             _service = service;
             _token = token;
@@ -27,7 +27,7 @@ namespace TeamNotationAPI.Controllers
 
         [HttpGet("[action]")]
         [Authorize]
-        public async Task<IActionResult> GetNotations([FromQuery] int page, int size, int idProject)
+        public async Task<IActionResult> GetAnnotations([FromQuery] int page, int size, int idProject)
         {
 
             try
@@ -36,7 +36,7 @@ namespace TeamNotationAPI.Controllers
                 return Ok(new MessageReturn("Sucesso ao Consultar",
                                             "",
                                             true,
-                                            await _service.GetNotations(page, size, idProject)));
+                                            await _service.GetAnnotations(page, size, idProject)));
 
             }
             catch
@@ -50,7 +50,7 @@ namespace TeamNotationAPI.Controllers
 
         [HttpGet("[action]")]
         [Authorize]
-        public async Task<IActionResult> GetNotation([FromQuery] int idNotation)
+        public async Task<IActionResult> GetAnnotation([FromQuery] int idAnnotation)
         {
 
             try
@@ -59,7 +59,7 @@ namespace TeamNotationAPI.Controllers
                 return Ok(new MessageReturn("Sucesso ao Consultar",
                                             "",
                                             true,
-                                            await _service.GetNotation(idNotation)));
+                                            await _service.GetAnnotation(idAnnotation)));
 
             }
             catch
@@ -74,7 +74,7 @@ namespace TeamNotationAPI.Controllers
 
         [HttpPost("[action]")]
         [Authorize]
-        public async Task<IActionResult> AddNotation([FromBody] NotationDTO notatition)
+        public async Task<IActionResult> AddAnnotation([FromBody] AnnotationDTO notatition)
         {
             var identity = User.Identity as ClaimsIdentity;
             notatition.idUser = Convert.ToInt32(identity.Claims.ToList()[1].Value);
@@ -86,7 +86,7 @@ namespace TeamNotationAPI.Controllers
                 return Ok(new MessageReturn("Sucesso ao Adicionar",
                                             "",
                                             true,
-                                            await _service.AddNotation(notatition)));
+                                            await _service.AddAnnotation(notatition)));
 
             }
             catch (Exception e)
@@ -101,11 +101,11 @@ namespace TeamNotationAPI.Controllers
 
         [HttpPut("[action]")]
         [Authorize]
-        public async Task<IActionResult> PutNotation([FromBody] NotationDTO notatition)
+        public async Task<IActionResult> PutAnnotation([FromBody] AnnotationDTO notatition)
         {
             try
             {
-                if (await _service.PutNotation(notatition))
+                if (await _service.PutAnnotation(notatition))
                 {
                     return Ok(new MessageReturn("Sucesso ao Alterar",
                                                 "Muito bom, sempre mantenha seus dados atualizados!",
@@ -130,11 +130,11 @@ namespace TeamNotationAPI.Controllers
 
         [HttpDelete("[action]")]
         [Authorize]
-        public async Task<IActionResult> DeleteNotation([FromQuery] int idNotation)
+        public async Task<IActionResult> DeleteAnnotation([FromQuery] int idAnnotation)
         {
             try
             {
-                if (await _service.DeleteNotation(idNotation))
+                if (await _service.DeleteAnnotation(idAnnotation))
                 {
                     return Ok(new MessageReturn("Sucesso ao Deletar",
                                                 "",

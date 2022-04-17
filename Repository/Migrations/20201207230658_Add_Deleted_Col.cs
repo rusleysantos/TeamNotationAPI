@@ -6,14 +6,6 @@ namespace Repository.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(@"INSERT INTO STATUS
-                                    (DESCRIPTION, TIPO) 
-                                   VALUES
-                                    ('Em Andamento','TA'),
-                                    ('Impedida','TA'),
-                                    ('Concluída','TA'),
-                                    ('Bloqueada','TA'),
-                                    ('Excluir','TA')");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_AttachT_ExecutionTask_ExecutionTaskidTask",
@@ -28,7 +20,7 @@ namespace Repository.Migrations
                 table: "AttachT");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_AttachT_Notation_NotationidNotation",
+                name: "FK_AttachT_Annotation_AnnotationidAnnotation",
                 table: "AttachT");
 
             migrationBuilder.DropForeignKey(
@@ -72,12 +64,12 @@ namespace Repository.Migrations
                 table: "Impediment");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Notation_Project_ID_PROJECT",
-                table: "Notation");
+                name: "FK_Annotation_Project_ID_PROJECT",
+                table: "Annotation");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Notation_User_ID_USER",
-                table: "Notation");
+                name: "FK_Annotation_User_ID_USER",
+                table: "Annotation");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_PROJECT_USER_Project_ID_PROJECT",
@@ -124,8 +116,8 @@ namespace Repository.Migrations
                 table: "Profile");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_Notation",
-                table: "Notation");
+                name: "PK_Annotation",
+                table: "Annotation");
 
             migrationBuilder.DropPrimaryKey(
                 name: "PK_Mockup",
@@ -180,7 +172,7 @@ namespace Repository.Migrations
                 newName: "PROFILE");
 
             migrationBuilder.RenameTable(
-                name: "Notation",
+                name: "Annotation",
                 newName: "NOTATION");
 
             migrationBuilder.RenameTable(
@@ -226,12 +218,12 @@ namespace Repository.Migrations
                 newName: "IX_USER_ID_ADDRESS");
 
             migrationBuilder.RenameIndex(
-                name: "IX_Notation_ID_USER",
+                name: "IX_Annotation_ID_USER",
                 table: "NOTATION",
                 newName: "IX_NOTATION_ID_USER");
 
             migrationBuilder.RenameIndex(
-                name: "IX_Notation_ID_PROJECT",
+                name: "IX_Annotation_ID_PROJECT",
                 table: "NOTATION",
                 newName: "IX_NOTATION_ID_PROJECT");
 
@@ -296,9 +288,9 @@ namespace Repository.Migrations
                 newName: "IX_EXECUTION_TASK_ImpedimentidImpediment");
 
             migrationBuilder.RenameIndex(
-                name: "IX_AttachT_NotationidNotation",
+                name: "IX_AttachT_AnnotationidAnnotation",
                 table: "ATTACH_T",
-                newName: "IX_ATTACH_T_NotationidNotation");
+                newName: "IX_ATTACH_T_AnnotationidAnnotation");
 
             migrationBuilder.RenameIndex(
                 name: "IX_AttachT_KnowledgeidKnowledge",
@@ -422,9 +414,9 @@ namespace Repository.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_ATTACH_T_NOTATION_NotationidNotation",
+                name: "FK_ATTACH_T_NOTATION_AnnotationidAnnotation",
                 table: "ATTACH_T",
-                column: "NotationidNotation",
+                column: "AnnotationidAnnotation",
                 principalTable: "NOTATION",
                 principalColumn: "ID_NOTATION",
                 onDelete: ReferentialAction.Restrict);
@@ -589,7 +581,7 @@ namespace Repository.Migrations
                 table: "ATTACH_T");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_ATTACH_T_NOTATION_NotationidNotation",
+                name: "FK_ATTACH_T_NOTATION_AnnotationidAnnotation",
                 table: "ATTACH_T");
 
             migrationBuilder.DropForeignKey(
@@ -750,7 +742,7 @@ namespace Repository.Migrations
 
             migrationBuilder.RenameTable(
                 name: "NOTATION",
-                newName: "Notation");
+                newName: "Annotation");
 
             migrationBuilder.RenameTable(
                 name: "MOCKUP",
@@ -796,13 +788,13 @@ namespace Repository.Migrations
 
             migrationBuilder.RenameIndex(
                 name: "IX_NOTATION_ID_USER",
-                table: "Notation",
-                newName: "IX_Notation_ID_USER");
+                table: "Annotation",
+                newName: "IX_Annotation_ID_USER");
 
             migrationBuilder.RenameIndex(
                 name: "IX_NOTATION_ID_PROJECT",
-                table: "Notation",
-                newName: "IX_Notation_ID_PROJECT");
+                table: "Annotation",
+                newName: "IX_Annotation_ID_PROJECT");
 
             migrationBuilder.RenameIndex(
                 name: "IX_IMPEDIMENT_ID_USER",
@@ -865,9 +857,9 @@ namespace Repository.Migrations
                 newName: "IX_ExecutionTask_ImpedimentidImpediment");
 
             migrationBuilder.RenameIndex(
-                name: "IX_ATTACH_T_NotationidNotation",
+                name: "IX_ATTACH_T_AnnotationidAnnotation",
                 table: "AttachT",
-                newName: "IX_AttachT_NotationidNotation");
+                newName: "IX_AttachT_AnnotationidAnnotation");
 
             migrationBuilder.RenameIndex(
                 name: "IX_ATTACH_T_KnowledgeidKnowledge",
@@ -910,8 +902,8 @@ namespace Repository.Migrations
                 column: "ID_PROFILE");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_Notation",
-                table: "Notation",
+                name: "PK_Annotation",
+                table: "Annotation",
                 column: "ID_NOTATION");
 
             migrationBuilder.AddPrimaryKey(
@@ -979,10 +971,10 @@ namespace Repository.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_AttachT_Notation_NotationidNotation",
+                name: "FK_AttachT_Annotation_AnnotationidAnnotation",
                 table: "AttachT",
-                column: "NotationidNotation",
-                principalTable: "Notation",
+                column: "AnnotationidAnnotation",
+                principalTable: "Annotation",
                 principalColumn: "ID_NOTATION",
                 onDelete: ReferentialAction.Restrict);
 
@@ -1067,16 +1059,16 @@ namespace Repository.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Notation_Project_ID_PROJECT",
-                table: "Notation",
+                name: "FK_Annotation_Project_ID_PROJECT",
+                table: "Annotation",
                 column: "ID_PROJECT",
                 principalTable: "Project",
                 principalColumn: "ID_PROJECT",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Notation_User_ID_USER",
-                table: "Notation",
+                name: "FK_Annotation_User_ID_USER",
+                table: "Annotation",
                 column: "ID_USER",
                 principalTable: "User",
                 principalColumn: "ID_USER",
