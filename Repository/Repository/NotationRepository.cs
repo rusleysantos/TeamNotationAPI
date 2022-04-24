@@ -38,7 +38,7 @@ namespace Repository.Services
 
         public async Task<bool> DeleteAnnotation(int idAnnotation)
         {
-            Task<Annotation> returnAnnotation = _con.NOTATION.Where(x => x.idAnnotation == idAnnotation).FirstAsync();
+            Task<Annotation> returnAnnotation = _con.ANNOTATION.Where(x => x.idAnnotation == idAnnotation).FirstAsync();
 
             if (returnAnnotation.Result != null)
             {
@@ -57,12 +57,12 @@ namespace Repository.Services
 
         public async Task<Annotation> GetAnnotation(int idAnnotation)
         {
-            return await _con.NOTATION.Where(x => x.idAnnotation == idAnnotation).FirstAsync();
+            return await _con.ANNOTATION.Where(x => x.idAnnotation == idAnnotation).FirstAsync();
         }
 
         public async Task<List<Annotation>> GetAnnotations(int page, int size, int idProject)
         {
-            return await _con.NOTATION
+            return await _con.ANNOTATION
                         .Skip((page - 1) * size)
                         .Take(size)
                         .Where(x => x.idProject == idProject && x.Deleted != true)
@@ -71,7 +71,7 @@ namespace Repository.Services
 
         public async Task<bool> PutAnnotation(AnnotationDTO notation)
         {
-            Task<Annotation> returnAnnotation = _con.NOTATION.Where(x => x.idAnnotation == notation.idAnnotation).FirstAsync();
+            Task<Annotation> returnAnnotation = _con.ANNOTATION.Where(x => x.idAnnotation == notation.idAnnotation).FirstAsync();
 
             if (returnAnnotation.Result != null)
             {

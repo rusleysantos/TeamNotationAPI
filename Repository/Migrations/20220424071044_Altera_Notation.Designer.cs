@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.Models;
 
 namespace Repository.Migrations
 {
     [DbContext(typeof(AnnotationContext))]
-    partial class AnnotationContextModelSnapshot : ModelSnapshot
+    [Migration("20220424071044_Altera_Notation")]
+    partial class Altera_Notation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,6 +104,47 @@ namespace Repository.Migrations
                     b.ToTable("ADDRESS");
                 });
 
+            modelBuilder.Entity("TeamAnnotationAPI.Models.Annotation", b =>
+                {
+                    b.Property<int>("idAnnotation")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("ID_ANNOTATION")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnName("DELETED")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Description")
+                        .HasColumnName("DESCRIPTION")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PositionCard")
+                        .HasColumnName("POSITIONCARD")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnName("TITLE")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("idProject")
+                        .HasColumnName("ID_PROJECT")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idUser")
+                        .HasColumnName("ID_USER")
+                        .HasColumnType("int");
+
+                    b.HasKey("idAnnotation");
+
+                    b.HasIndex("idProject");
+
+                    b.HasIndex("idUser");
+
+                    b.ToTable("ANNOTATION");
+                });
+
             modelBuilder.Entity("TeamAnnotationAPI.Models.Attach", b =>
                 {
                     b.Property<int>("idAttach")
@@ -109,6 +152,9 @@ namespace Repository.Migrations
                         .HasColumnName("ID_ATTACH")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AnnotationidAnnotation")
+                        .HasColumnType("int");
 
                     b.Property<byte>("Blob")
                         .HasColumnName("BLOB")
@@ -123,9 +169,6 @@ namespace Repository.Migrations
                     b.Property<int?>("KnowledgeidKnowledge")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AnnotationidAnnotation")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnName("TITLE")
                         .HasColumnType("nvarchar(max)");
@@ -136,13 +179,13 @@ namespace Repository.Migrations
 
                     b.HasKey("idAttach");
 
+                    b.HasIndex("AnnotationidAnnotation");
+
                     b.HasIndex("ExecutionTaskidTask");
 
                     b.HasIndex("ImpedimentidImpediment");
 
                     b.HasIndex("KnowledgeidKnowledge");
-
-                    b.HasIndex("AnnotationidAnnotation");
 
                     b.ToTable("ATTACH_T");
                 });
@@ -336,47 +379,6 @@ namespace Repository.Migrations
                     b.ToTable("MOCKUP");
                 });
 
-            modelBuilder.Entity("TeamAnnotationAPI.Models.Annotation", b =>
-                {
-                    b.Property<int>("idAnnotation")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("ID_NOTATION")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnName("DELETED")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Description")
-                        .HasColumnName("DESCRIPTION")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PositionCard")
-                        .HasColumnName("POSITIONCARD")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnName("TITLE")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("idProject")
-                        .HasColumnName("ID_PROJECT")
-                        .HasColumnType("int");
-
-                    b.Property<int>("idUser")
-                        .HasColumnName("ID_USER")
-                        .HasColumnType("int");
-
-                    b.HasKey("idAnnotation");
-
-                    b.HasIndex("idProject");
-
-                    b.HasIndex("idUser");
-
-                    b.ToTable("NOTATION");
-                });
-
             modelBuilder.Entity("TeamAnnotationAPI.Models.Profile", b =>
                 {
                     b.Property<int>("idProfile")
@@ -532,8 +534,27 @@ namespace Repository.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TeamAnnotationAPI.Models.Annotation", b =>
+                {
+                    b.HasOne("TeamAnnotationAPI.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("idProject")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TeamAnnotationAPI.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("idUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("TeamAnnotationAPI.Models.Attach", b =>
                 {
+                    b.HasOne("TeamAnnotationAPI.Models.Annotation", null)
+                        .WithMany("Attachments")
+                        .HasForeignKey("AnnotationidAnnotation");
+
                     b.HasOne("TeamAnnotationAPI.Models.ExecutionTask", null)
                         .WithMany("Attachments")
                         .HasForeignKey("ExecutionTaskidTask");
@@ -545,10 +566,6 @@ namespace Repository.Migrations
                     b.HasOne("TeamAnnotationAPI.Models.Knowledge", null)
                         .WithMany("Attachments")
                         .HasForeignKey("KnowledgeidKnowledge");
-
-                    b.HasOne("TeamAnnotationAPI.Models.Annotation", null)
-                        .WithMany("Attachments")
-                        .HasForeignKey("AnnotationidAnnotation");
                 });
 
             modelBuilder.Entity("TeamAnnotationAPI.Models.Backlog", b =>
@@ -605,21 +622,6 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("TeamAnnotationAPI.Models.Impediment", b =>
                 {
-                    b.HasOne("TeamAnnotationAPI.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("idUser")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("TeamAnnotationAPI.Models.Annotation", b =>
-                {
-                    b.HasOne("TeamAnnotationAPI.Models.Project", "Project")
-                        .WithMany()
-                        .HasForeignKey("idProject")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("TeamAnnotationAPI.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("idUser")

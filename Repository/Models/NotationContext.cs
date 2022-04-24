@@ -39,7 +39,7 @@ namespace Repository.Models
         public DbSet<Impediment> IMPEDIMENT { get; set; }
         public DbSet<Knowledge> KNOWLEDGE { get; set; }
         public DbSet<Mockup> MOCKUP { get; set; }
-        public DbSet<Annotation> NOTATION { get; set; }
+        public DbSet<Annotation> ANNOTATION { get; set; }
         public DbSet<Profile> PROFILE { get; set; }
         public DbSet<Project> PROJECT { get; set; }
         public DbSet<Status> STATUS { get; set; }
