@@ -59,5 +59,8 @@ namespace TeamAnnotationAPI.Models
 
         [Column("ANNOTATIONS")]
         public List<Annotation> Annotations { get; set; }
+
+        [Column("SEQUENCE_NUMBER")]
+        public int SequenceNumber { get; set; }
     }
 }
