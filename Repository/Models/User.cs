@@ -26,7 +26,6 @@ namespace TeamAnnotationAPI.Models
         public int? idAddress { get; set; }
         public Address Address { get; set; }
 
-
         [ForeignKey("Profile")]
         [Column("ID_PROFILE")]
         public int? idProfile { get; set; }

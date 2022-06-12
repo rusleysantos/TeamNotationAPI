@@ -20,5 +20,8 @@ namespace TeamAnnotationAPI.Models
 
         [Column("DESCRIPTION")]
         public string Description { get; set; }
+
+        [Column("TEAM_MEMBERS")]
+        public List<User> TeamMembers { get; set; }
     }
 }

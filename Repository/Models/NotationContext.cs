@@ -48,6 +48,8 @@ namespace Repository.Models
         public DbSet<User> USER { get; set; }
         public DbSet<PROJECT_USER> PROJECT_USER { get; set; }
         public DbSet<ProjectTeam> PROJECT_TEAM { get; set; }
+        public DbSet<Sprint> SPRINT { get; set; }
+
 
     }
 }

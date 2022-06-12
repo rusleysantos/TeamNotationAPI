@@ -71,6 +71,7 @@ namespace Repository.Services
         {
             return await _con.PROJECT
                          .Include(j => j.ExecutionTasks)
+                            .ThenInclude(x => x.Status)
                          .Where(x => x.idProject == idProject)
                          .Skip((page - 1) * size)
                          .Take(size)

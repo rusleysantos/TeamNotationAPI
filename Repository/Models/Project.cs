@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repository.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,8 +25,16 @@ namespace TeamAnnotationAPI.Models
         [Column("PERCENTDONE")]
         public double PercentDone { get; set; }
 
+        [ForeignKey("Team")]
+        [Column("ID_TEAM")]
+        public int? idTeam { get; set; }
+        public Team Team { get; set; }
+
         [Column("EXECUTIONTASKS")]
         public List<ExecutionTask> ExecutionTasks { get; set; }
+
+        [Column("SPRINTS")]
+        public List<Sprint> Sprints { get; set; }
 
     }
 }

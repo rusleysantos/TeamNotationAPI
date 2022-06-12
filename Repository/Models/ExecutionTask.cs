@@ -27,6 +27,12 @@ namespace TeamAnnotationAPI.Models
         [Column("EFFORT")]
         public string Effort { get; set; }
 
+        [Column("COLOR_BACKGROUND")]
+        public string ColorBackground { get; set; }
+
+        [Column("COLOR_TEXT")]
+        public string ColorText { get; set; }
+
         [Column("BACKLOGS")]
         public List<Backlog> Backlogs { get; set; }
 
@@ -51,5 +57,7 @@ namespace TeamAnnotationAPI.Models
         [Column("DELETED")]
         public bool Deleted { get; set; }
 
+        [Column("ANNOTATIONS")]
+        public List<Annotation> Annotations { get; set; }
     }
 }

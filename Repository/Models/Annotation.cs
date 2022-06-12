@@ -21,6 +21,12 @@ namespace TeamAnnotationAPI.Models
         [Column("DESCRIPTION")]
         public string Description { get; set; }
 
+        [Column("COLOR_BACKGROUND")]
+        public string ColorBackground { get; set; }
+
+        [Column("COLOR_TEXT")]
+        public string ColorText { get; set; }
+
         [Column("ATTACHMENTS")]
         public List<Attach> Attachments { get; set; }
 
