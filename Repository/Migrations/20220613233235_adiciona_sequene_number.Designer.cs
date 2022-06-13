@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.Models;
 
 namespace Repository.Migrations
 {
     [DbContext(typeof(AnnotationContext))]
-    partial class AnnotationContextModelSnapshot : ModelSnapshot
+    [Migration("20220613233235_adiciona_sequene_number")]
+    partial class adiciona_sequene_number
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
