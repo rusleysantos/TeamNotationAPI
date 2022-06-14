@@ -76,6 +76,7 @@ namespace Repository.Services
                          .Skip((page - 1) * size)
                          .Take(size)
                          .SelectMany(y => y.ExecutionTasks)
+                         .OrderBy(o => o.SequenceNumber)
                          .ToListAsync();
         }
 
