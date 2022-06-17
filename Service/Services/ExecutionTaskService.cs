@@ -46,5 +46,15 @@ namespace Service.Services
         {
             return _repository.DeleteExecutionTask(idTask);
         }
+
+        public Task<bool> PutPositionTask(List<ExecutionTaskDTO> listTask)
+        {
+            foreach (var task in listTask)
+            {
+                task.SequenceNumber = listTask.IndexOf(task);
+            }
+
+            return _repository.PutPositionTask(listTask);
+        }
     }
 }

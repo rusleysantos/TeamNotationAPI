@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -97,7 +98,7 @@ namespace TeamAnnotationAPI.Controllers
 
         [HttpPut("[action]")]
         [Authorize]
-        public async Task<IActionResult> PutExecutionTask([FromBody] ExecutionTaskDTO Task)
+        public async Task<IActionResult> PutExecutionTask([FromBody] ExecutionTaskDTO task)
         {
 
             try
@@ -106,7 +107,32 @@ namespace TeamAnnotationAPI.Controllers
                 return Ok(new MessageReturn("Sucesso ao Alterar Tarefa",
                                             "",
                                             true,
-                                            await _service.PutExecutionTask(Task)));
+                                            await _service.PutExecutionTask(task)));
+
+
+            }
+            catch
+            {
+                return BadRequest(new MessageReturn("Erro",
+                                                   "Erro, por favor tente noavmente mais tarde.",
+                                                   false));
+
+            }
+        }
+
+
+        [HttpPut("[action]")]
+        [Authorize]
+        public async Task<IActionResult> PutPositionTask([FromBody] List<ExecutionTaskDTO> listTask)
+        {
+
+            try
+            {
+
+                return Ok(new MessageReturn("Sucesso ao Alterar Tarefa",
+                                            "",
+                                            true,
+                                            await _service.PutPositionTask(listTask)));
 
 
             }

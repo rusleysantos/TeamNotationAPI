@@ -16,6 +16,7 @@ namespace Repository.DTO
         public int idProject { get; set; }
         // public List<int> idsBacklogs { get; set; }
         public int idUser { get; set; }
+        public int SequenceNumber { get; set; }
         // public List<int> idsAttachments { get; set; }
     }
 }

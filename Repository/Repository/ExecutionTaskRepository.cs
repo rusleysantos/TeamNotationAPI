@@ -22,6 +22,13 @@ namespace Repository.Services
 
         public async Task<int> AddExecutionTask(ExecutionTaskDTO task)
         {
+
+            var taskSequence = await _con.EXECUTION_TASK
+                                            .Where(x => x.idProject == task.idProject)
+                                            .OrderByDescending(j => j.SequenceNumber)
+                                            .Select(x => new { x.SequenceNumber })
+                                            .FirstOrDefaultAsync();
+
             _con.EXECUTION_TASK.Add(new ExecutionTask
             {
                 Description = task.Description,
@@ -30,9 +37,11 @@ namespace Repository.Services
                 Title = task.Title,
                 idStatus = task.idStatus,
                 idUser = task.idUser,
-                idProject = task.idProject
-                
+                idProject = task.idProject,
+                SequenceNumber = taskSequence == null ? 0 : taskSequence.SequenceNumber + 1
+
             });
+
             await _con.SaveChangesAsync();
 
             return 0;
@@ -86,7 +95,8 @@ namespace Repository.Services
             ExecutionTask returnExecutionTask = _con.EXECUTION_TASK.Where(x => x.idTask == executionTask.idTask).First();
             Status status = _con.STATUS.Where(x => x.idStatus == executionTask.idStatus).First();
 
-            if (status.Description == "Excluir") {
+            if (status.Description == "Excluir")
+            {
 
                 _con.Remove(returnExecutionTask);
                 _con.SaveChanges();
@@ -117,6 +127,44 @@ namespace Repository.Services
             }
         }
 
+        public async Task<bool> PutPositionTask(List<ExecutionTaskDTO> listTask)
+        {
+
+            try
+            {
+                _con.UpdateRange(listTask);
+                await _con.SaveChangesAsync();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+            //var listTasks = await _con.EXECUTION_TASK
+            //                        .Where(x => x.idTask == idPositionTaskPrevious ||
+            //                                    x.idTask == idPositionTaskCurrent)
+            //                        .ToListAsync();
+
+            //var task = listTasks[0].SequenceNumber;
+            //listTasks[0].SequenceNumber = listTasks[1].SequenceNumber;
+            //listTasks[1].SequenceNumber = task;
+
+            //_con.UpdateRange(listTasks);
+
+            //await _con.SaveChangesAsync();
+
+            //return await _con.PROJECT
+            //          .Include(j => j.ExecutionTasks)
+            //             .ThenInclude(x => x.Status)
+            //          .Where(x => x.idProject == listTasks[0].idProject)
+            //          .Skip((page - 1) * size)
+            //          .Take(size)
+            //          .SelectMany(y => y.ExecutionTasks)
+            //          .OrderBy(o => o.SequenceNumber)
+            //          .ToListAsync();
+        }
 
     }
 }

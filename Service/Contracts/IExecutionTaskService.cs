@@ -15,5 +15,6 @@ namespace Service.Contracts
         public Task<List<ExecutionTask>> GetTasksProject(int idProject, int page, int size);
         public Task<ExecutionTask> GetExecutionTask(int idTask);
         public Task<bool> DeleteExecutionTask(int idTask);
+        public Task<bool> PutPositionTask(List<ExecutionTaskDTO> listTask);
     }
 }
