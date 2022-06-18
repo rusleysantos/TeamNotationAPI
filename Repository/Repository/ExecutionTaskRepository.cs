@@ -127,12 +127,14 @@ namespace Repository.Services
             }
         }
 
-        public async Task<bool> PutPositionTask(List<ExecutionTaskDTO> listTask)
+        public async Task<bool> PutPositionTask(List<ExecutionTask> listTask)
         {
 
             try
             {
-                _con.UpdateRange(listTask);
+                _con.EXECUTION_TASK
+                    .UpdateRange(listTask);
+
                 await _con.SaveChangesAsync();
 
                 return true;

@@ -49,12 +49,25 @@ namespace Service.Services
 
         public Task<bool> PutPositionTask(List<ExecutionTaskDTO> listTask)
         {
+            List<ExecutionTask> listTaskParse = new List<ExecutionTask>();
+
             foreach (var task in listTask)
             {
-                task.SequenceNumber = listTask.IndexOf(task);
+                listTaskParse.Add(new ExecutionTask
+                {
+                    idTask = task.idTask,
+                    Title = task.Title,
+                    Description = task.Description,
+                    Weight = task.Weight,   
+                    Effort = task.Effort,          
+                    idStatus = task.idStatus,
+                    idProject = task.idProject,
+                    idUser = task.idUser,
+                    SequenceNumber = listTask.IndexOf(task),
+                });
             }
 
-            return _repository.PutPositionTask(listTask);
+            return _repository.PutPositionTask(listTaskParse);
         }
     }
 }
