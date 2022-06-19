@@ -65,7 +65,10 @@ namespace Repository.Services
 
         public Task<ExecutionTask> GetExecutionTask(int idExecutionTask)
         {
-            return _con.EXECUTION_TASK.Where(x => x.idTask == idExecutionTask).FirstAsync();
+            return _con.EXECUTION_TASK
+                    .Include(j => j.Status)
+                    .Where(x => x.idTask == idExecutionTask)
+                    .FirstAsync();
         }
 
         public async Task<List<ExecutionTask>> GetExecutionTasks(int page, int size)

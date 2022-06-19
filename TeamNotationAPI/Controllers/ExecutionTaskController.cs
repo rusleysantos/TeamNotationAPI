@@ -100,7 +100,6 @@ namespace TeamAnnotationAPI.Controllers
         [Authorize]
         public async Task<IActionResult> PutExecutionTask([FromBody] ExecutionTaskDTO task)
         {
-
             try
             {
 
@@ -114,7 +113,7 @@ namespace TeamAnnotationAPI.Controllers
             catch
             {
                 return BadRequest(new MessageReturn("Erro",
-                                                   "Erro, por favor tente noavmente mais tarde.",
+                                                   "Erro, por favor tente novamente mais tarde.",
                                                    false));
 
             }
@@ -139,7 +138,7 @@ namespace TeamAnnotationAPI.Controllers
             catch
             {
                 return BadRequest(new MessageReturn("Erro",
-                                                   "Erro, por favor tente noavmente mais tarde.",
+                                                   "Erro, por favor tente novamente mais tarde.",
                                                    false));
 
             }
