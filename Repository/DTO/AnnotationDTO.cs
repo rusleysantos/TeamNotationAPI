@@ -13,6 +13,8 @@ namespace Repository.DTO
         public int idUser { get; set; }
         public int idProject { get; set; }
         public bool Deleted { get; set; }
+        public string ColorBackground { get; set; }
+        public string ColorText { get; set; }
         // public List<Attach> Attachments { get; set; }
     }
 }

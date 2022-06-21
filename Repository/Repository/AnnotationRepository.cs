@@ -28,7 +28,9 @@ namespace Repository.Services
                 idUser = notation.idUser,
                 Description = notation.Description,
                 PositionCard = notation.PositionCard,
-                Title = notation.Title
+                Title = notation.Title,
+                ColorBackground = notation.ColorBackground,
+                ColorText = notation.ColorText
             });
 
             await _con.SaveChangesAsync();
@@ -80,6 +82,10 @@ namespace Repository.Services
                 //returnAnnotation.Result.Project = notation.Project == null ? returnAnnotation.Result.Project : notation.Project;
                 returnAnnotation.Result.Title = notation.Title == null ? returnAnnotation.Result.Title : notation.Title;
                 returnAnnotation.Result.PositionCard = notation.PositionCard == null ? returnAnnotation.Result.PositionCard : notation.PositionCard;
+
+                returnAnnotation.Result.ColorBackground = notation.ColorBackground == null ? returnAnnotation.Result.ColorBackground : notation.ColorBackground;
+                returnAnnotation.Result.ColorText = notation.ColorText == null ? returnAnnotation.Result.ColorText : notation.ColorText;
+
 
                 _con.Update(returnAnnotation.Result);
                 await _con.SaveChangesAsync();
