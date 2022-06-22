@@ -38,7 +38,9 @@ namespace Repository.Services
                 idStatus = task.idStatus,
                 idUser = task.idUser,
                 idProject = task.idProject,
-                SequenceNumber = taskSequence == null ? 0 : taskSequence.SequenceNumber + 1
+                SequenceNumber = taskSequence == null ? 0 : taskSequence.SequenceNumber + 1,
+                ColorBackground = task.ColorBackground,
+                ColorText = task.ColorText
 
             });
 
@@ -118,6 +120,9 @@ namespace Repository.Services
                 returnExecutionTask.Title = executionTask.Title == null ? returnExecutionTask.Title : executionTask.Title;
                 //returnExecutionTa.Resultsk.User = attach.User == null ? returnExecutionTask.User : attach.User;
                 returnExecutionTask.Weight = executionTask.Weight == null ? returnExecutionTask.Weight : executionTask.Weight;
+                returnExecutionTask.ColorBackground = executionTask.ColorBackground == null ? returnExecutionTask.ColorBackground : executionTask.ColorBackground;
+                returnExecutionTask.ColorText = executionTask.ColorText == null ? returnExecutionTask.ColorText : executionTask.ColorText;
+
 
                 _con.Update(returnExecutionTask);
                 await _con.SaveChangesAsync();
