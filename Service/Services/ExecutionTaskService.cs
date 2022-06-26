@@ -58,12 +58,14 @@ namespace Service.Services
                     idTask = task.idTask,
                     Title = task.Title,
                     Description = task.Description,
-                    Weight = task.Weight,   
-                    Effort = task.Effort,          
+                    Weight = task.Weight,
+                    Effort = task.Effort,
                     idStatus = task.idStatus,
                     idProject = task.idProject,
                     idUser = task.idUser,
                     SequenceNumber = listTask.IndexOf(task),
+                    ColorBackground = task.ColorBackground,
+                    ColorText = task.ColorText
                 });
             }
 

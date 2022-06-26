@@ -9,22 +9,44 @@ using TeamAnnotationAPI.Models;
 
 namespace Service.Services
 {
-    public class AnnotationService: IAnnotationService
+    public class AnnotationService : IAnnotationService
     {
         private IAnnotationRepository _repository { get; }
-        public AnnotationService(IAnnotationRepository repository)
+        private IExecutionTaskRepository _repositoryExecutionTask { get; }
+
+        public AnnotationService(IAnnotationRepository repository, IExecutionTaskRepository repositoryExecutionTask)
         {
             _repository = repository;
+            _repositoryExecutionTask = repositoryExecutionTask;
         }
 
         public Task<int> AddAnnotation(AnnotationDTO notation)
         {
-            return _repository.AddAnnotation(notation);
+            if (notation.idTask != 0)
+            {
+                ExecutionTask task = _repositoryExecutionTask.GetExecutionTask(notation.idTask).Result;
+                return _repository.AddAnnotation(notation, task);
+            }
+            else
+            {
+                return _repository.AddAnnotation(notation);
+            }
+
         }
 
         public Task<bool> PutAnnotation(AnnotationDTO notation)
         {
-            return _repository.PutAnnotation(notation);
+            if (notation.idTask != 0)
+            {
+                List<Annotation> annotations = new List<Annotation>();
+                ExecutionTask task = _repositoryExecutionTask.GetExecutionTask(notation.idTask).Result;
+
+                return _repository.PutAnnotation(notation, task);
+            }
+            else
+            {
+                return _repository.PutAnnotation(notation);
+            }
         }
 
         public Task<List<Annotation>> GetAnnotations(int page, int size, int idProject)

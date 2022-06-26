@@ -35,7 +35,7 @@ namespace TeamAnnotationAPI.Controllers
 
 
             }
-            catch
+            catch(Exception ex)
             {
                 return BadRequest(new MessageReturn("Erro ao Buscar Projeto",
                                                    "Erro ao buscar projeto, por favor tente noavmente mais tarde.",

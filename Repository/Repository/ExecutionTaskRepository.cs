@@ -65,9 +65,9 @@ namespace Repository.Services
             }
         }
 
-        public Task<ExecutionTask> GetExecutionTask(int idExecutionTask)
+        public async Task<ExecutionTask> GetExecutionTask(int idExecutionTask)
         {
-            return _con.EXECUTION_TASK
+            return await _con.EXECUTION_TASK
                     .Include(j => j.Status)
                     .Where(x => x.idTask == idExecutionTask)
                     .FirstAsync();
@@ -96,13 +96,11 @@ namespace Repository.Services
 
         public async Task<bool> PutExecutionTask(ExecutionTaskDTO executionTask)
         {
-            //Task<ExecutionTask> returnExecutionTask = _con.EXECUTION_TASK.Where(x => x.idTask == executionTask.idTask).FirstAsync();
             ExecutionTask returnExecutionTask = _con.EXECUTION_TASK.Where(x => x.idTask == executionTask.idTask).First();
             Status status = _con.STATUS.Where(x => x.idStatus == executionTask.idStatus).First();
 
             if (status.Description == "Excluir")
             {
-
                 _con.Remove(returnExecutionTask);
                 _con.SaveChanges();
 

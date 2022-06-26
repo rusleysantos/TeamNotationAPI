@@ -39,7 +39,7 @@ namespace TeamAnnotationAPI.Controllers
                                             await _service.GetAnnotations(page, size, idProject)));
 
             }
-            catch
+            catch (Exception e)
             {
                 return BadRequest(new MessageReturn("Erro ao Consultar",
                                                    "Erro ao consultar, por favor tente noavmente mais tarde.",
@@ -62,7 +62,7 @@ namespace TeamAnnotationAPI.Controllers
                                             await _service.GetAnnotation(idAnnotation)));
 
             }
-            catch
+            catch(Exception e)
             {
                 return BadRequest(new MessageReturn("Erro",
                                                    "Erro, por favor tente noavmente mais tarde.",
@@ -119,7 +119,7 @@ namespace TeamAnnotationAPI.Controllers
 
                 }
             }
-            catch
+            catch (Exception e)
             {
                 return BadRequest(new MessageReturn("Erro ao Alterar",
                                                      "Erro ao alterar, por favor tente novamente mais tarde.",

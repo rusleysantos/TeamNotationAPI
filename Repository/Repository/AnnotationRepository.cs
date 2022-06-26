@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Repository.Contracts;
 using Repository.DTO;
 using Repository.Models;
@@ -20,18 +21,34 @@ namespace Repository.Services
             _con = con;
         }
 
-        public async Task<int> AddAnnotation(AnnotationDTO notation)
+        public async Task<int> AddAnnotation(AnnotationDTO notation, ExecutionTask task = null)
         {
-            _con.Add(new Annotation
+            if (task != null)
             {
-                idProject = notation.idProject,
-                idUser = notation.idUser,
-                Description = notation.Description,
-                PositionCard = notation.PositionCard,
-                Title = notation.Title,
-                ColorBackground = notation.ColorBackground,
-                ColorText = notation.ColorText
-            });
+                _con.Add(new Annotation
+                {
+                    idProject = notation.idProject,
+                    idUser = notation.idUser,
+                    Description = notation.Description,
+                    PositionCard = notation.PositionCard,
+                    Title = notation.Title,
+                    ColorBackground = task.ColorBackground,
+                    ColorText = task.ColorText,
+                });
+            }
+            else
+            {
+                _con.Add(new Annotation
+                {
+                    idProject = notation.idProject,
+                    idUser = notation.idUser,
+                    Description = notation.Description,
+                    PositionCard = notation.PositionCard,
+                    Title = notation.Title,
+                    ColorBackground = notation.ColorBackground,
+                    ColorText = notation.ColorText
+                });
+            }
 
             await _con.SaveChangesAsync();
 
@@ -59,7 +76,10 @@ namespace Repository.Services
 
         public async Task<Annotation> GetAnnotation(int idAnnotation)
         {
-            return await _con.ANNOTATION.Where(x => x.idAnnotation == idAnnotation).FirstAsync();
+
+            return await _con.ANNOTATION
+                        .Where(x => x.idAnnotation == idAnnotation)
+                        .FirstAsync();
         }
 
         public async Task<List<Annotation>> GetAnnotations(int page, int size, int idProject)
@@ -71,26 +91,41 @@ namespace Repository.Services
                         .ToListAsync();
         }
 
-        public async Task<bool> PutAnnotation(AnnotationDTO notation)
+        public async Task<bool> PutAnnotation(AnnotationDTO notation, ExecutionTask task = null)
         {
-            Task<Annotation> returnAnnotation = _con.ANNOTATION.Where(x => x.idAnnotation == notation.idAnnotation).FirstAsync();
+            var returnAnnotation = await _con.ANNOTATION.Where(x => x.idAnnotation == notation.idAnnotation).FirstAsync();
 
-            if (returnAnnotation.Result != null)
+            if (returnAnnotation != null)
             {
                 //returnAnnotation.Result.Attachments = notation.Attachments.Count == 0 ? returnAnnotation.Result.Attachments : notation.Attachments;
-                returnAnnotation.Result.Description = notation.Description == null ? returnAnnotation.Result.Description : notation.Description;
+                returnAnnotation.Description = notation.Description == null ? returnAnnotation.Description : notation.Description;
                 //returnAnnotation.Result.Project = notation.Project == null ? returnAnnotation.Result.Project : notation.Project;
-                returnAnnotation.Result.Title = notation.Title == null ? returnAnnotation.Result.Title : notation.Title;
-                returnAnnotation.Result.PositionCard = notation.PositionCard == null ? returnAnnotation.Result.PositionCard : notation.PositionCard;
+                returnAnnotation.Title = notation.Title == null ? returnAnnotation.Title : notation.Title;
+                returnAnnotation.PositionCard = notation.PositionCard == null ? returnAnnotation.PositionCard : notation.PositionCard;
 
-                returnAnnotation.Result.ColorBackground = notation.ColorBackground == null ? returnAnnotation.Result.ColorBackground : notation.ColorBackground;
-                returnAnnotation.Result.ColorText = notation.ColorText == null ? returnAnnotation.Result.ColorText : notation.ColorText;
+                if (task != null)
+                {
+                    returnAnnotation.ColorBackground = task.ColorBackground == null ? "" : task.ColorBackground;
+                    returnAnnotation.ColorText = task.ColorText == null ? "" : task.ColorText;
 
+                    var teste = await _con.Database.ExecuteSqlRawAsync($@"UPDATE ANNOTATION
+                                                                        SET ExecutionTaskidTask = {task.idTask}
+                                                                        WHERE ID_ANNOTATION = {notation.idAnnotation};");
+                    await _con.SaveChangesAsync();
 
-                _con.Update(returnAnnotation.Result);
-                await _con.SaveChangesAsync();
+                    return true;
 
-                return true;
+                }
+                else
+                {
+                    returnAnnotation.ColorBackground = notation.ColorBackground == null ? returnAnnotation.ColorBackground : notation.ColorBackground;
+                    returnAnnotation.ColorText = notation.ColorText == null ? returnAnnotation.ColorText : notation.ColorText;
+                    _con.Update(returnAnnotation);
+                    await _con.SaveChangesAsync();
+
+                    return true;
+                }
+
             }
             else
             {

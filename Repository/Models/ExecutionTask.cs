@@ -57,7 +57,9 @@ namespace TeamAnnotationAPI.Models
         [Column("DELETED")]
         public bool Deleted { get; set; }
 
-        [Column("ANNOTATIONS")]
+        //[ForeignKey("Execution_Task")]
+        //[Column("ExecutionTaskidTask")]
+        //public int idAnnotation { get; set; }
         public List<Annotation> Annotations { get; set; }
 
         [Column("SEQUENCE_NUMBER")]
