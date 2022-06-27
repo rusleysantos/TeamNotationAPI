@@ -1,9 +1,11 @@
-﻿using Repository.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository.Contracts;
 using Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using TeamAnnotationAPI.Models;
 
 namespace Repository.Services
@@ -17,22 +19,22 @@ namespace Repository.Services
             _con = con;
         }
 
-        public User AddUser(User user)
+        public async Task<User> AddUser(User user)
         {
-            _con.Add(user);
-            _con.SaveChanges();
+            await _con.AddAsync(user);
+            await _con.SaveChangesAsync();
 
             return user;
         }
 
-        public bool DeleteUser(int idUser)
+        public async Task<bool> DeleteUser(int idUser)
         {
-            User returnUser = _con.USER.Where(x => x.idUser == idUser).First();
+            User returnUser = await _con.USER.Where(x => x.idUser == idUser).FirstAsync();
 
             if (returnUser != null)
             {
                 _con.Remove(returnUser);
-                _con.SaveChanges();
+                await _con.SaveChangesAsync();
                 return true;
             }
             else
@@ -41,22 +43,28 @@ namespace Repository.Services
             }
         }
 
-        public User GetUser(int idUser)
+        public async Task<User> GetUser(int idUser)
         {
-            return _con.USER.Where(x => x.idUser == idUser).First();
+            return await _con.USER.Where(x => x.idUser == idUser).FirstAsync();
         }
 
-        public List<User> GetUsers(int page, int size)
+        public async Task<List<User>> GetUsers(int page, int size)
         {
-            return _con.USER
+            return await _con.USER
                         .Skip((page - 1) * size)
                         .Take(size)
-                        .ToList();
+                        .Select(x => new User
+                        {
+                            idUser = x.idUser,
+                            Login = x.Login,
+                            Password = ""
+                        })
+                        .ToListAsync();
         }
 
-        public bool PutUser(User user)
+        public async Task<bool> PutUser(User user)
         {
-            User returnUser = _con.USER.Where(x => x.idUser == user.idUser).First();
+            User returnUser = await _con.USER.Where(x => x.idUser == user.idUser).FirstAsync();
 
             if (returnUser != null)
             {
@@ -65,7 +73,7 @@ namespace Repository.Services
                 //returnUser.Password = user.Password == null ? returnUser.Password : user.Password;
                 //returnUser.Profile = user.Profile == null ? returnUser.Profile : user.Profile;
 
-                _con.SaveChanges();
+                await _con.SaveChangesAsync();
 
                 return true;
             }

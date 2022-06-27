@@ -40,7 +40,7 @@ namespace Repository.Services
                 idProject = task.idProject,
                 SequenceNumber = taskSequence == null ? 0 : taskSequence.SequenceNumber + 1,
                 ColorBackground = task.ColorBackground,
-                ColorText = task.ColorText
+                ColorText = task.ColorText,
 
             });
 
@@ -76,6 +76,7 @@ namespace Repository.Services
         public async Task<List<ExecutionTask>> GetExecutionTasks(int page, int size)
         {
             return await _con.EXECUTION_TASK
+                        .Include(t => t.User)
                         .Skip((page - 1) * size)
                         .Take(size)
                         .ToListAsync();
@@ -83,15 +84,28 @@ namespace Repository.Services
 
         public async Task<List<ExecutionTask>> GetTasksProject(int idProject, int page, int size)
         {
-            return await _con.PROJECT
+            var tasks = await _con.PROJECT
                          .Include(j => j.ExecutionTasks)
                             .ThenInclude(x => x.Status)
+
+                         .Include(q => q.ExecutionTasks)
+                            .ThenInclude(e => e.User)
+                            .AsNoTracking()
+
                          .Where(x => x.idProject == idProject)
                          .Skip((page - 1) * size)
                          .Take(size)
                          .SelectMany(y => y.ExecutionTasks)
                          .OrderBy(o => o.SequenceNumber)
                          .ToListAsync();
+
+            foreach (var item in tasks)
+            {
+                item.User.Password = "";
+
+            }
+
+            return tasks;
         }
 
         public async Task<bool> PutExecutionTask(ExecutionTaskDTO executionTask)
@@ -120,6 +134,7 @@ namespace Repository.Services
                 returnExecutionTask.Weight = executionTask.Weight == null ? returnExecutionTask.Weight : executionTask.Weight;
                 returnExecutionTask.ColorBackground = executionTask.ColorBackground == null ? returnExecutionTask.ColorBackground : executionTask.ColorBackground;
                 returnExecutionTask.ColorText = executionTask.ColorText == null ? returnExecutionTask.ColorText : executionTask.ColorText;
+                returnExecutionTask.idUser = executionTask.idUser;
 
 
                 _con.Update(returnExecutionTask);

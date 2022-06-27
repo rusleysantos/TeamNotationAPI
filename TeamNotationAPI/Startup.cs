@@ -77,6 +77,7 @@ namespace TeamAnnotationAPI
             services.AddScoped<IExecutionTaskService, ExecutionTaskService>();
             services.AddScoped<ITeamRepository, TeamRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IStatusRepository, StatusRepository>();
             services.AddScoped<IStatusService, StatusService>();
             services.AddScoped<ITokenService, TokenService>();
